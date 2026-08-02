@@ -1,0 +1,70 @@
+{
+  "songs": [
+    {
+      "slug": "jesus-loves-me",
+      "title": "Jesus Loves Me",
+      "tagline": "A tender reminder that Jesus loves every little heart — because the Bible tells us so.",
+      "cover": "1",
+      "mark": "♪",
+      "intro": [
+        "\"Jesus Loves Me\" is one of the most beloved Christian hymns ever written. For more than 160 years, its simple yet powerful message has reminded children and adults alike of the unchanging love of Jesus Christ.",
+        "The words were written by Anna Bartlett Warner (1827–1915) and first appeared in her sister Susan Warner's novel Say and Seal, published in 1860. In the story, the hymn is sung to comfort a sick child, expressing the assurance that Jesus loves us because God's Word declares it to be true. A few years later, in 1862, William Batchelder Bradbury composed the familiar melody and added the well-known chorus, helping make the hymn a favorite in churches and Sunday schools around the world.",
+        "The hymn is rooted in the truth of Scripture and reflects passages such as John 3:16, Romans 5:8, and 1 John 4:9–10, which proclaim God's love revealed through Jesus Christ. Its opening line, \"Jesus loves me, this I know, for the Bible tells me so,\" has become one of the most recognizable statements of Christian faith."
+      ],
+      "chorus": {
+        "heading": "Chorus",
+        "lines": [
+          "Yes, Jesus loves me!",
+          "Yes, Jesus loves me!",
+          "Yes, Jesus loves me!",
+          "The Bible tells me so."
+        ]
+      },
+      "verses": [
+        {
+          "heading": "Verse 1",
+          "lines": [
+            "Jesus loves me! This I know,",
+            "For the Bible tells me so;",
+            "Little ones to Him belong;",
+            "They are weak, but He is strong."
+          ]
+        },
+        {
+          "heading": "Verse 2",
+          "lines": [
+            "Jesus loves me! He who died,",
+            "Heaven's gates to open wide;",
+            "He will wash away my sin,",
+            "Let His little child come in."
+          ]
+        },
+        {
+          "heading": "Verse 3",
+          "lines": [
+            "Jesus loves me! Loves me still,",
+            "Though I'm very weak and ill;",
+            "From His shining throne on high,",
+            "Comes to watch me where I lie."
+          ]
+        },
+        {
+          "heading": "Verse 4",
+          "lines": [
+            "Jesus loves me! He will stay",
+            "Close beside me all the way;",
+            "Then His little child will take",
+            "Up to heaven for His dear sake."
+          ]
+        }
+      ],
+      "credits": {
+        "title": "Jesus Loves Me",
+        "lyrics": "Anna Bartlett Warner (1827–1915)",
+        "music": "William Batchelder Bradbury (1816–1868)",
+        "published": "1862",
+        "copyright": "Public Domain"
+      }
+    }
+  ]
+}

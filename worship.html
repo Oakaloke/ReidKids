@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Worship for Little Ones — sweet songs and lullabies to fill your home with praise and joy. A growing collection of hymns for children from Reid Kids." />
+  <meta name="theme-color" content="#3b6ea5" />
+  <title>Worship for Little Ones — Reid Kids</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Worship for Little Ones — Reid Kids" />
+  <meta property="og:description" content="Sweet songs and lullabies to fill your home with praise and joy." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://reidkids.com/worship.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Decorative sky / clouds backdrop -->
+  <div class="sky" aria-hidden="true">
+    <span class="cloud cloud--1"></span>
+    <span class="cloud cloud--2"></span>
+    <span class="cloud cloud--3"></span>
+  </div>
+
+  <!-- Navigation -->
+  <header class="nav" id="top">
+    <div class="container nav__inner">
+      <a href="index.html#top" class="brand" aria-label="Reid Kids home">
+        <span class="brand__mark" aria-hidden="true">✦</span>
+        <span class="brand__name">Reid<span class="brand__name-accent">Kids</span></span>
+      </a>
+
+      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav__menu" id="nav-menu">
+        <a href="index.html#about">About</a>
+        <a href="index.html#books">Books</a>
+        <a href="index.html#resources">Family</a>
+        <a href="worship.html" aria-current="page">Worship</a>
+        <a href="index.html#soon">Coming Soon</a>
+        <a href="index.html#contact" class="nav__cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Worship landing -->
+    <section class="section" id="worship">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow eyebrow--center">Worship for Little Ones</span>
+          <h2>Little songs of <span class="text-gold">praise</span></h2>
+          <p class="section__sub">Sweet songs and lullabies to fill your home with praise and joy.</p>
+        </div>
+
+        <div class="books" id="hymn-grid" role="list">
+          <!-- Hymn cards are rendered from worship.json -->
+        </div>
+
+        <p class="hymn-empty" id="hymn-empty" hidden>More songs are on the way — check back soon! ✦</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="index.html#top" class="brand brand--light">
+        <span class="brand__mark" aria-hidden="true">✦</span>
+        <span class="brand__name">Reid<span class="brand__name-accent">Kids</span></span>
+      </a>
+      <p class="footer__verse">“Sing to the Lord a new song.” — Psalm 96:1</p>
+      <p class="footer__copy">© <span id="year"></span> Reid Kids. Made with love &amp; prayer.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    /* ---- Render the hymn list from worship.json ---- */
+    (function () {
+      "use strict";
+      var grid = document.getElementById("hymn-grid");
+      var empty = document.getElementById("hymn-empty");
+      if (!grid) return;
+
+      function reveal(el) {
+        el.classList.add("reveal");
+        if ("IntersectionObserver" in window) {
+          var obs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                obs.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+          obs.observe(el);
+        } else {
+          el.classList.add("is-visible");
+        }
+      }
+
+      fetch("worship.json")
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          var songs = (data && data.songs) || [];
+          if (!songs.length) { if (empty) empty.hidden = false; return; }
+
+          songs.forEach(function (song) {
+            var card = document.createElement("a");
+            card.className = "book book--link";
+            card.setAttribute("role", "listitem");
+            card.href = "song.html?song=" + encodeURIComponent(song.slug);
+
+            var cover = document.createElement("div");
+            cover.className = "book__cover book__cover--" + (song.cover || "1");
+            var mark = document.createElement("span");
+            mark.textContent = song.mark || "♪";
+            cover.appendChild(mark);
+
+            var h3 = document.createElement("h3");
+            h3.textContent = song.title;
+
+            var p = document.createElement("p");
+            p.textContent = song.tagline || "";
+
+            var tag = document.createElement("span");
+            tag.className = "tag";
+            tag.textContent = "Hymn";
+
+            card.appendChild(cover);
+            card.appendChild(h3);
+            card.appendChild(p);
+            card.appendChild(tag);
+            grid.appendChild(card);
+            reveal(card);
+          });
+        })
+        .catch(function () {
+          if (empty) {
+            empty.hidden = false;
+            empty.textContent = "We couldn't load the songs right now — please try again soon.";
+          }
+        });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A faith-filled hymn for little ones from Reid Kids — with its story, lyrics, and history." />
+  <meta name="theme-color" content="#3b6ea5" />
+  <title>Worship for Little Ones — Reid Kids</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Worship for Little Ones — Reid Kids" />
+  <meta property="og:description" content="A faith-filled hymn for little ones, with its story, lyrics, and history." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://reidkids.com/song.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Decorative sky / clouds backdrop -->
+  <div class="sky" aria-hidden="true">
+    <span class="cloud cloud--1"></span>
+    <span class="cloud cloud--2"></span>
+    <span class="cloud cloud--3"></span>
+  </div>
+
+  <!-- Navigation -->
+  <header class="nav" id="top">
+    <div class="container nav__inner">
+      <a href="index.html#top" class="brand" aria-label="Reid Kids home">
+        <span class="brand__mark" aria-hidden="true">✦</span>
+        <span class="brand__name">Reid<span class="brand__name-accent">Kids</span></span>
+      </a>
+
+      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav__menu" id="nav-menu">
+        <a href="index.html#about">About</a>
+        <a href="index.html#books">Books</a>
+        <a href="index.html#resources">Family</a>
+        <a href="worship.html">Worship</a>
+        <a href="index.html#soon">Coming Soon</a>
+        <a href="index.html#contact" class="nav__cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="hymn">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow eyebrow--center">Worship for Little Ones</span>
+          <h2 id="hymn-title">Loading…</h2>
+          <p class="section__sub" id="hymn-tagline"></p>
+        </div>
+
+        <article class="hymn reveal" id="hymn-body" aria-live="polite">
+          <!-- Rendered from worship.json -->
+        </article>
+
+        <p class="hymn__back">
+          <a href="worship.html" class="btn btn--ghost">← Back to Worship</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="index.html#top" class="brand brand--light">
+        <span class="brand__mark" aria-hidden="true">✦</span>
+        <span class="brand__name">Reid<span class="brand__name-accent">Kids</span></span>
+      </a>
+      <p class="footer__verse">“Sing to the Lord a new song.” — Psalm 96:1</p>
+      <p class="footer__copy">© <span id="year"></span> Reid Kids. Made with love &amp; prayer.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    /* ---- Render a single hymn from worship.json (?song=slug) ---- */
+    (function () {
+      "use strict";
+      var titleEl = document.getElementById("hymn-title");
+      var taglineEl = document.getElementById("hymn-tagline");
+      var body = document.getElementById("hymn-body");
+      if (!body) return;
+
+      var params = new URLSearchParams(window.location.search);
+      var slug = params.get("song");
+
+      function el(tag, className, text) {
+        var node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text != null) node.textContent = text;
+        return node;
+      }
+
+      function lyricBlock(block, isChorus) {
+        var wrap = el("div", "lyric-block" + (isChorus ? " lyric-block--chorus" : ""));
+        wrap.appendChild(el("h3", "lyric-block__heading", block.heading));
+        var lines = el("p", "lyric-block__lines");
+        (block.lines || []).forEach(function (line, i) {
+          if (i) lines.appendChild(document.createElement("br"));
+          lines.appendChild(document.createTextNode(line));
+        });
+        wrap.appendChild(lines);
+        return wrap;
+      }
+
+      function notFound(message) {
+        titleEl.textContent = "Song not found";
+        taglineEl.textContent = "";
+        body.appendChild(el("p", "hymn-empty", message || "We couldn't find that song. Please head back to Worship."));
+      }
+
+      fetch("worship.json")
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          var songs = (data && data.songs) || [];
+          var song = songs.filter(function (s) { return s.slug === slug; })[0];
+          if (!song) { notFound(); return; }
+
+          document.title = song.title + " — Worship for Little Ones — Reid Kids";
+          titleEl.textContent = song.title;
+          taglineEl.textContent = song.tagline || "";
+
+          /* Intro */
+          if (song.intro && song.intro.length) {
+            var intro = el("div", "hymn__intro");
+            song.intro.forEach(function (para) { intro.appendChild(el("p", null, para)); });
+            body.appendChild(intro);
+          }
+
+          /* Lyrics — chorus follows each verse */
+          var lyrics = el("div", "hymn__lyrics");
+          lyrics.appendChild(el("h3", "hymn__section-label", "Lyrics"));
+          (song.verses || []).forEach(function (verse) {
+            lyrics.appendChild(lyricBlock(verse, false));
+            if (song.chorus) lyrics.appendChild(lyricBlock(song.chorus, true));
+          });
+          body.appendChild(lyrics);
+
+          /* Credits */
+          if (song.credits) {
+            var c = song.credits;
+            var credits = el("div", "hymn__credits");
+            var dl = el("dl", "hymn__credits-list");
+            function row(label, value) {
+              if (!value) return;
+              dl.appendChild(el("dt", null, label));
+              dl.appendChild(el("dd", null, value));
+            }
+            row("Title", c.title);
+            row("Lyrics", c.lyrics);
+            row("Music", c.music);
+            row("First Published", c.published);
+            row("Copyright Status", c.copyright);
+            credits.appendChild(dl);
+            body.appendChild(credits);
+          }
+        })
+        .catch(function () {
+          notFound("We couldn't load this song right now — please try again soon.");
+        });
+    })();
+  </script>
+</body>
+</html>

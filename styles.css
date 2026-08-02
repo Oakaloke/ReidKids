@@ -266,6 +266,59 @@ img { max-width: 100%; display: block; }
 .footer__verse { font-style: italic; color: var(--blue-200); margin: 0; }
 .footer__copy { color: rgba(255,255,255,.7); font-size: .9rem; margin: 0; }
 
+/* ---------- Worship / Hymns ---------- */
+.book--link { display: block; color: inherit; }
+.resource--link { color: inherit; cursor: pointer; }
+
+.hymn-empty {
+  text-align: center; color: var(--ink-soft); font-weight: 600;
+  margin: 2.5rem auto 0;
+}
+
+.hymn { max-width: 760px; margin: 0 auto; }
+
+.hymn__intro p {
+  color: var(--ink-soft); font-size: 1.08rem; margin: 0 0 1.1rem;
+}
+.hymn__intro p:last-child { margin-bottom: 0; }
+
+.hymn__lyrics {
+  background: #fff; border-radius: var(--radius); border: 1px solid var(--blue-100);
+  box-shadow: var(--shadow-sm); padding: clamp(1.6rem, 4vw, 2.4rem);
+  margin-top: 2.4rem; text-align: center;
+}
+.hymn__section-label {
+  font-size: 1.4rem; color: var(--blue-600); margin-bottom: 1.4rem;
+}
+
+.lyric-block { margin: 0 auto 1.6rem; max-width: 30rem; }
+.lyric-block:last-child { margin-bottom: 0; }
+.lyric-block__heading {
+  font-size: .82rem; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--gold-600); margin-bottom: .45rem;
+}
+.lyric-block__lines { margin: 0; color: var(--ink); line-height: 1.9; }
+
+.lyric-block--chorus {
+  background: var(--blue-50); border-left: 4px solid var(--gold-400);
+  border-radius: 12px; padding: 1rem 1.3rem; text-align: left;
+}
+.lyric-block--chorus .lyric-block__heading { color: var(--blue-500); }
+.lyric-block--chorus .lyric-block__lines { font-style: italic; }
+
+.hymn__credits {
+  margin-top: 2.4rem; padding-top: 1.6rem; border-top: 1px solid var(--blue-100);
+  text-align: center;
+}
+.hymn__credits-list {
+  display: inline-grid; grid-template-columns: auto auto; gap: .3rem 1rem;
+  margin: 0; text-align: left; font-size: .86rem; color: var(--ink-soft);
+}
+.hymn__credits-list dt { font-weight: 700; color: var(--blue-600); }
+.hymn__credits-list dd { margin: 0; }
+
+.hymn__back { text-align: center; margin-top: 2.6rem; }
+
 /* ---------- Reveal on scroll ---------- */
 .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
 .reveal.is-visible { opacity: 1; transform: none; }
