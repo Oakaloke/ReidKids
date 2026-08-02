@@ -70,6 +70,7 @@
       "slug": "o-store-gud",
       "title": "O Store Gud (The Origin of How Great Thou Art)",
       "tagline": "The Swedish poem behind one of the world's most beloved hymns.",
+      "metaDescription": "The story of O Store Gud, Carl Gustav Boberg's 1885 Swedish poem behind How Great Thou Art — including an original ReidKids English translation of the public-domain text.",
       "cover": "2",
       "mark": "♫",
       "meta": [
@@ -95,6 +96,69 @@
           ]
         },
         {
+          "heading": "O Great God",
+          "subheading": "An Original English Translation of Carl Gustav Boberg's O Store Gud (1885)",
+          "byline": "By ReidKids, translated from the original Swedish public domain poem",
+          "verses": [
+            {
+              "heading": "Verse 1",
+              "lines": [
+                "O Great God, when I behold the world,",
+                "Created by Your mighty, sovereign hand,",
+                "I see Your wisdom woven through creation,",
+                "And every living thing by Your command."
+              ]
+            },
+            {
+              "heading": "Verse 2",
+              "lines": [
+                "When summer winds move gently through the meadows,",
+                "When fragrant flowers bloom beside the stream,",
+                "When birds rejoice among the forest branches,",
+                "And distant waters softly sing their theme,"
+              ]
+            },
+            {
+              "heading": "Verse 3",
+              "lines": [
+                "When in Your Holy Word I read the wonders",
+                "That You have done throughout the ages past,",
+                "How full of grace You've been to every generation,",
+                "Your faithful love forevermore will last."
+              ]
+            },
+            {
+              "heading": "Verse 4",
+              "lines": [
+                "When all the mist of time has disappeared,",
+                "And heaven's eternal morning fills the sky,",
+                "With humble heart I'll bow before my Savior,",
+                "And praise the God who loved and rescued me."
+              ]
+            }
+          ],
+          "refrain": {
+            "heading": "Refrain",
+            "lines": [
+              "Then from my soul a joyful song arises:",
+              "O Great God! O Great God!",
+              "Then from my soul a joyful song arises:",
+              "O Great God! O Great God!"
+            ]
+          }
+        },
+        {
+          "heading": "About This Translation",
+          "paragraphs": [
+            "This is an original English translation created from Carl Gustav Boberg's 1885 Swedish poem O Store Gud, which is in the public domain. It is intended to reflect the themes and meaning of the original Swedish text without reproducing the wording of Stuart K. Hine's later English adaptation, How Great Thou Art, which remains under copyright."
+          ],
+          "meta": [
+            { "label": "Original Swedish Author", "value": "Carl Gustav Boberg (1859–1940)" },
+            { "label": "Original Poem", "value": "O Store Gud (1885)" },
+            { "label": "Original Language", "value": "Swedish" }
+          ]
+        },
+        {
           "heading": "Biblical Inspiration",
           "list": [
             { "term": "Psalm 8:1", "desc": "The majesty of the Lord's name fills all the earth." },
@@ -113,7 +177,7 @@
           "paragraphs": [
             "The original Swedish poem, O Store Gud, written by Carl Boberg in 1885, is in the public domain, as is the traditional Swedish melody associated with it.",
             "The well-known English hymn How Great Thou Art, translated and adapted by Stuart K. Hine in the twentieth century, remains protected by copyright in many countries.",
-            "Because of this, this website does not reproduce Stuart Hine's English lyrics. Instead, it presents information about the hymn's history along with original translations or adaptations inspired by Carl Boberg's public domain poem."
+            "Because of this, this website does not reproduce Stuart Hine's English lyrics. The English lyrics presented above are an original ReidKids translation of Boberg's public domain poem."
           ]
         },
         {

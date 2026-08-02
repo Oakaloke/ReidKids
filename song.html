@@ -128,6 +128,10 @@
           if (!song) { notFound(); return; }
 
           document.title = song.title + " — Worship for Little Ones — Reid Kids";
+          if (song.metaDescription) {
+            var descTag = document.querySelector('meta[name="description"]');
+            if (descTag) descTag.setAttribute("content", song.metaDescription);
+          }
           titleEl.textContent = song.title;
           taglineEl.textContent = song.tagline || "";
 
@@ -161,11 +165,25 @@
             body.appendChild(lyrics);
           }
 
-          /* Generic content sections (heading + paragraphs + optional list) */
+          /* Generic content sections (heading + paragraphs + optional list/lyrics) */
           if (song.sections && song.sections.length) {
             song.sections.forEach(function (sec) {
               var wrap = el("section", "hymn__section" + (sec.variant === "callout" ? " hymn__callout" : ""));
               if (sec.heading) wrap.appendChild(el("h3", "hymn__section-label", sec.heading));
+              if (sec.subheading) wrap.appendChild(el("p", "hymn__subheading", sec.subheading));
+              if (sec.byline) wrap.appendChild(el("p", "hymn__byline", sec.byline));
+
+              /* Lyrics inside a section — reuses the Jesus Loves Me markup, with
+                 the refrain given the same accent/callout treatment as a chorus. */
+              if (sec.verses && sec.verses.length) {
+                var secLyrics = el("div", "hymn__lyrics");
+                sec.verses.forEach(function (verse) {
+                  secLyrics.appendChild(lyricBlock(verse, false));
+                  if (sec.refrain) secLyrics.appendChild(lyricBlock(sec.refrain, true));
+                });
+                wrap.appendChild(secLyrics);
+              }
+
               if (sec.list && sec.list.length) {
                 var ul = el("ul", "hymn__list");
                 sec.list.forEach(function (li) {
@@ -183,6 +201,19 @@
               (sec.paragraphs || []).forEach(function (para) {
                 wrap.appendChild(el("p", null, para));
               });
+
+              /* Small, muted labelled metadata within a section */
+              if (sec.meta && sec.meta.length) {
+                var secMeta = el("div", "hymn__meta");
+                var sdl = el("dl", "hymn__deflist");
+                sec.meta.forEach(function (item) {
+                  sdl.appendChild(el("dt", null, item.label));
+                  sdl.appendChild(el("dd", null, item.value));
+                });
+                secMeta.appendChild(sdl);
+                wrap.appendChild(secMeta);
+              }
+
               body.appendChild(wrap);
             });
           }

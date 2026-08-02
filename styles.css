@@ -325,6 +325,15 @@ img { max-width: 100%; display: block; }
 .hymn__section p { color: var(--ink-soft); font-size: 1.08rem; margin: 0 0 1.1rem; }
 .hymn__section p:last-child { margin-bottom: 0; }
 
+.hymn__subheading {
+  text-align: center; font-family: var(--font-head); font-weight: 500;
+  color: var(--blue-500); margin: -.8rem 0 .5rem;
+}
+.hymn__byline {
+  text-align: center; font-size: .86rem; font-style: italic;
+  color: var(--ink-soft); margin: 0 0 1.4rem;
+}
+
 .hymn__list { list-style: none; margin: 0 0 1.3rem; padding: 0; }
 .hymn__list li {
   position: relative; padding: .55rem 0 .55rem 1.4rem;
