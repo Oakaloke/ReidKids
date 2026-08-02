@@ -65,6 +65,68 @@
         "published": "1862",
         "copyright": "Public Domain"
       }
+    },
+    {
+      "slug": "o-store-gud",
+      "title": "O Store Gud (The Origin of How Great Thou Art)",
+      "tagline": "The Swedish poem behind one of the world's most beloved hymns.",
+      "cover": "2",
+      "mark": "♫",
+      "meta": [
+        { "label": "Original Title", "value": "O Store Gud (\"O Great God\")" },
+        { "label": "Original Author", "value": "Carl Gustav Boberg (1859–1940)" },
+        { "label": "Original Language", "value": "Swedish" },
+        { "label": "Year Written", "value": "1885" }
+      ],
+      "sections": [
+        {
+          "heading": "The Story Behind the Hymn",
+          "paragraphs": [
+            "One of the world's most beloved hymns, How Great Thou Art, began as a Swedish poem titled O Store Gud (\"O Great God\"), written by Swedish preacher, editor, and politician Carl Gustav Boberg in 1885.",
+            "According to tradition, Boberg was walking home after attending a church service when a sudden thunderstorm swept across the countryside. Powerful lightning, rolling thunder, and fierce winds were followed by a calm sky, brilliant sunshine, and birds singing once again. Deeply moved by the dramatic display of God's power and the peace that followed, Boberg wrote a poem praising the greatness of the Creator.",
+            "The poem first appeared in a Swedish publication in 1885 and was later set to a traditional Swedish folk melody. Over time, it spread throughout Scandinavia and was translated into several languages, including German and Russian."
+          ]
+        },
+        {
+          "heading": "The English Hymn",
+          "paragraphs": [
+            "In the late 1940s, British missionary Stuart K. Hine encountered the hymn while serving in Eastern Europe. Inspired by both the Russian translation and Boberg's original poem, Hine produced an English adaptation that expanded on the original themes. He also added verses reflecting Christ's sacrifice on the cross and the hope of His glorious return.",
+            "Published under the title How Great Thou Art, Hine's version gained worldwide recognition through churches, hymnals, radio broadcasts, recordings, and evangelistic crusades, becoming one of the most loved Christian hymns ever written."
+          ]
+        },
+        {
+          "heading": "Biblical Inspiration",
+          "list": [
+            { "term": "Psalm 8:1", "desc": "The majesty of the Lord's name fills all the earth." },
+            { "term": "Psalm 19:1", "desc": "The heavens declare the glory of God and the skies proclaim His handiwork." },
+            { "term": "Romans 1:20", "desc": "God's eternal power and divine nature are clearly seen through creation." },
+            { "term": "Colossians 1:16–17", "desc": "All things were created through Christ and for Him." },
+            { "term": "Revelation 4:11", "desc": "All creation worships the Creator who is worthy of glory, honor, and praise." }
+          ],
+          "paragraphs": [
+            "These passages remind believers that the beauty of creation points to its Creator and that God's greatness is revealed not only in nature but also through His plan of redemption in Jesus Christ."
+          ]
+        },
+        {
+          "heading": "Copyright Information",
+          "variant": "callout",
+          "paragraphs": [
+            "The original Swedish poem, O Store Gud, written by Carl Boberg in 1885, is in the public domain, as is the traditional Swedish melody associated with it.",
+            "The well-known English hymn How Great Thou Art, translated and adapted by Stuart K. Hine in the twentieth century, remains protected by copyright in many countries.",
+            "Because of this, this website does not reproduce Stuart Hine's English lyrics. Instead, it presents information about the hymn's history along with original translations or adaptations inspired by Carl Boberg's public domain poem."
+          ]
+        },
+        {
+          "heading": "Legacy",
+          "paragraphs": [
+            "More than 140 years after Carl Boberg first penned O Store Gud, the hymn continues to inspire Christians around the world. Whether sung in Swedish, English, or many other languages, its central message remains unchanged: all creation proclaims the majesty, power, and glory of Almighty God."
+          ]
+        }
+      ],
+      "quote": {
+        "text": "Great are the works of the LORD, studied by all who delight in them.",
+        "cite": "Psalm 111:2 (ESV)"
+      }
     }
   ]
 }

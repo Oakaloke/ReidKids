@@ -131,6 +131,18 @@
           titleEl.textContent = song.title;
           taglineEl.textContent = song.tagline || "";
 
+          /* Metadata block (top) — small / muted */
+          if (song.meta && song.meta.length) {
+            var meta = el("div", "hymn__meta");
+            var mdl = el("dl", "hymn__deflist");
+            song.meta.forEach(function (item) {
+              mdl.appendChild(el("dt", null, item.label));
+              mdl.appendChild(el("dd", null, item.value));
+            });
+            meta.appendChild(mdl);
+            body.appendChild(meta);
+          }
+
           /* Intro */
           if (song.intro && song.intro.length) {
             var intro = el("div", "hymn__intro");
@@ -138,20 +150,48 @@
             body.appendChild(intro);
           }
 
-          /* Lyrics — chorus follows each verse */
-          var lyrics = el("div", "hymn__lyrics");
-          lyrics.appendChild(el("h3", "hymn__section-label", "Lyrics"));
-          (song.verses || []).forEach(function (verse) {
-            lyrics.appendChild(lyricBlock(verse, false));
-            if (song.chorus) lyrics.appendChild(lyricBlock(song.chorus, true));
-          });
-          body.appendChild(lyrics);
+          /* Lyrics — chorus follows each verse. Omitted entirely when absent. */
+          if (song.verses && song.verses.length) {
+            var lyrics = el("div", "hymn__lyrics");
+            lyrics.appendChild(el("h3", "hymn__section-label", "Lyrics"));
+            song.verses.forEach(function (verse) {
+              lyrics.appendChild(lyricBlock(verse, false));
+              if (song.chorus) lyrics.appendChild(lyricBlock(song.chorus, true));
+            });
+            body.appendChild(lyrics);
+          }
+
+          /* Generic content sections (heading + paragraphs + optional list) */
+          if (song.sections && song.sections.length) {
+            song.sections.forEach(function (sec) {
+              var wrap = el("section", "hymn__section" + (sec.variant === "callout" ? " hymn__callout" : ""));
+              if (sec.heading) wrap.appendChild(el("h3", "hymn__section-label", sec.heading));
+              if (sec.list && sec.list.length) {
+                var ul = el("ul", "hymn__list");
+                sec.list.forEach(function (li) {
+                  var item = el("li");
+                  if (li && li.term) {
+                    item.appendChild(el("strong", null, li.term));
+                    item.appendChild(document.createTextNode(" — " + (li.desc || "")));
+                  } else {
+                    item.textContent = (li && li.desc) || li;
+                  }
+                  ul.appendChild(item);
+                });
+                wrap.appendChild(ul);
+              }
+              (sec.paragraphs || []).forEach(function (para) {
+                wrap.appendChild(el("p", null, para));
+              });
+              body.appendChild(wrap);
+            });
+          }
 
           /* Credits */
           if (song.credits) {
             var c = song.credits;
             var credits = el("div", "hymn__credits");
-            var dl = el("dl", "hymn__credits-list");
+            var dl = el("dl", "hymn__deflist");
             function row(label, value) {
               if (!value) return;
               dl.appendChild(el("dt", null, label));
@@ -164,6 +204,14 @@
             row("Copyright Status", c.copyright);
             credits.appendChild(dl);
             body.appendChild(credits);
+          }
+
+          /* Closing pull quote */
+          if (song.quote) {
+            var q = el("blockquote", "hymn__quote");
+            q.appendChild(el("p", "hymn__quote-text", song.quote.text));
+            if (song.quote.cite) q.appendChild(el("cite", "hymn__quote-cite", song.quote.cite));
+            body.appendChild(q);
           }
         })
         .catch(function () {
