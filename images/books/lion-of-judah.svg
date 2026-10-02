@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" role="img" aria-label="Placeholder cover for The Lion of Judah coloring book">
+  <rect width="600" height="800" fill="#003594"/>
+  <rect x="24" y="24" width="552" height="752" rx="18" fill="none" stroke="#FFD100" stroke-width="6"/>
+  <text x="300" y="150" text-anchor="middle" font-family="'Fredoka','Nunito',sans-serif" font-size="150" fill="#FFD100">🦁</text>
+  <text x="300" y="360" text-anchor="middle" font-family="'Fredoka','Nunito',sans-serif" font-weight="700" font-size="58" fill="#FFFFFF">The Lion</text>
+  <text x="300" y="430" text-anchor="middle" font-family="'Fredoka','Nunito',sans-serif" font-weight="700" font-size="58" fill="#FFFFFF">of Judah</text>
+  <line x1="180" y1="478" x2="420" y2="478" stroke="#FFD100" stroke-width="4"/>
+  <text x="300" y="540" text-anchor="middle" font-family="'Nunito',sans-serif" font-weight="600" font-size="30" fill="#FFD100">A Christian Coloring Book</text>
+  <text x="300" y="580" text-anchor="middle" font-family="'Nunito',sans-serif" font-weight="600" font-size="30" fill="#FFD100">for Little Hearts</text>
+  <text x="300" y="712" text-anchor="middle" font-family="'Nunito',sans-serif" font-weight="700" font-size="26" fill="#FFFFFF" opacity="0.85">Cover coming soon</text>
+</svg>

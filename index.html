@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Reid Kids — a warm, faith-filled brand of Christian children's books and family resources, nurturing little hearts with the love of Jesus." />
-  <meta name="theme-color" content="#3b6ea5" />
+  <meta name="description" content="Reid Kids — a warm, faith-filled brand of Christian children's books, coloring books, and family resources, nurturing little hearts with the love of Jesus." />
+  <meta name="theme-color" content="#003594" />
   <title>Reid Kids — Faith-Filled Stories for Little Hearts</title>
 
   <!-- Open Graph -->
   <meta property="og:title" content="Reid Kids" />
-  <meta property="og:description" content="Christian children's books and family resources rooted in God's Word." />
+  <meta property="og:description" content="Christian children's books, coloring books, and family resources rooted in God's Word." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://reidkids.com" />
 
@@ -17,35 +17,23 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Decorative sky / clouds backdrop -->
-  <div class="sky" aria-hidden="true">
-    <span class="cloud cloud--1"></span>
-    <span class="cloud cloud--2"></span>
-    <span class="cloud cloud--3"></span>
-  </div>
-
-  <!-- Navigation -->
-  <header class="nav" id="top">
-    <div class="container nav__inner">
-      <a href="#top" class="brand" aria-label="Reid Kids home">
-        <span class="brand__mark" aria-hidden="true">✦</span>
-        <span class="brand__name">Reid<span class="brand__name-accent">Kids</span></span>
+  <!-- Header: royal band · centered logo · nav below -->
+  <header class="site-header" id="top">
+    <div class="container">
+      <a class="site-header__logo" href="index.html" aria-label="Reid Kids — home">
+        <img src="images/assets/ReidKids_Eagle_Logo_Transparent.svg" alt="Reid Kids logo" width="112" height="112" />
       </a>
-
-      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
-        <span></span><span></span><span></span>
-      </button>
-
-      <nav class="nav__menu" id="nav-menu">
+      <nav class="site-nav" aria-label="Primary">
         <a href="#about">About</a>
         <a href="#books">Books</a>
-        <a href="#resources">Family</a>
+        <a href="coloring.html">Coloring Books</a>
         <a href="worship.html">Worship</a>
         <a href="#soon">Coming Soon</a>
-        <a href="#contact" class="nav__cta">Contact</a>
+        <a href="#contact" class="nav-cta">Contact</a>
       </nav>
     </div>
   </header>
@@ -56,14 +44,14 @@
       <div class="container hero__inner">
         <div class="hero__content reveal">
           <span class="eyebrow">✦ Faith • Family • Wonder</span>
-          <h1 class="hero__title">Helping little hearts<br />grow in <span class="text-gold">God's love</span></h1>
+          <h1 class="hero__title">Helping little hearts grow in <span class="hl">God's love</span></h1>
           <p class="hero__lead">
-            Reid Kids creates warm, beautifully illustrated Christian books and family
-            resources that plant seeds of faith and fill childhood with wonder.
+            Reid Kids creates warm, beautifully illustrated Christian books, coloring books, and
+            family resources that plant seeds of faith and fill childhood with wonder.
           </p>
           <div class="hero__actions">
             <a href="#books" class="btn btn--primary">Explore Our Books</a>
-            <a href="#soon" class="btn btn--ghost">What's Coming</a>
+            <a href="coloring.html" class="btn btn--ghost">Coloring Books</a>
           </div>
           <p class="hero__verse">
             “Let the little children come to me.” <span>— Matthew 19:14</span>
@@ -79,13 +67,10 @@
           </div>
         </div>
       </div>
-      <div class="wave" aria-hidden="true">
-        <svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,64 C240,112 480,16 720,40 C960,64 1200,112 1440,64 L1440,120 L0,120 Z"></path></svg>
-      </div>
     </section>
 
     <!-- About -->
-    <section class="section" id="about">
+    <section class="section section--tint" id="about">
       <div class="container">
         <div class="section__head reveal">
           <span class="eyebrow eyebrow--center">About Reid Kids</span>
@@ -118,7 +103,7 @@
     </section>
 
     <!-- Children's Books -->
-    <section class="section section--tint" id="books">
+    <section class="section" id="books">
       <div class="container">
         <div class="section__head reveal">
           <span class="eyebrow eyebrow--center">Children's Books</span>
@@ -145,6 +130,25 @@
             <p>Gentle truths about courage, kindness, and trusting Jesus in big feelings.</p>
             <span class="tag">Ages 4–8</span>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Coloring Books (featured preview) -->
+    <section class="section section--tint" id="coloring">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow eyebrow--center">Coloring Books</span>
+          <h2>Color along with <span class="hl">God's Word</span></h2>
+          <p class="section__sub">Faith-filled coloring books for little hands — available on Amazon and beyond.</p>
+        </div>
+
+        <div class="cbooks" id="cbooks-preview">
+          <!-- Featured coloring books render here from books.js -->
+        </div>
+
+        <div class="cbooks-cta reveal">
+          <a href="coloring.html" class="btn btn--primary">See All Coloring Books</a>
         </div>
       </div>
     </section>
@@ -176,7 +180,7 @@
           <article class="resource reveal">
             <span class="resource__icon">🖍️</span>
             <div>
-              <h3>Coloring & Activities</h3>
+              <h3>Coloring &amp; Activities</h3>
               <p>Free downloadable pages that bring Bible stories to life through play.</p>
             </div>
           </article>
@@ -246,15 +250,23 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container footer__inner">
-      <a href="#top" class="brand brand--light">
-        <span class="brand__mark" aria-hidden="true">✦</span>
-        <span class="brand__name">Reid<span class="brand__name-accent">Kids</span></span>
+      <a class="footer__logo" href="index.html" aria-label="Reid Kids — home">
+        <img src="images/assets/ReidKids_Eagle_Logo_Transparent.svg" alt="Reid Kids logo" width="64" height="64" />
       </a>
+      <nav class="footer__nav" aria-label="Footer">
+        <a href="#about">About</a>
+        <a href="#books">Books</a>
+        <a href="coloring.html">Coloring Books</a>
+        <a href="worship.html">Worship</a>
+        <a href="#soon">Coming Soon</a>
+        <a href="#contact">Contact</a>
+      </nav>
       <p class="footer__verse">“Train up a child in the way he should go.” — Proverbs 22:6</p>
-      <p class="footer__copy">© <span id="year"></span> Reid Kids. Made with love &amp; prayer.</p>
+      <p class="footer__copy">© <span class="js-year"></span> ReidKids</p>
     </div>
   </footer>
 
+  <script src="books.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

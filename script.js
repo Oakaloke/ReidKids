@@ -1,76 +1,123 @@
 /* =========================================================
    Reid Kids — script.js
-   Mobile nav · scroll reveal · signup · current year
+   Current year · scroll reveal · signup · coloring-book cards
    ========================================================= */
 (function () {
   "use strict";
 
-  /* ---- Current year in footer ---- */
-  var yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  /* ---- Mobile navigation toggle ---- */
-  var toggle = document.querySelector(".nav__toggle");
-  var menu = document.getElementById("nav-menu");
-
-  if (toggle && menu) {
-    toggle.addEventListener("click", function () {
-      var open = menu.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-    });
-
-    // Close menu after tapping a link (mobile)
-    menu.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        menu.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
-        toggle.setAttribute("aria-label", "Open menu");
-      });
-    });
-  }
+  /* ---- Current year in footer(s) ---- */
+  var year = new Date().getFullYear();
+  document.querySelectorAll("#year, .js-year").forEach(function (el) {
+    el.textContent = year;
+  });
 
   /* ---- Scroll reveal ---- */
-  var revealEls = document.querySelectorAll(".reveal");
-
-  if ("IntersectionObserver" in window && revealEls.length) {
-    var observer = new IntersectionObserver(
-      function (entries) {
+  function watch(el) {
+    if ("IntersectionObserver" in window) {
+      var obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
+            obs.unobserve(entry.target);
           }
         });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
-    );
-    revealEls.forEach(function (el) { observer.observe(el); });
-  } else {
-    revealEls.forEach(function (el) { el.classList.add("is-visible"); });
+      }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+      obs.observe(el);
+    } else {
+      el.classList.add("is-visible");
+    }
   }
+  document.querySelectorAll(".reveal").forEach(watch);
 
   /* ---- Coming Soon signup ---- */
   var form = document.getElementById("signup");
   var note = document.getElementById("signup-note");
-
   if (form && note) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var input = document.getElementById("email");
       var value = (input.value || "").trim();
       var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-
       if (!valid) {
         note.style.color = "#ffd0d0";
         note.textContent = "Please enter a valid email address.";
         input.focus();
         return;
       }
-
       note.style.color = "";
       note.textContent = "Thank you! We'll let you know when Reid Kids launches. 💛";
       form.reset();
     });
+  }
+
+  /* ---- Coloring books (homepage preview + full page) ---- */
+  function el(tag, className, text) {
+    var node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text != null) node.textContent = text;
+    return node;
+  }
+
+  function bookCard(book) {
+    var card = el("article", "cbook reveal");
+
+    var img = el("img", "cbook__cover");
+    img.src = book.cover || "images/books/placeholder.svg";
+    img.alt = "Cover of " + (book.title || "coloring book");
+    img.loading = "lazy";
+    card.appendChild(img);
+
+    var body = el("div", "cbook__body");
+    body.appendChild(el("h3", "cbook__title", book.title || "Untitled"));
+    if (book.subtitle) body.appendChild(el("p", "cbook__subtitle", book.subtitle));
+    if (book.ageRange) body.appendChild(el("span", "tag cbook__age", book.ageRange));
+    if (book.description) body.appendChild(el("p", "cbook__desc", book.description));
+
+    var actions = el("div", "cbook__actions");
+    var buy = el("a", "btn btn--primary cbook__buy", "Buy on Amazon");
+    buy.href = book.amazon || "#";
+    buy.target = "_blank";
+    buy.rel = "noopener noreferrer";
+    actions.appendChild(buy);
+
+    if (book.stores && book.stores.length) {
+      var stores = el("div", "cbook__stores");
+      book.stores.forEach(function (s) {
+        if (!s || !s.label) return;
+        var link = el("a", null, s.label);
+        link.href = s.url || "#";
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        stores.appendChild(link);
+      });
+      actions.appendChild(stores);
+    }
+
+    body.appendChild(actions);
+    card.appendChild(body);
+    watch(card);
+    return card;
+  }
+
+  function renderBooks(grid, books, emptyEl) {
+    if (!books.length) {
+      if (emptyEl) emptyEl.hidden = false;
+      return;
+    }
+    books.forEach(function (book) { grid.appendChild(bookCard(book)); });
+  }
+
+  var allBooks = window.REIDKIDS_BOOKS || [];
+
+  var fullGrid = document.getElementById("cbooks-grid");
+  if (fullGrid) {
+    renderBooks(fullGrid, allBooks, document.getElementById("cbooks-empty"));
+  }
+
+  var previewGrid = document.getElementById("cbooks-preview");
+  if (previewGrid) {
+    var featured = allBooks.filter(function (b) { return b.featured; });
+    if (!featured.length) featured = allBooks.slice(0, 3);
+    renderBooks(previewGrid, featured.slice(0, 3), null);
   }
 })();

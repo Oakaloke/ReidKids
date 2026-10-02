@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Reid Kids coloring books — faith-filled Christian coloring books for little hands, available on Amazon and other stores." />
+  <meta name="theme-color" content="#003594" />
+  <title>Coloring Books — Reid Kids</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Coloring Books — Reid Kids" />
+  <meta property="og:description" content="Faith-filled Christian coloring books for little hands." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://reidkids.com/coloring.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Header: royal band · centered logo · nav below -->
+  <header class="site-header" id="top">
+    <div class="container">
+      <a class="site-header__logo" href="index.html" aria-label="Reid Kids — home">
+        <img src="images/assets/ReidKids_Eagle_Logo_Transparent.svg" alt="Reid Kids logo" width="112" height="112" />
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html#about">About</a>
+        <a href="index.html#books">Books</a>
+        <a href="coloring.html" aria-current="page">Coloring Books</a>
+        <a href="worship.html">Worship</a>
+        <a href="index.html#soon">Coming Soon</a>
+        <a href="index.html#contact" class="nav-cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="coloring">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow eyebrow--center">Coloring Books</span>
+          <h2>Color along with <span class="hl">God's Word</span></h2>
+          <p class="section__sub">
+            Faith-filled Christian coloring books for little hands — gentle pictures
+            that help children celebrate Jesus one page at a time. Available on Amazon
+            and other stores.
+          </p>
+        </div>
+
+        <div class="cbooks" id="cbooks-grid">
+          <!-- Coloring books render here from books.js -->
+        </div>
+
+        <p class="cbooks-empty" id="cbooks-empty" hidden>More coloring books are on the way — check back soon! ✦</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a class="footer__logo" href="index.html" aria-label="Reid Kids — home">
+        <img src="images/assets/ReidKids_Eagle_Logo_Transparent.svg" alt="Reid Kids logo" width="64" height="64" />
+      </a>
+      <nav class="footer__nav" aria-label="Footer">
+        <a href="index.html#about">About</a>
+        <a href="index.html#books">Books</a>
+        <a href="coloring.html">Coloring Books</a>
+        <a href="worship.html">Worship</a>
+        <a href="index.html#soon">Coming Soon</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <p class="footer__verse">“Train up a child in the way he should go.” — Proverbs 22:6</p>
+      <p class="footer__copy">© <span class="js-year"></span> ReidKids</p>
+    </div>
+  </footer>
+
+  <script src="books.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
