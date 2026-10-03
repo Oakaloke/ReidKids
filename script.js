@@ -138,12 +138,12 @@
       if (book.description) body.appendChild(el("p", "featured__desc", book.description));
 
       var actions = el("div", "featured__actions");
-      var buy = el("a", "btn btn--primary", "Buy on Amazon");
+      var buy = el("a", "btn btn--royal", "Buy on Amazon");
       buy.href = book.amazon || "#";
       buy.target = "_blank";
       buy.rel = "noopener noreferrer";
       actions.appendChild(buy);
-      var more = el("a", "btn btn--outline", "All coloring books");
+      var more = el("a", "btn btn--royal-outline", "All coloring books");
       more.href = "coloring.html";
       actions.appendChild(more);
       body.appendChild(actions);

@@ -11,14 +11,16 @@
   --sol:     #FFD100;
   --white:   #FFFFFF;
   --ink:     #1A1F2B;
+  --muted:   #2C3340;   /* body text on light surfaces */
 
   /* ----- Support shades (same hues) ----- */
   --royal-dark: #002a73;
   --sol-dark:   #e6bd00;
   --royal-soft: rgba(0, 53, 148, 0.06);
   --royal-line: rgba(0, 53, 148, 0.14);
-  --ink-soft:   #5a6472;
-  --line:       #e7eaf1;
+  --ink-soft:   #2C3340;
+  --line:       #E6E8EE;
+  --field:      #E8EEF8;   /* blue-gray storybook field */
   --surface:    #f6f8fc;
 
   --radius:    16px;
@@ -132,6 +134,24 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   box-shadow: inset 0 0 0 2px var(--royal);
 }
 .btn--outline:hover { background: var(--royal); color: var(--white); transform: translateY(-2px); }
+/* Royal fill — for use on the yellow band */
+.btn--royal {
+  background: var(--royal); color: var(--white);
+  box-shadow: 0 16px 28px -16px rgba(0, 53, 148, .6);
+}
+.btn--royal:hover { background: var(--royal-dark); color: var(--white); transform: translateY(-2px); }
+/* Royal outline — reads on the yellow band */
+.btn--royal-outline {
+  background: transparent; color: var(--royal);
+  box-shadow: inset 0 0 0 2px var(--royal);
+}
+.btn--royal-outline:hover { background: var(--royal); color: var(--white); transform: translateY(-2px); }
+/* White outline — reads on the royal hero */
+.btn--white-outline {
+  background: transparent; color: var(--white);
+  box-shadow: inset 0 0 0 2px var(--white);
+}
+.btn--white-outline:hover { background: var(--white); color: var(--royal); transform: translateY(-2px); }
 
 /* ---------- Eyebrow / section heads ---------- */
 .eyebrow {
@@ -143,30 +163,53 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 
 .section { padding: clamp(4rem, 8vw, 6rem) 0; }
 .section--tint { background: var(--surface); }
+
+/* Royal band — white text, yellow eyebrow */
 .section--royal { background: var(--royal); color: var(--white); }
 .section--royal h2 { color: var(--white); }
 .section--royal .eyebrow { color: var(--sol); }
 .section--royal .section__sub { color: rgba(255,255,255,.88); }
 
+/* Sol band — royal headings & body */
+.section--sol { background: var(--sol); color: var(--royal); }
+.section--sol h2, .section--sol h3 { color: var(--royal); }
+.section--sol .eyebrow { color: var(--royal); }
+.section--sol .section__sub { color: var(--royal); }
+
+/* Blue-gray field — white cards sit on it */
+.section--field { background: var(--field); }
+
 .section__head { text-align: center; max-width: 640px; margin: 0 auto 3rem; }
 .section__head h2 { font-size: clamp(1.9rem, 4.2vw, 2.7rem); }
 .section__sub { color: var(--ink-soft); font-size: 1.1rem; margin: 0; }
 
-/* ---------- Hero (centered · white) ---------- */
-.hero { text-align: center; padding: clamp(2.6rem, 6vw, 4.6rem) 0 clamp(3rem, 7vw, 5rem); }
-.hero__inner { max-width: 760px; margin: 0 auto; }
-.hero__logo { margin: 0 auto 1.8rem; }
-.hero__logo img {
-  width: clamp(240px, 32vw, 400px); height: auto; margin: 0 auto;
+/* Yellow rule under an eyebrow */
+.yellow-rule { display: block; width: 56px; height: 4px; border-radius: 4px; background: var(--sol); margin: 0 auto 1.1rem; }
+
+/* ---------- Hero (centered · full royal band) ---------- */
+.hero {
+  background: var(--royal); color: var(--white); text-align: center;
+  padding: clamp(2.8rem, 6vw, 4.8rem) 0 clamp(3.2rem, 7vw, 5.2rem);
 }
-.hero__title { font-size: clamp(2.3rem, 5.6vw, 3.6rem); margin-bottom: .6rem; }
+.hero__inner { max-width: 760px; margin: 0 auto; }
+.hero .eyebrow { color: var(--sol); }
+.hero__logo {
+  display: inline-block; background: var(--white);
+  border: 1px solid #E6E8EE; border-radius: 28px;
+  padding: clamp(16px, 3vw, 28px); margin: 0 auto 1.9rem;
+  box-shadow: 0 26px 54px -26px rgba(0, 0, 0, .55);
+}
+.hero__logo img {
+  width: clamp(260px, 60vw, 400px); height: auto; margin: 0 auto;
+}
+.hero__title { color: var(--white); font-size: clamp(2.3rem, 5.6vw, 3.6rem); margin-bottom: .6rem; }
 .hero__lead {
-  font-size: 1.2rem; color: var(--ink-soft);
+  font-size: 1.2rem; color: rgba(255, 255, 255, .9);
   max-width: 44ch; margin: 0 auto 2rem;
 }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 1.6rem; }
-.hero__verse { font-style: italic; color: var(--ink-soft); font-size: .95rem; margin: 0; }
-.hero__verse strong { color: var(--royal); font-style: normal; }
+.hero__verse { font-style: italic; color: rgba(255, 255, 255, .8); font-size: .95rem; margin: 0; }
+.hero__verse strong { color: var(--white); font-style: normal; }
 
 /* ---------- Featured coloring book ---------- */
 .featured {
@@ -191,6 +234,16 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .featured__subtitle { color: var(--ink-soft); font-weight: 700; font-size: 1.02rem; margin: 0 0 1rem; }
 .featured__desc { color: var(--ink-soft); font-size: 1.08rem; margin: 0 0 1.6rem; }
 .featured__actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+
+/* Featured on the sol (yellow) band */
+.section--sol .featured__cover { background: var(--white); }
+.section--sol .featured__badge { background: var(--royal); color: var(--white); }
+.section--sol .featured__subtitle,
+.section--sol .featured__desc { color: var(--royal); }
+.section--sol .tag { background: var(--royal); color: var(--white); }
+
+/* Age pills on the storybook field */
+.section--field .tag { background: var(--royal); color: var(--white); }
 
 /* ---------- Storybooks grid ---------- */
 .books { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; }
