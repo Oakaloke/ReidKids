@@ -91,6 +91,13 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .site-header__logo img {
   height: 84px; width: auto; display: block;
 }
+/* Text wordmark — keeps the eagle reserved for the hero/footer */
+.site-wordmark {
+  font-family: var(--font-head); font-weight: 600;
+  font-size: 1.6rem; letter-spacing: -0.01em; color: var(--royal);
+  line-height: 1;
+}
+.site-wordmark:hover { color: var(--royal-dark); }
 .site-nav { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem 1.6rem; }
 .site-nav a {
   position: relative;
@@ -353,6 +360,11 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   box-shadow: 0 16px 34px -18px rgba(0,0,0,.5);
 }
 .footer__logo img { height: 72px; width: auto; }
+.footer__wordmark {
+  font-family: var(--font-head); font-weight: 600;
+  font-size: 1.7rem; color: var(--white); line-height: 1;
+}
+.footer__wordmark:hover { color: var(--sol); }
 .footer__nav { display: flex; flex-wrap: wrap; gap: .5rem 1.6rem; justify-content: center; }
 .footer__nav a { font-weight: 700; color: rgba(255,255,255,.9); transition: color .2s; }
 .footer__nav a:hover { color: var(--sol); }
