@@ -199,17 +199,22 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   padding: clamp(2.8rem, 6vw, 4.8rem) 0 clamp(3.2rem, 7vw, 5.2rem);
 }
 .hero__inner { max-width: 760px; margin: 0 auto; }
-.hero .eyebrow { color: var(--sol); }
 .hero__logo {
-  display: inline-block; background: var(--white);
+  display: block; width: fit-content; background: var(--white);
   border: 1px solid #E6E8EE; border-radius: 28px;
-  padding: clamp(16px, 3vw, 28px); margin: 0 auto 1.9rem;
+  padding: clamp(16px, 3vw, 28px); margin: 0 auto 2.2rem;
   box-shadow: 0 26px 54px -26px rgba(0, 0, 0, .55);
 }
 .hero__logo img {
   width: clamp(260px, 60vw, 400px); height: auto; margin: 0 auto;
 }
-.hero__title { color: var(--white); font-size: clamp(2.3rem, 5.6vw, 3.6rem); margin-bottom: .6rem; }
+.hero__title {
+  color: var(--white);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 600; line-height: 1.08; letter-spacing: -0.02em;
+  max-width: 17ch; margin: 0 auto .9rem;
+}
+.hero__accent { color: var(--sol); }
 .hero__lead {
   font-size: 1.2rem; color: rgba(255, 255, 255, .9);
   max-width: 44ch; margin: 0 auto 2rem;
