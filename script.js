@@ -114,10 +114,42 @@
     renderBooks(fullGrid, allBooks, document.getElementById("cbooks-empty"));
   }
 
-  var previewGrid = document.getElementById("cbooks-preview");
-  if (previewGrid) {
+  /* ---- Featured coloring book (homepage) ---- */
+  var featuredBox = document.getElementById("cbook-featured");
+  if (featuredBox) {
     var featured = allBooks.filter(function (b) { return b.featured; });
-    if (!featured.length) featured = allBooks.slice(0, 3);
-    renderBooks(previewGrid, featured.slice(0, 3), null);
+    if (!featured.length) featured = allBooks.slice(0, 1);
+    var book = featured[0];
+    if (!book) {
+      featuredBox.innerHTML = '<p class="books-note">New coloring books are on the way — launching 2026.</p>';
+    } else {
+      var media = el("div", "featured__media");
+      var img = el("img", "featured__cover");
+      img.src = book.cover || "images/books/placeholder.svg";
+      img.alt = "Cover of " + (book.title || "coloring book");
+      img.loading = "lazy";
+      media.appendChild(el("span", "featured__badge", "New"));
+      media.appendChild(img);
+
+      var body = el("div", "featured__body");
+      body.appendChild(el("h3", "featured__title", book.title || "Untitled"));
+      if (book.subtitle) body.appendChild(el("p", "featured__subtitle", book.subtitle));
+      if (book.ageRange) body.appendChild(el("span", "tag cbook__age", book.ageRange));
+      if (book.description) body.appendChild(el("p", "featured__desc", book.description));
+
+      var actions = el("div", "featured__actions");
+      var buy = el("a", "btn btn--primary", "Buy on Amazon");
+      buy.href = book.amazon || "#";
+      buy.target = "_blank";
+      buy.rel = "noopener noreferrer";
+      actions.appendChild(buy);
+      var more = el("a", "btn btn--outline", "All coloring books");
+      more.href = "coloring.html";
+      actions.appendChild(more);
+      body.appendChild(actions);
+
+      featuredBox.appendChild(media);
+      featuredBox.appendChild(body);
+    }
   }
 })();
