@@ -323,7 +323,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .cbooks-empty { text-align: center; color: var(--white); font-weight: 700; margin: 2.5rem auto 0; }
 
 /* ---------- Shop / merchandise strip ---------- */
-.shop { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; }
+.shop { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.6rem; }
 .shop__card {
   display: flex; flex-direction: column; text-align: left;
   background: var(--white); border-radius: var(--radius);
@@ -335,6 +335,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .shop__art--1 { background: linear-gradient(150deg, var(--royal), var(--royal-dark)); }
 .shop__art--2 { background: linear-gradient(150deg, var(--sol), var(--sol-dark)); }
 .shop__art--3 { background: linear-gradient(150deg, #2b63c7, var(--royal)); }
+.shop__art--4 { background: linear-gradient(150deg, var(--sol), var(--royal)); }
 .shop__art::after {
   content: ""; position: absolute; inset: 0;
   background: radial-gradient(circle at 78% 20%, rgba(255,255,255,.26), transparent 46%);
@@ -520,6 +521,15 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   color: var(--white); font-size: .82rem; line-height: 1.6; text-align: center;
 }
 
+/* ---------- "Play Bible Match" link (on the Royal field) ---------- */
+.play-cta { text-align: center; margin: 2.6rem auto 0; }
+.play-cta a {
+  font-weight: 800; color: var(--white);
+  text-decoration: underline; text-decoration-color: var(--sol);
+  text-decoration-thickness: 3px; text-underline-offset: 4px;
+}
+.play-cta a:hover { color: var(--sol); }
+
 /* ---------- Reveal on scroll ---------- */
 .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
 .reveal.is-visible { opacity: 1; transform: none; }
@@ -529,7 +539,8 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   .featured { grid-template-columns: 1fr; max-width: 420px; text-align: center; }
   .featured__body { text-align: center; }
   .featured__actions { justify-content: center; }
-  .books, .shop { grid-template-columns: 1fr; max-width: 420px; margin-inline: auto; }
+  .books { grid-template-columns: 1fr; max-width: 420px; margin-inline: auto; }
+  .shop { grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }   /* 2×2 on tablet/phone */
 }
 
 @media (max-width: 640px) {
