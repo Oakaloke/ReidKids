@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bible verses for children — a growing collection of short, encouraging Scriptures from the Christian Standard Bible (CSB), with a new Verse of the Week for your family." />
+  <meta name="theme-color" content="#003594" />
+  <title>Bible Verses for Kids — Reid Kids</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Bible Verses for Kids — Reid Kids" />
+  <meta property="og:description" content="Short, encouraging Bible verses for children from the Christian Standard Bible, with a new Verse of the Week." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.reidkids.com/verses.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Header: white · sticky -->
+  <header class="site-header" id="top">
+    <div class="container">
+      <a class="site-wordmark" href="index.html" aria-label="Reid Kids — home">Reid Kids</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html#about">About</a>
+        <a href="index.html#books">Books</a>
+        <a href="coloring.html">Coloring Books</a>
+        <a href="worship.html">Worship</a>
+        <a href="verses.html" aria-current="page">Verses</a>
+        <a href="index.html#contact" class="nav-cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="verses">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow eyebrow--center">God's Word for Little Hearts</span>
+          <h2>Bible <span class="hl">verses</span> for kids</h2>
+          <p class="section__sub">Short, encouraging Scriptures to read, talk about, and tuck into little hearts — straight from the Bible. A new Verse of the Week shows up here every week.</p>
+        </div>
+
+        <!-- Verse of the Week renders here -->
+        <div id="verse-week" aria-live="polite"></div>
+
+        <!-- Full collection, grouped by theme, renders here -->
+        <div id="verse-themes"></div>
+
+        <p class="hymn-empty" id="verse-empty" hidden>We couldn't load the verses right now — please try again soon. ✦</p>
+
+        <!-- CSB copyright / licence notice -->
+        <p class="verse-copyright" id="verse-copyright"></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer: royal · solid logo on white pill -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a class="footer__logo" href="index.html" aria-label="Reid Kids — home">
+        <img src="images/assets/ReidKids_Eagle_Logo.svg" alt="Reid Kids eagle logo" width="72" height="72" />
+      </a>
+      <nav class="footer__nav" aria-label="Footer">
+        <a href="index.html#about">About</a>
+        <a href="index.html#books">Books</a>
+        <a href="coloring.html">Coloring Books</a>
+        <a href="worship.html">Worship</a>
+        <a href="verses.html">Verses</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <p class="footer__verse">“Your word is a lamp for my feet and a light on my path.” — Psalm 119:105 (CSB)</p>
+      <p class="footer__copy">© 2026 Reid Kids</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    /* ---- Render Bible verses from verses.json ---- */
+    (function () {
+      "use strict";
+      var weekBox = document.getElementById("verse-week");
+      var themesBox = document.getElementById("verse-themes");
+      var empty = document.getElementById("verse-empty");
+      var copyEl = document.getElementById("verse-copyright");
+      if (!weekBox || !themesBox) return;
+
+      function el(tag, className, text) {
+        var node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text != null) node.textContent = text;
+        return node;
+      }
+
+      /* Scroll reveal for dynamically created cards */
+      function reveal(node) {
+        node.classList.add("reveal");
+        if ("IntersectionObserver" in window) {
+          var obs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                obs.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+          obs.observe(node);
+        } else {
+          node.classList.add("is-visible");
+        }
+      }
+
+      /* Present the verse "in quotes" without doubling marks the text already has */
+      function quoted(t) {
+        t = (t || "").trim();
+        var open = t.charAt(0) === "“" ? "" : "“";
+        var close = t.charAt(t.length - 1) === "”" ? "" : "”";
+        return open + t + close;
+      }
+
+      /* Verse of the Week: continuous week count so every verse shows once
+         before any repeats, rotating to a new one each week. */
+      function weekIndex(count) {
+        var ONE_WEEK = 604800000;                 // ms in 7 days
+        var epoch = Date.UTC(2024, 0, 1);         // fixed Monday reference point
+        var weeks = Math.floor((Date.now() - epoch) / ONE_WEEK);
+        return ((weeks % count) + count) % count;
+      }
+
+      function rememberLine(parentClass, text) {
+        var p = el("p", parentClass);
+        p.appendChild(el("strong", null, "Remember: "));
+        p.appendChild(document.createTextNode(text));
+        return p;
+      }
+
+      fetch("verses.json")
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          var verses = (data && data.verses) || [];
+          var ready = verses.filter(function (v) { return v.verified && v.text; });
+          if (!ready.length) { if (empty) empty.hidden = false; return; }
+
+          if (copyEl && data.copyright) copyEl.textContent = data.copyright;
+
+          /* ----- Verse of the Week ----- */
+          var v = ready[weekIndex(ready.length)];
+          var card = el("div", "verse-week reveal");
+          card.appendChild(el("span", "verse-week__eyebrow", "Verse of the Week"));
+          card.appendChild(el("h3", "verse-week__title", v.title));
+          card.appendChild(el("p", "verse-week__text", quoted(v.text)));
+          card.appendChild(el("p", "verse-week__ref", "— " + v.reference + " (" + v.translation + ")"));
+          card.appendChild(rememberLine("verse-week__remember", v.remember));
+          weekBox.appendChild(card);
+          reveal(card);
+
+          /* ----- Full collection, grouped by theme (keeps file order) ----- */
+          var order = [];
+          var groups = {};
+          ready.forEach(function (item) {
+            if (!groups[item.theme]) { groups[item.theme] = []; order.push(item.theme); }
+            groups[item.theme].push(item);
+          });
+
+          order.forEach(function (theme) {
+            var wrap = el("div", "verse-theme");
+            var head = el("div", "verse-theme__head reveal");
+            head.appendChild(el("span", "eyebrow eyebrow--center", "Theme"));
+            head.appendChild(el("h3", null, theme));
+            wrap.appendChild(head);
+            reveal(head);
+
+            var grid = el("div", "verse-grid");
+            groups[theme].forEach(function (item) {
+              var c = el("article", "verse-card reveal");
+              c.appendChild(el("h4", "verse-card__title", item.title));
+              c.appendChild(el("p", "verse-card__text", quoted(item.text)));
+              c.appendChild(el("p", "verse-card__ref", "— " + item.reference + " (" + item.translation + ")"));
+              c.appendChild(rememberLine("verse-card__remember", item.remember));
+              grid.appendChild(c);
+              reveal(c);
+            });
+            wrap.appendChild(grid);
+            themesBox.appendChild(wrap);
+          });
+        })
+        .catch(function () {
+          if (empty) { empty.hidden = false; }
+        });
+    })();
+  </script>
+</body>
+</html>
