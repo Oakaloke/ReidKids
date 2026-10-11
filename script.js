@@ -58,12 +58,39 @@
     return node;
   }
 
+  function hasRealLink(book) {
+    var a = (book.amazon || "").trim();
+    return a !== "" && a !== "#";
+  }
+
+  // Buy button when there's a real Amazon link; a disabled "Coming soon" button otherwise.
+  // realClass is the active-button style (e.g. "btn--primary" or "btn--royal").
+  function buyControl(book, realClass, extraClass) {
+    extraClass = extraClass || "";
+    if (hasRealLink(book)) {
+      var a = el("a", "btn " + realClass + " " + extraClass, "Buy on Amazon");
+      a.href = book.amazon;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      return a;
+    }
+    var b = el("button", "btn btn--soon " + extraClass, "Coming soon to Amazon");
+    b.type = "button";
+    b.disabled = true;
+    b.setAttribute("aria-disabled", "true");
+    return b;
+  }
+
+  function coverAlt(book) {
+    return book.alt || ("Cover of " + (book.title || "coloring book"));
+  }
+
   function bookCard(book) {
     var card = el("article", "cbook reveal");
 
     var img = el("img", "cbook__cover");
     img.src = book.cover || "images/books/placeholder.svg";
-    img.alt = "Cover of " + (book.title || "coloring book");
+    img.alt = coverAlt(book);
     img.loading = "lazy";
     card.appendChild(img);
 
@@ -74,11 +101,7 @@
     if (book.description) body.appendChild(el("p", "cbook__desc", book.description));
 
     var actions = el("div", "cbook__actions");
-    var buy = el("a", "btn btn--primary cbook__buy", "Buy on Amazon");
-    buy.href = book.amazon || "#";
-    buy.target = "_blank";
-    buy.rel = "noopener noreferrer";
-    actions.appendChild(buy);
+    actions.appendChild(buyControl(book, "btn--primary", "cbook__buy"));
 
     if (book.stores && book.stores.length) {
       var stores = el("div", "cbook__stores");
@@ -126,7 +149,7 @@
       var media = el("div", "featured__media");
       var img = el("img", "featured__cover");
       img.src = book.cover || "images/books/placeholder.svg";
-      img.alt = "Cover of " + (book.title || "coloring book");
+      img.alt = coverAlt(book);
       img.loading = "lazy";
       media.appendChild(el("span", "featured__badge", "New"));
       media.appendChild(img);
@@ -136,13 +159,10 @@
       if (book.subtitle) body.appendChild(el("p", "featured__subtitle", book.subtitle));
       if (book.ageRange) body.appendChild(el("span", "tag cbook__age", book.ageRange));
       if (book.description) body.appendChild(el("p", "featured__desc", book.description));
+      body.appendChild(el("p", "featured__avail", "Available on Amazon"));
 
       var actions = el("div", "featured__actions");
-      var buy = el("a", "btn btn--royal", "Buy on Amazon");
-      buy.href = book.amazon || "#";
-      buy.target = "_blank";
-      buy.rel = "noopener noreferrer";
-      actions.appendChild(buy);
+      actions.appendChild(buyControl(book, "btn--royal"));
       var more = el("a", "btn btn--royal-outline", "All coloring books");
       more.href = "coloring.html";
       actions.appendChild(more);

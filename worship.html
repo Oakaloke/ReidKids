@@ -116,6 +116,7 @@
             cover.className = "book__cover book__cover--" + (song.cover || "1");
             var mark = document.createElement("span");
             mark.textContent = song.mark || "♪";
+            mark.setAttribute("aria-hidden", "true");
             cover.appendChild(mark);
 
             var h3 = document.createElement("h3");

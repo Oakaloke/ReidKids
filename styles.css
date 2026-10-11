@@ -10,8 +10,9 @@
   --royal:   #003594;
   --sol:     #FFD100;
   --white:   #FFFFFF;
-  --ink:     #1A1F2B;
+  --ink:     #1F2937;   /* body text gray — on white/light cards */
   --muted:   #2C3340;   /* body text on light surfaces */
+  --panel:   #F3F4F8;   /* light panel surface */
 
   /* ----- Support shades (same hues) ----- */
   --royal-dark: #002a73;
@@ -63,7 +64,16 @@ img, svg { max-width: 100%; display: block; }
 .container { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: 24px; }
 
 /* Sol "highlighter" accent — keeps text dark & readable */
-.hl { background: linear-gradient(transparent 58%, var(--sol) 58%); color: var(--ink); padding: 0 .1em; }
+/* Highlighted word — one reusable class. No marker bar (so no letter ever sits
+   half on / half off a background). On the Royal field the word is Sol-yellow
+   with a thin, rounded Sol underline a few px below the letters. Add
+   .hl--on-light to use Royal text on a white/light surface. */
+.hl { position: relative; color: var(--sol); white-space: nowrap; padding: 0 .02em; }
+.hl::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -0.16em;
+  height: 4px; border-radius: var(--radius-pill); background: var(--sol);
+}
+.hl--on-light { color: var(--royal); }
 
 .visually-hidden {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -165,6 +175,12 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .55);
 }
 .btn--ghost:hover { background: var(--white); color: var(--royal); transform: translateY(-2px); }
+/* Coming soon — non-interactive, still high-contrast (Royal on light panel) */
+.btn--soon, .btn--soon[disabled] {
+  background: var(--panel); color: var(--royal);
+  box-shadow: inset 0 0 0 2px var(--royal-line);
+  cursor: default; opacity: 1;
+}
 
 /* ---------- Eyebrow / section heads ---------- */
 .eyebrow {
@@ -185,7 +201,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 
 .section__head { text-align: center; max-width: 640px; margin: 0 auto 3rem; }
 .section__head h2 { font-size: clamp(1.9rem, 4.2vw, 2.7rem); color: var(--white); }
-.section__sub { color: rgba(255,255,255,.90); font-size: 1.1rem; margin: 0; }
+.section__sub { color: var(--white); font-size: 1.1rem; margin: 0; }
 
 /* Yellow rule under an eyebrow */
 .yellow-rule { display: block; width: 56px; height: 4px; border-radius: 4px; background: var(--sol); margin: 0 auto 1.1rem; }
@@ -213,11 +229,11 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 }
 .hero__accent { color: var(--sol); }
 .hero__lead {
-  font-size: 1.2rem; color: rgba(255, 255, 255, .9);
+  font-size: 1.2rem; color: var(--white);
   max-width: 44ch; margin: 0 auto 2rem;
 }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 1.6rem; }
-.hero__verse { font-style: italic; color: rgba(255, 255, 255, .8); font-size: .95rem; margin: 0; }
+.hero__verse { font-style: italic; color: var(--white); font-size: .95rem; margin: 0; }
 .hero__verse strong { color: var(--white); font-style: normal; }
 
 /* ---------- Featured coloring book ---------- */
@@ -243,7 +259,12 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .featured__body { text-align: left; }
 .featured__title { font-size: clamp(1.7rem, 3.4vw, 2.3rem); margin-bottom: .2rem; }
 .featured__subtitle { color: var(--ink-soft); font-weight: 700; font-size: 1.02rem; margin: 0 0 1rem; }
-.featured__desc { color: var(--ink-soft); font-size: 1.08rem; margin: 0 0 1.6rem; }
+.featured__desc { color: var(--ink-soft); font-size: 1.08rem; margin: 0 0 1.2rem; }
+.featured__avail { color: var(--royal); font-weight: 800; font-size: .9rem; letter-spacing: .02em; margin: 0 0 1.3rem; }
+.featured__avail::before {
+  content: ""; display: inline-block; width: .5rem; height: .5rem;
+  border-radius: 50%; background: var(--sol); margin-right: .5rem; vertical-align: middle;
+}
 .featured__actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
 
 /* ---------- Storybooks grid ---------- */
@@ -261,6 +282,9 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .book__cover--1 { background: linear-gradient(155deg, var(--royal), var(--royal-dark)); }
 .book__cover--2 { background: linear-gradient(155deg, var(--sol), var(--sol-dark)); }
 .book__cover--3 { background: linear-gradient(155deg, var(--royal), #2b63c7); }
+/* Decorative cover glyph — high-contrast per cover tint */
+.book__cover > span { position: relative; z-index: 1; color: var(--white); font-size: 2.4rem; line-height: 1; }
+.book__cover--2 > span { color: var(--royal); }
 .book__cover::after {
   content: ""; position: absolute; inset: 0;
   background: radial-gradient(circle at 70% 18%, rgba(255,255,255,.28), transparent 42%);
@@ -272,7 +296,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   background: var(--royal-soft); padding: .32rem .8rem; border-radius: var(--radius-pill);
 }
 .book .tag { align-self: flex-start; margin-top: auto; }   /* pin age pill to a shared baseline */
-.books-note { text-align: center; color: rgba(255,255,255,.9); font-weight: 700; margin: 2.6rem auto 0; }
+.books-note { text-align: center; color: var(--white); font-weight: 700; margin: 2.6rem auto 0; }
 
 /* ---------- Coloring books grid (coloring.html) ---------- */
 .cbooks { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.8rem; }
@@ -296,7 +320,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .cbook__stores { display: flex; flex-wrap: wrap; gap: .4rem 1rem; justify-content: flex-start; margin-top: .9rem; }
 .cbook__stores a { font-weight: 800; font-size: .88rem; color: var(--royal); text-decoration: underline; }
 .cbook__stores a:hover { color: var(--royal-dark); }
-.cbooks-empty { text-align: center; color: rgba(255,255,255,.9); font-weight: 700; margin: 2.5rem auto 0; }
+.cbooks-empty { text-align: center; color: var(--white); font-weight: 700; margin: 2.5rem auto 0; }
 
 /* ---------- Shop / merchandise strip ---------- */
 .shop { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; }
@@ -364,14 +388,14 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 }
 .footer__wordmark:hover { color: var(--sol); }
 .footer__nav { display: flex; flex-wrap: wrap; gap: .5rem 1.6rem; justify-content: center; }
-.footer__nav a { font-weight: 700; color: rgba(255,255,255,.9); transition: color .2s; }
+.footer__nav a { font-weight: 700; color: var(--white); transition: color .2s; }
 .footer__nav a:hover { color: var(--sol); }
-.footer__verse { font-style: italic; color: rgba(255,255,255,.82); margin: 0; }
-.footer__copy { color: rgba(255,255,255,.72); font-size: .9rem; margin: 0; }
+.footer__verse { font-style: italic; color: var(--white); margin: 0; }
+.footer__copy { color: var(--white); font-size: .9rem; margin: 0; }
 
 /* ---------- Worship / Hymns ---------- */
 .book--link { display: block; color: inherit; }
-.hymn-empty { text-align: center; color: rgba(255,255,255,.9); font-weight: 700; margin: 2.5rem auto 0; }
+.hymn-empty { text-align: center; color: var(--white); font-weight: 700; margin: 2.5rem auto 0; }
 .hymn {
   max-width: 760px; margin: 0 auto;
   background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg);
@@ -492,8 +516,8 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 /* CSB copyright / licence notice */
 .verse-copyright {
   max-width: 760px; margin: 3.5rem auto 0; padding-top: 1.6rem;
-  border-top: 1px solid rgba(255,255,255,.25);
-  color: rgba(255,255,255,.75); font-size: .82rem; line-height: 1.6; text-align: center;
+  border-top: 1px solid rgba(255,255,255,.35);
+  color: var(--white); font-size: .82rem; line-height: 1.6; text-align: center;
 }
 
 /* ---------- Reveal on scroll ---------- */
