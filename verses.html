@@ -114,12 +114,13 @@
         }
       }
 
-      /* Present the verse "in quotes" without doubling marks the text already has */
+      /* Present the verse "in quotes". If the verse text already contains its
+         own quotation marks (e.g. Jesus speaking, as in Mark 10:14 / Matthew
+         19:14), leave it as-is so we never wrap it in a second set of quotes. */
       function quoted(t) {
         t = (t || "").trim();
-        var open = t.charAt(0) === "“" ? "" : "“";
-        var close = t.charAt(t.length - 1) === "”" ? "" : "”";
-        return open + t + close;
+        if (/[“”]/.test(t)) return t;
+        return "“" + t + "”";
       }
 
       /* Verse of the Week: continuous week count so every verse shows once

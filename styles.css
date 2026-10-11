@@ -42,7 +42,7 @@ body {
   margin: 0;
   font-family: var(--font-body);
   color: var(--ink);
-  background: var(--white);
+  background: var(--royal);   /* one continuous Royal field, header → footer */
   line-height: 1.65;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -63,7 +63,7 @@ img, svg { max-width: 100%; display: block; }
 .container { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: 24px; }
 
 /* Sol "highlighter" accent — keeps text dark & readable */
-.hl { background: linear-gradient(transparent 58%, var(--sol) 58%); padding: 0 .1em; }
+.hl { background: linear-gradient(transparent 58%, var(--sol) 58%); color: var(--ink); padding: 0 .1em; }
 
 .visually-hidden {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -159,36 +159,33 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   box-shadow: inset 0 0 0 2px var(--white);
 }
 .btn--white-outline:hover { background: var(--white); color: var(--royal); transform: translateY(-2px); }
+/* Ghost — subtle text button that reads on the royal field */
+.btn--ghost {
+  background: transparent; color: var(--white);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .55);
+}
+.btn--ghost:hover { background: var(--white); color: var(--royal); transform: translateY(-2px); }
 
 /* ---------- Eyebrow / section heads ---------- */
 .eyebrow {
   display: inline-block; font-family: var(--font-body); font-weight: 800;
   letter-spacing: .22em; font-size: .78rem; text-transform: uppercase;
-  color: var(--royal); margin-bottom: 1rem;
+  color: var(--sol); margin-bottom: 1rem;   /* eyebrows sit on the blue field */
 }
 .eyebrow--center { margin-inline: auto; }
 
 .section { padding: clamp(4rem, 8vw, 6rem) 0; }
-.section--tint { background: var(--surface); }
 
-/* Royal band — white text, yellow eyebrow */
-.section--royal { background: var(--royal); color: var(--white); }
-.section--royal h2 { color: var(--white); }
-.section--royal .eyebrow { color: var(--sol); }
-.section--royal .section__sub { color: rgba(255,255,255,.88); }
-
-/* Sol band — royal headings & body */
-.section--sol { background: var(--sol); color: var(--royal); }
-.section--sol h2, .section--sol h3 { color: var(--royal); }
-.section--sol .eyebrow { color: var(--royal); }
-.section--sol .section__sub { color: var(--royal); }
-
-/* Blue-gray field — white cards sit on it */
-.section--field { background: var(--field); }
+/* The old colored bands are now transparent so every section sits on the
+   same continuous Royal background. Sections are separated by spacing only. */
+.section--tint,
+.section--royal,
+.section--sol,
+.section--field { background: transparent; color: inherit; }
 
 .section__head { text-align: center; max-width: 640px; margin: 0 auto 3rem; }
-.section__head h2 { font-size: clamp(1.9rem, 4.2vw, 2.7rem); }
-.section__sub { color: var(--ink-soft); font-size: 1.1rem; margin: 0; }
+.section__head h2 { font-size: clamp(1.9rem, 4.2vw, 2.7rem); color: var(--white); }
+.section__sub { color: rgba(255,255,255,.90); font-size: 1.1rem; margin: 0; }
 
 /* Yellow rule under an eyebrow */
 .yellow-rule { display: block; width: 56px; height: 4px; border-radius: 4px; background: var(--sol); margin: 0 auto 1.1rem; }
@@ -228,6 +225,8 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   display: grid; grid-template-columns: minmax(280px, 380px) 1fr;
   gap: clamp(2rem, 5vw, 3.5rem); align-items: center;
   max-width: 920px; margin: 0 auto;
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow); padding: clamp(1.6rem, 4vw, 2.6rem);
 }
 .featured__media { position: relative; }
 .featured__cover {
@@ -246,16 +245,6 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .featured__subtitle { color: var(--ink-soft); font-weight: 700; font-size: 1.02rem; margin: 0 0 1rem; }
 .featured__desc { color: var(--ink-soft); font-size: 1.08rem; margin: 0 0 1.6rem; }
 .featured__actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
-
-/* Featured on the sol (yellow) band */
-.section--sol .featured__cover { background: var(--white); }
-.section--sol .featured__badge { background: var(--royal); color: var(--white); }
-.section--sol .featured__subtitle,
-.section--sol .featured__desc { color: var(--royal); }
-.section--sol .tag { background: var(--royal); color: var(--white); }
-
-/* Age pills on the storybook field */
-.section--field .tag { background: var(--royal); color: var(--white); }
 
 /* ---------- Storybooks grid ---------- */
 .books { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; }
@@ -283,7 +272,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   background: var(--royal-soft); padding: .32rem .8rem; border-radius: var(--radius-pill);
 }
 .book .tag { align-self: flex-start; margin-top: auto; }   /* pin age pill to a shared baseline */
-.books-note { text-align: center; color: var(--ink-soft); font-weight: 700; margin: 2.6rem auto 0; }
+.books-note { text-align: center; color: rgba(255,255,255,.9); font-weight: 700; margin: 2.6rem auto 0; }
 
 /* ---------- Coloring books grid (coloring.html) ---------- */
 .cbooks { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.8rem; }
@@ -307,7 +296,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .cbook__stores { display: flex; flex-wrap: wrap; gap: .4rem 1rem; justify-content: flex-start; margin-top: .9rem; }
 .cbook__stores a { font-weight: 800; font-size: .88rem; color: var(--royal); text-decoration: underline; }
 .cbook__stores a:hover { color: var(--royal-dark); }
-.cbooks-empty { text-align: center; color: var(--ink-soft); font-weight: 700; margin: 2.5rem auto 0; }
+.cbooks-empty { text-align: center; color: rgba(255,255,255,.9); font-weight: 700; margin: 2.5rem auto 0; }
 
 /* ---------- Shop / merchandise strip ---------- */
 .shop { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; }
@@ -333,7 +322,11 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .shop__link:hover { color: var(--royal-dark); }
 
 /* ---------- About column ---------- */
-.about { max-width: 680px; margin: 0 auto; text-align: left; }
+.about {
+  max-width: 680px; margin: 0 auto; text-align: left;
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow); padding: clamp(1.8rem, 4vw, 2.6rem);
+}
 .about p { font-size: 1.12rem; color: var(--ink-soft); margin: 0 0 1.1rem; }
 .about p:last-child { margin-bottom: 0; }
 .about__verse { font-family: var(--font-head); font-style: italic; color: var(--royal); font-size: 1.2rem; }
@@ -357,7 +350,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .contact__card a.contact__email { font-weight: 800; color: var(--royal); font-size: 1.15rem; text-decoration: underline; }
 
 /* ---------- Footer (royal · solid logo on white pill) ---------- */
-.footer { background: var(--royal); color: var(--white); text-align: center; padding: 3.4rem 0 2.6rem; }
+.footer { background: var(--royal); color: var(--white); text-align: center; padding: 3.4rem 0 2.6rem; border-top: 4px solid var(--sol); }
 .footer__inner { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
 .footer__logo {
   display: inline-flex; background: var(--white);
@@ -378,13 +371,17 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 
 /* ---------- Worship / Hymns ---------- */
 .book--link { display: block; color: inherit; }
-.hymn-empty { text-align: center; color: var(--ink-soft); font-weight: 700; margin: 2.5rem auto 0; }
-.hymn { max-width: 760px; margin: 0 auto; }
+.hymn-empty { text-align: center; color: rgba(255,255,255,.9); font-weight: 700; margin: 2.5rem auto 0; }
+.hymn {
+  max-width: 760px; margin: 0 auto;
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow); padding: clamp(1.6rem, 4vw, 2.6rem);
+}
 .hymn__intro p { color: var(--ink-soft); font-size: 1.08rem; margin: 0 0 1.1rem; }
 .hymn__intro p:last-child { margin-bottom: 0; }
 .hymn__lyrics {
-  background: var(--white); border-radius: var(--radius); border: 1px solid var(--line);
-  box-shadow: var(--shadow-sm); padding: clamp(1.6rem, 4vw, 2.4rem); margin-top: 2.4rem; text-align: center;
+  background: var(--surface); border-radius: var(--radius); border: 1px solid var(--line);
+  padding: clamp(1.6rem, 4vw, 2.4rem); margin-top: 2.4rem; text-align: center;
 }
 .hymn__section-label { font-size: 1.4rem; color: var(--royal); margin-bottom: 1.4rem; }
 .lyric-block { margin: 0 auto 1.6rem; max-width: 30rem; }
@@ -436,39 +433,40 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .hymn__back { text-align: center; margin-top: 2.6rem; }
 
 /* ---------- Bible verses (verses.html) ---------- */
-/* Verse of the Week — prominent royal card */
+/* Verse of the Week — highlighted white card with a Sol top accent */
 .verse-week {
   max-width: 760px; margin: 0 auto 3.5rem;
-  background: var(--royal); color: var(--white);
+  background: var(--white); color: var(--ink);
+  border: 1px solid var(--line); border-top: 5px solid var(--sol);
   border-radius: var(--radius-lg); box-shadow: var(--shadow);
   padding: clamp(1.8rem, 5vw, 3rem); text-align: center;
 }
 .verse-week__eyebrow {
   display: inline-block; font-weight: 800; letter-spacing: .22em;
-  font-size: .78rem; text-transform: uppercase; color: var(--sol); margin-bottom: 1rem;
+  font-size: .78rem; text-transform: uppercase; color: var(--royal); margin-bottom: 1rem;
 }
 .verse-week__title {
-  color: var(--white); font-size: clamp(1.6rem, 3.6vw, 2.2rem); margin: 0 0 1rem;
+  color: var(--royal); font-size: clamp(1.6rem, 3.6vw, 2.2rem); margin: 0 0 1rem;
 }
 .verse-week__text {
   font-family: var(--font-head); font-style: italic; font-weight: 400;
   font-size: clamp(1.25rem, 2.6vw, 1.6rem); line-height: 1.5;
-  color: var(--white); margin: 0 auto 1rem; max-width: 36ch;
+  color: var(--ink); margin: 0 auto 1rem; max-width: 36ch;
 }
-.verse-week__ref { font-weight: 800; color: var(--sol); margin: 0 0 1.4rem; }
+.verse-week__ref { font-weight: 800; color: var(--royal); margin: 0 0 1.4rem; }
 .verse-week__remember {
-  background: rgba(255,255,255,.12); border-left: 4px solid var(--sol);
+  background: var(--royal-soft); border-left: 4px solid var(--sol);
   border-radius: 12px; padding: .9rem 1.2rem; margin: 0 auto; max-width: 48ch;
-  text-align: left; color: rgba(255,255,255,.95); font-size: 1rem;
+  text-align: left; color: var(--ink-soft); font-size: 1rem;
 }
-.verse-week__remember strong { color: var(--sol); }
+.verse-week__remember strong { color: var(--royal); }
 
 /* Theme groups */
 .verse-theme { margin-top: 3.2rem; }
 .verse-theme:first-of-type { margin-top: 0; }
 .verse-theme__head { text-align: center; margin-bottom: 1.8rem; }
 .verse-theme__head .eyebrow { margin-bottom: .4rem; }
-.verse-theme__head h3 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin: 0; }
+.verse-theme__head h3 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin: 0; color: var(--white); }
 
 /* Verse card grid */
 .verse-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.6rem; }
@@ -494,8 +492,8 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 /* CSB copyright / licence notice */
 .verse-copyright {
   max-width: 760px; margin: 3.5rem auto 0; padding-top: 1.6rem;
-  border-top: 1px solid var(--line);
-  color: var(--ink-soft); font-size: .82rem; line-height: 1.6; text-align: center;
+  border-top: 1px solid rgba(255,255,255,.25);
+  color: rgba(255,255,255,.75); font-size: .82rem; line-height: 1.6; text-align: center;
 }
 
 /* ---------- Reveal on scroll ---------- */
