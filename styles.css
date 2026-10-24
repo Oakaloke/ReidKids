@@ -555,3 +555,8 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* Direct access to the digital coloring studio, including narrow screens. */
+.site-nav .nav-studio { background: #fff1a8; color: #003594; border-radius: 999px; padding: .55rem .85rem; font-weight: 800; min-height: 44px; display: inline-flex; align-items: center; }
+.site-nav .nav-studio::after { display: none; }
+.site-nav .nav-studio:hover { background: #ffd100; color: #003594; }

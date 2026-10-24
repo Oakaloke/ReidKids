@@ -61,3 +61,11 @@ Plain static site — no build step.
 python3 -m http.server 8000
 ```
 Then visit <http://localhost:8000>.
+
+## Digital coloring studio
+
+`/studio/` contains the 30 original Be Strong and Courageous pages, optimized from the supplied digital coloring package. The original source artwork is retained separately and unchanged. The studio is a static app, with fill, brush, nondestructive eraser, undo, PNG export, gallery and a numbered challenge based on larger enclosed spaces. The drawing page and maze use free drawing. Small or open regions can be finished in free color.
+
+Color layers are stored per page in IndexedDB on the visitor's device only. There are no accounts, uploads, analytics or external services in the studio. Download PNG is the backup if browser storage is blocked or cleared.
+
+Preview with `python3 -m http.server 8000` and open `/studio/`. Check all pages, number mode, wrong-color feedback, undo, reset cancel/accept, gallery navigation, rapid page changes, per-page persistence, PNG export and narrow touch layouts before publishing.
