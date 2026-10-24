@@ -336,6 +336,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .shop__art--2 { background: linear-gradient(150deg, var(--sol), var(--sol-dark)); }
 .shop__art--3 { background: linear-gradient(150deg, #2b63c7, var(--royal)); }
 .shop__art--4 { background: linear-gradient(150deg, var(--sol), var(--royal)); }
+.shop__art--adventure { background: #c06a3c center/cover no-repeat url("images/adventure.jpg"); }
 .shop__art::after {
   content: ""; position: absolute; inset: 0;
   background: radial-gradient(circle at 78% 20%, rgba(255,255,255,.26), transparent 46%);

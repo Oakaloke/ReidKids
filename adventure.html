@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Canyon Quest — a free 2D adventure game for kids from Reid Kids. Help the explorer and his dog collect golden stars and reach the cross at the end of the trail." />
+  <meta name="theme-color" content="#003594" />
+  <title>Canyon Quest — Reid Kids</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Canyon Quest — Reid Kids" />
+  <meta property="og:description" content="Run, jump, and collect stars across the canyon! A free adventure game for kids." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.reidkids.com/adventure.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Game styles — all scoped under .cq- so they can't clash with the site CSS -->
+  <style>
+    .cq-game { max-width: 940px; margin: 0 auto; background: var(--white);
+      border: 1px solid var(--line); border-radius: var(--radius-lg);
+      box-shadow: var(--shadow); padding: clamp(1rem, 3vw, 1.6rem); position: relative; }
+    .cq-stage { position: relative; width: 100%; aspect-ratio: 16 / 9;
+      border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-sm);
+      background: #8fc7e8; touch-action: none; }
+    .cq-canvas { display: block; width: 100%; height: 100%; }
+
+    /* Overlay panels (start / win) */
+    .cq-overlay { position: absolute; inset: 0; display: flex; align-items: center;
+      justify-content: center; text-align: center; padding: 1.2rem;
+      background: rgba(0,32,86,.55); backdrop-filter: blur(2px); }
+    .cq-overlay[hidden] { display: none; }
+    .cq-panel { background: var(--white); border-radius: 18px; padding: clamp(1.3rem, 4vw, 2rem);
+      max-width: 420px; box-shadow: var(--shadow); }
+    .cq-panel h3 { font-family: var(--font-head); font-weight: 600; color: var(--royal);
+      font-size: clamp(1.4rem, 5vw, 1.9rem); margin: 0 0 .5rem; }
+    .cq-panel p { color: var(--ink); margin: 0 0 1.1rem; font-size: 1.02rem; }
+    .cq-panel p strong { color: var(--royal); }
+
+    /* HUD */
+    .cq-hud { display: flex; flex-wrap: wrap; gap: .5rem 1.3rem; align-items: center;
+      justify-content: center; margin: 1.1rem 0 .2rem; color: var(--ink); font-weight: 800; }
+    .cq-hud strong { color: var(--royal); }
+    .cq-restart { font-size: .9rem; padding: .55rem 1.1rem; }
+
+    /* Touch controls */
+    .cq-touch { display: none; gap: .7rem; justify-content: space-between;
+      margin-top: .9rem; }
+    .cq-touch__move { display: flex; gap: .7rem; }
+    .cq-tbtn { -webkit-user-select: none; user-select: none; touch-action: manipulation;
+      font-family: var(--font-body); font-weight: 800; font-size: 1.5rem; line-height: 1;
+      min-width: 68px; padding: 1rem 1.1rem; border-radius: 16px; border: 2px solid var(--royal-line);
+      background: var(--panel); color: var(--royal); cursor: pointer; }
+    .cq-tbtn:active { background: var(--royal-soft); transform: translateY(1px); }
+    .cq-tbtn--jump { min-width: 120px; background: var(--royal); color: #fff; border-color: var(--royal-dark); }
+    .cq-help { text-align: center; color: var(--ink-soft); margin: 1rem 0 0; font-size: .96rem; }
+    .cq-help kbd { font-family: var(--font-body); font-weight: 800; background: var(--panel);
+      border: 1px solid var(--royal-line); border-bottom-width: 2px; border-radius: 6px;
+      padding: .05rem .4rem; color: var(--royal); font-size: .9em; }
+
+    /* On touch devices, show the on-screen pad and hide the keyboard hint */
+    @media (hover: none) and (pointer: coarse) {
+      .cq-touch { display: flex; }
+      .cq-help { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header: white · sticky (same as other pages) -->
+  <header class="site-header" id="top">
+    <div class="container">
+      <a class="site-wordmark" href="index.html" aria-label="Reid Kids — home">Reid Kids</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html#about">About</a>
+        <a href="index.html#books">Books</a>
+        <a href="coloring.html">Coloring Books</a>
+        <a href="worship.html">Worship</a>
+        <a href="verses.html">Verses</a>
+        <a href="index.html#contact" class="nav-cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="game">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow eyebrow--center">Play &amp; Learn</span>
+          <h2>Canyon <span class="hl">Quest</span> — Level 1</h2>
+          <p class="section__sub">Help the explorer and his dog collect every golden star and reach the cross at the end of the trail!</p>
+        </div>
+
+        <div class="cq-game reveal">
+          <div class="cq-stage">
+            <canvas class="cq-canvas" id="cq-canvas" width="960" height="540" aria-label="Canyon Quest game"></canvas>
+
+            <!-- Start screen -->
+            <div class="cq-overlay" id="cq-start">
+              <div class="cq-panel">
+                <h3>Canyon Quest 🏜️</h3>
+                <p>Collect all the <strong>golden stars</strong> and reach the <strong>cross</strong> at the end of the trail. Watch out for the gaps!</p>
+                <button class="btn btn--primary" id="cq-play" type="button">Start adventure</button>
+              </div>
+            </div>
+
+            <!-- Win screen -->
+            <div class="cq-overlay" id="cq-win" hidden>
+              <div class="cq-panel">
+                <h3>Level Complete! 🎉</h3>
+                <p>You collected <strong id="cq-win-stars">0</strong> / <strong id="cq-win-total">0</strong> stars. Well done, explorer!</p>
+                <button class="btn btn--primary" id="cq-again" type="button">Play again</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cq-hud">
+            <span>Stars: <strong id="cq-stars">0</strong> / <strong id="cq-total">0</strong></span>
+            <button class="btn btn--outline cq-restart" id="cq-restart" type="button">Restart</button>
+          </div>
+
+          <!-- On-screen controls for phones/tablets -->
+          <div class="cq-touch" aria-hidden="true">
+            <div class="cq-touch__move">
+              <button class="cq-tbtn" id="cq-left" type="button" aria-label="Move left">◀</button>
+              <button class="cq-tbtn" id="cq-right" type="button" aria-label="Move right">▶</button>
+            </div>
+            <button class="cq-tbtn cq-tbtn--jump" id="cq-jump" type="button" aria-label="Jump">Jump ⤴</button>
+          </div>
+
+          <p class="cq-help">
+            Move with <kbd>←</kbd> <kbd>→</kbd> (or <kbd>A</kbd> <kbd>D</kbd>) &nbsp;·&nbsp; Jump with <kbd>Space</kbd> / <kbd>↑</kbd> / <kbd>W</kbd>
+          </p>
+        </div>
+
+        <p class="play-cta" style="margin-top:2.4rem">
+          <a href="games.html">Try the Bible Match game →</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer: royal · with Games link -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a class="footer__logo" href="index.html" aria-label="Reid Kids — home">
+        <img src="images/assets/ReidKids_Eagle_Logo.svg" alt="Reid Kids eagle logo" width="72" height="72" />
+      </a>
+      <nav class="footer__nav" aria-label="Footer">
+        <a href="index.html#about">About</a>
+        <a href="index.html#books">Books</a>
+        <a href="coloring.html">Coloring Books</a>
+        <a href="worship.html">Worship</a>
+        <a href="verses.html">Verses</a>
+        <a href="games.html" aria-current="page">Games</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <p class="footer__verse">“Be strong and courageous.” — Joshua 1:9 (CSB)</p>
+      <p class="footer__copy">© 2026 Reid Kids</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    /* ---- Canyon Quest — a simple, kid-friendly 2D platformer (Level 1) ---- */
+    (function () {
+      "use strict";
+      var canvas = document.getElementById("cq-canvas");
+      if (!canvas || !canvas.getContext) return;
+      var ctx = canvas.getContext("2d");
+      var W = canvas.width, H = canvas.height;   // internal resolution: 960 x 540
+
+      /* ----- Backdrop image (the canyon art) as a soft far layer ----- */
+      var bg = new Image();
+      var bgReady = false;
+      bg.onload = function () { bgReady = true; };
+      bg.src = "images/adventure.jpg";
+
+      /* ----- Level 1 layout (world coordinates) ----- */
+      var GROUND_Y = 430;
+      var platforms = [
+        { x: 0,    y: GROUND_Y, w: 620,  h: 160 },
+        { x: 740,  y: GROUND_Y, w: 420,  h: 160 },
+        { x: 1030, y: 330,      w: 150,  h: 22  }, // floating step
+        { x: 1300, y: GROUND_Y, w: 520,  h: 160 },
+        { x: 1700, y: 320,      w: 150,  h: 22  }, // floating step
+        { x: 1960, y: GROUND_Y, w: 560,  h: 160 },
+        { x: 2360, y: 330,      w: 150,  h: 22  }, // floating step
+        { x: 2660, y: GROUND_Y, w: 520,  h: 160 }
+      ];
+      var stars = [
+        { x: 300,  y: 360 }, { x: 520,  y: 300 },
+        { x: 1080, y: 285 }, { x: 1420, y: 360 },
+        { x: 1760, y: 275 }, { x: 2080, y: 360 },
+        { x: 2410, y: 285 }, { x: 2820, y: 340 }
+      ];
+      var goal = { x: 3020, y: GROUND_Y - 150 };     // cross at the trail's end
+      var WORLD_W = 3200;
+      var START_X = 60, START_Y = GROUND_Y - 64;
+
+      /* ----- Player & dog ----- */
+      var player, dog, cam, collected, total = stars.length, state = "ready", runT = 0;
+
+      function reset() {
+        player = { x: START_X, y: START_Y, w: 34, h: 46, vx: 0, vy: 0, onGround: false, dir: 1 };
+        dog    = { x: START_X - 48, y: START_Y + 10, vx: 0, dir: 1 };
+        cam = 0; runT = 0;
+        collected = 0;
+        stars.forEach(function (s) { s.got = false; });
+        updateHud();
+      }
+      function updateHud() {
+        document.getElementById("cq-stars").textContent = String(collected);
+        document.getElementById("cq-total").textContent = String(total);
+      }
+
+      /* ----- Input ----- */
+      var keys = { left: false, right: false, jump: false };
+      function setKey(e, down) {
+        var k = e.key;
+        if (k === "ArrowLeft" || k === "a" || k === "A") { keys.left = down; e.preventDefault(); }
+        else if (k === "ArrowRight" || k === "d" || k === "D") { keys.right = down; e.preventDefault(); }
+        else if (k === " " || k === "ArrowUp" || k === "w" || k === "W" || k === "Spacebar") { keys.jump = down; e.preventDefault(); }
+      }
+      window.addEventListener("keydown", function (e) { if (state === "playing") setKey(e, true); });
+      window.addEventListener("keyup", function (e) { if (state === "playing") setKey(e, false); });
+
+      function bindHold(id, prop) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        var on = function (e) { e.preventDefault(); keys[prop] = true; };
+        var off = function (e) { e.preventDefault(); keys[prop] = false; };
+        el.addEventListener("touchstart", on, { passive: false });
+        el.addEventListener("touchend", off); el.addEventListener("touchcancel", off);
+        el.addEventListener("mousedown", on); el.addEventListener("mouseup", off);
+        el.addEventListener("mouseleave", off);
+      }
+      bindHold("cq-left", "left");
+      bindHold("cq-right", "right");
+      bindHold("cq-jump", "jump");
+
+      /* ----- Tiny sound effects (WebAudio, optional) ----- */
+      var AC = window.AudioContext || window.webkitAudioContext;
+      var actx = null;
+      function beep(freq, dur, type) {
+        if (!AC) return;
+        try {
+          if (!actx) actx = new AC();
+          var o = actx.createOscillator(), g = actx.createGain();
+          o.type = type || "sine"; o.frequency.value = freq;
+          g.gain.value = 0.05; o.connect(g); g.connect(actx.destination);
+          o.start(); o.stop(actx.currentTime + dur);
+        } catch (err) { /* ignore */ }
+      }
+
+      /* ----- Physics ----- */
+      var GRAV = 0.62, MOVE = 3.4, MAXV = 4.4, JUMP = 12.4, FRICTION = 0.80;
+
+      function aabb(ax, ay, aw, ah, b) {
+        return ax < b.x + b.w && ax + aw > b.x && ay < b.y + b.h && ay + ah > b.y;
+      }
+
+      function update() {
+        if (state !== "playing") return;
+
+        // horizontal intent
+        if (keys.left && !keys.right) { player.vx = -MOVE; player.dir = -1; }
+        else if (keys.right && !keys.left) { player.vx = MOVE; player.dir = 1; }
+        else { player.vx *= FRICTION; if (Math.abs(player.vx) < 0.1) player.vx = 0; }
+        if (player.vx > MAXV) player.vx = MAXV;
+        if (player.vx < -MAXV) player.vx = -MAXV;
+
+        // jump
+        if (keys.jump && player.onGround) { player.vy = -JUMP; player.onGround = false; beep(620, 0.12, "square"); }
+
+        // gravity
+        player.vy += GRAV;
+        if (player.vy > 16) player.vy = 16;
+
+        // move + collide X
+        player.x += player.vx;
+        if (player.x < 0) player.x = 0;
+        for (var i = 0; i < platforms.length; i++) {
+          var p = platforms[i];
+          if (aabb(player.x, player.y, player.w, player.h, p)) {
+            if (player.vx > 0) player.x = p.x - player.w;
+            else if (player.vx < 0) player.x = p.x + p.w;
+            player.vx = 0;
+          }
+        }
+
+        // move + collide Y
+        player.y += player.vy;
+        player.onGround = false;
+        for (var j = 0; j < platforms.length; j++) {
+          var q = platforms[j];
+          if (aabb(player.x, player.y, player.w, player.h, q)) {
+            if (player.vy > 0) { player.y = q.y - player.h; player.onGround = true; }
+            else if (player.vy < 0) { player.y = q.y + q.h; }
+            player.vy = 0;
+          }
+        }
+
+        // run animation timer
+        if (player.onGround && Math.abs(player.vx) > 0.5) runT += 0.25; else runT = 0;
+
+        // fell into a canyon gap → gently respawn, keep your stars
+        if (player.y > H + 80) {
+          player.x = START_X; player.y = START_Y; player.vx = 0; player.vy = 0;
+          beep(180, 0.18, "sine");
+        }
+
+        // dog follows the explorer
+        var targetX = player.x - 52 * player.dir;
+        dog.x += (targetX - dog.x) * 0.12;
+        dog.dir = player.dir;
+        dog.y = player.y + 14;
+
+        // collect stars
+        for (var s = 0; s < stars.length; s++) {
+          var st = stars[s];
+          if (!st.got && Math.abs((player.x + player.w / 2) - st.x) < 30 &&
+              Math.abs((player.y + player.h / 2) - st.y) < 32) {
+            st.got = true; collected++; updateHud(); beep(880, 0.12, "triangle");
+            beep(1180, 0.10, "triangle");
+          }
+        }
+
+        // reach the cross → win
+        if (player.x + player.w > goal.x && player.x < goal.x + 40 &&
+            player.y + player.h > goal.y - 10) {
+          win();
+        }
+
+        // camera follows, clamped to the world
+        var want = player.x - W * 0.38;
+        cam += (want - cam) * 0.12;
+        if (cam < 0) cam = 0;
+        if (cam > WORLD_W - W) cam = WORLD_W - W;
+      }
+
+      /* ----- Drawing ----- */
+      function draw() {
+        // sky — golden-hour gradient
+        var sky = ctx.createLinearGradient(0, 0, 0, H);
+        sky.addColorStop(0, "#8fc7e8");
+        sky.addColorStop(0.55, "#bfe0ea");
+        sky.addColorStop(1, "#ffdda6");
+        ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H);
+
+        // soft canyon-art backdrop (very slow parallax, faded so gameplay stays clear)
+        if (bgReady) {
+          ctx.save();
+          ctx.globalAlpha = 0.28;
+          var bw = W * 1.3, bh = bw * (bg.height / bg.width);
+          var bx = -(cam * 0.15) % bw;
+          ctx.drawImage(bg, bx, H - bh - 40, bw, bh);
+          ctx.drawImage(bg, bx + bw, H - bh - 40, bw, bh);
+          ctx.restore();
+        }
+
+        // sun glow
+        ctx.save();
+        var sx = W - 150, sy = 120;
+        var glow = ctx.createRadialGradient(sx, sy, 10, sx, sy, 140);
+        glow.addColorStop(0, "rgba(255,240,200,0.95)");
+        glow.addColorStop(1, "rgba(255,240,200,0)");
+        ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(sx, sy, 140, 0, Math.PI * 2); ctx.fill();
+        ctx.restore();
+
+        // far mesas (parallax)
+        drawMesas(cam * 0.35, "#d98b5f", 250);
+        drawMesas(cam * 0.55, "#c06a3c", 300);
+
+        // world layer
+        ctx.save();
+        ctx.translate(-cam, 0);
+
+        // platforms (canyon rock)
+        platforms.forEach(function (p) {
+          ctx.fillStyle = "#7d3f22";
+          roundRect(p.x, p.y, p.w, p.h, 6); ctx.fill();
+          ctx.fillStyle = "#b5673a";                 // lit top edge
+          roundRect(p.x, p.y, p.w, Math.min(16, p.h), 6); ctx.fill();
+          ctx.fillStyle = "rgba(255,255,255,0.10)";  // sparse speckle
+          for (var k = 0; k < p.w; k += 46) {
+            ctx.fillRect(p.x + 10 + (k % 90), p.y + 22 + ((k * 7) % 40), 3, 3);
+          }
+        });
+
+        // stars
+        stars.forEach(function (st) {
+          if (st.got) return;
+          var bob = Math.sin((runT + st.x) * 0.06) * 4;
+          drawStar(st.x, st.y + bob, 15, 7, "#FFD100", "#E0A500");
+        });
+
+        // goal — a cross on a post with a little banner
+        drawGoal(goal.x, goal.y);
+
+        // dog + explorer
+        drawDog(dog.x, dog.y, dog.dir);
+        drawBoy(player.x, player.y, player.w, player.h, player.dir, runT, player.onGround);
+
+        ctx.restore();
+      }
+
+      function drawMesas(offset, color, baseH) {
+        ctx.fillStyle = color;
+        var step = 360, start = -(offset % step) - step;
+        for (var x = start; x < W + step; x += step) {
+          var h = baseH + ((Math.floor(x / step) * 53) % 70);
+          ctx.beginPath();
+          ctx.moveTo(x, H);
+          ctx.lineTo(x + 40, H - h);
+          ctx.lineTo(x + step * 0.62, H - h);
+          ctx.lineTo(x + step * 0.62 + 40, H);
+          ctx.closePath(); ctx.fill();
+        }
+      }
+
+      function roundRect(x, y, w, h, r) {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.arcTo(x + w, y, x + w, y + h, r);
+        ctx.arcTo(x + w, y + h, x, y + h, r);
+        ctx.arcTo(x, y + h, x, y, r);
+        ctx.arcTo(x, y, x + w, y, r);
+        ctx.closePath();
+      }
+
+      function drawStar(cx, cy, outer, inner, fill, stroke) {
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.beginPath();
+        for (var i = 0; i < 10; i++) {
+          var r = (i % 2 === 0) ? outer : inner;
+          var a = (Math.PI / 5) * i - Math.PI / 2;
+          ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r);
+        }
+        ctx.closePath();
+        ctx.fillStyle = fill; ctx.fill();
+        ctx.lineWidth = 2; ctx.strokeStyle = stroke; ctx.stroke();
+        ctx.restore();
+      }
+
+      function drawGoal(x, y) {
+        // post
+        ctx.fillStyle = "#8a5a2b";
+        ctx.fillRect(x + 6, y - 10, 10, 160);
+        // banner
+        ctx.fillStyle = "#003594";
+        ctx.beginPath();
+        ctx.moveTo(x + 16, y - 6);
+        ctx.lineTo(x + 92, y + 8);
+        ctx.lineTo(x + 16, y + 30);
+        ctx.closePath(); ctx.fill();
+        // cross on top
+        ctx.fillStyle = "#FFD100";
+        ctx.fillRect(x + 4, y - 44, 14, 40);
+        ctx.fillRect(x - 6, y - 34, 34, 12);
+      }
+
+      function drawBoy(x, y, w, h, dir, t, onGround) {
+        ctx.save();
+        ctx.translate(x + w / 2, y);
+        ctx.scale(dir, 1);
+        var legSwing = onGround ? Math.sin(t) * 6 : 4;
+
+        // backpack
+        ctx.fillStyle = "#2f5d3a";
+        roundRect(-16, 12, 12, 20, 4); ctx.fill();
+
+        // legs (tan)
+        ctx.fillStyle = "#b9995f";
+        ctx.fillRect(-7, h - 16, 6, 16 + legSwing);
+        ctx.fillRect(2, h - 16, 6, 16 - legSwing);
+        // shoes
+        ctx.fillStyle = "#5a3b1f";
+        ctx.fillRect(-8, h - 2 + legSwing, 9, 5);
+        ctx.fillRect(1, h - 2 - legSwing, 9, 5);
+
+        // body (green shirt)
+        ctx.fillStyle = "#3f7d4e";
+        roundRect(-10, 14, 20, h - 28, 6); ctx.fill();
+        // arm
+        ctx.fillStyle = "#356b43";
+        ctx.fillRect(6, 17, 6, 16);
+
+        // head
+        ctx.fillStyle = "#f3c99b";
+        ctx.beginPath(); ctx.arc(0, 6, 10, 0, Math.PI * 2); ctx.fill();
+        // hair (brown)
+        ctx.fillStyle = "#6b4423";
+        ctx.beginPath(); ctx.arc(0, 2, 10, Math.PI, Math.PI * 2); ctx.fill();
+        ctx.fillRect(-10, 2, 20, 3);
+        // eye + smile
+        ctx.fillStyle = "#333";
+        ctx.beginPath(); ctx.arc(4, 6, 1.6, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = "#8a5a3b"; ctx.lineWidth = 1.4;
+        ctx.beginPath(); ctx.arc(3, 9, 3, 0.1, Math.PI - 0.1); ctx.stroke();
+        ctx.restore();
+      }
+
+      function drawDog(x, y, dir) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.scale(dir, 1);
+        // body (yellow lab)
+        ctx.fillStyle = "#e9c478";
+        roundRect(-18, 18, 34, 18, 9); ctx.fill();
+        // legs
+        ctx.fillRect(-12, 34, 5, 10);
+        ctx.fillRect(8, 34, 5, 10);
+        // tail
+        ctx.save(); ctx.translate(-18, 20); ctx.rotate(-0.5);
+        ctx.fillRect(-10, 0, 12, 5); ctx.restore();
+        // head
+        ctx.beginPath(); ctx.arc(20, 20, 11, 0, Math.PI * 2); ctx.fill();
+        // ear
+        ctx.fillStyle = "#cfa255";
+        roundRect(12, 10, 7, 14, 4); ctx.fill();
+        // snout + eye
+        ctx.fillStyle = "#3a2a16";
+        ctx.beginPath(); ctx.arc(30, 22, 3, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = "#333";
+        ctx.beginPath(); ctx.arc(24, 18, 1.5, 0, Math.PI * 2); ctx.fill();
+        ctx.restore();
+      }
+
+      /* ----- States ----- */
+      function start() {
+        reset();
+        state = "playing";
+        document.getElementById("cq-start").hidden = true;
+        document.getElementById("cq-win").hidden = true;
+      }
+      function win() {
+        state = "won";
+        keys.left = keys.right = keys.jump = false;
+        document.getElementById("cq-win-stars").textContent = String(collected);
+        document.getElementById("cq-win-total").textContent = String(total);
+        document.getElementById("cq-win").hidden = false;
+        beep(660, 0.12, "triangle"); beep(880, 0.14, "triangle");
+      }
+
+      document.getElementById("cq-play").addEventListener("click", start);
+      document.getElementById("cq-again").addEventListener("click", start);
+      document.getElementById("cq-restart").addEventListener("click", function () {
+        if (state === "ready") return; start();
+      });
+
+      /* ----- Main loop ----- */
+      reset();
+      function loop() { update(); draw(); requestAnimationFrame(loop); }
+      loop();
+    })();
+  </script>
+</body>
+</html>
