@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#003594"><meta name="description" content="Free interactive coloring for kids. Color a friendly lion online!">
+<title>Color & Play | Reid Kids</title>
+<style>
+:root{font-family:Nunito,system-ui,sans-serif;color:#17325a;background:#f4f8ff}*{box-sizing:border-box}
+body{margin:0}header{background:#003594;color:white;padding:14px max(18px,calc((100vw - 1060px)/2));display:flex;align-items:center;justify-content:space-between;gap:12px}
+header a{color:white;text-decoration:none;font-weight:800}header .brand{font-size:1.35rem}
+main{max-width:1060px;margin:auto;padding:22px 16px 50px}h1{font-size:clamp(1.7rem,4vw,2.5rem);margin:0 0 8px}
+.intro{margin:0 0 18px;color:#49617c}.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:16px 0}
+button{font:inherit;cursor:pointer;border:2px solid #c7d6e9;background:white;border-radius:12px;padding:10px 14px;font-weight:800;color:#17325a;min-height:44px}
+button[aria-pressed=true],button.primary{background:#003594;border-color:#003594;color:white}button:focus-visible,.swatch:focus-visible,[tabindex]:focus-visible{outline:4px solid #f1b900;outline-offset:3px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:18px}.paper,.side{background:white;border-radius:20px;box-shadow:0 8px 25px #102f5a15;padding:16px}
+.paper svg{display:block;width:100%;height:auto;max-height:640px;touch-action:manipulation}.paintable{cursor:pointer;stroke:#1c2635;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;transition:fill .12s}
+.paintable:focus{stroke:#005ce6;stroke-width:7}.number{font-weight:900;font-size:19px;fill:#30445c;pointer-events:none;text-anchor:middle;paint-order:stroke;stroke:white;stroke-width:3}
+.palette{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.swatch{aspect-ratio:1;border-radius:14px;border:3px solid white;box-shadow:0 0 0 1px #c4d0e0;position:relative;padding:0;min-height:50px;color:#1c2635}
+.swatch[aria-pressed=true]{outline:4px solid #003594;outline-offset:2px}.swatch span{display:block;background:#ffffffdb;border-radius:20px;width:23px;margin:auto;font-size:14px;font-weight:900}
+.side h2{margin:0 0 12px;font-size:1.15rem}.tip{font-size:.9rem;line-height:1.5;color:#52677e}
+.status{min-height:26px;font-weight:800;margin:12px 0}footer{text-align:center;padding:20px;color:#49617c}
+@media(max-width:700px){.layout{grid-template-columns:1fr}.palette{grid-template-columns:repeat(6,1fr)}.paper{padding:8px}.side{padding:14px}.swatch{min-height:42px}}
+</style></head>
+<body><header><a class="brand" href="../index.html">Reid Kids</a><a href="../coloring.html">← Coloring Books</a></header>
+<main><h1>🦁 Color & Play</h1><p class="intro">Choose a color, then tap a part of the picture. Make it your own or match the numbers!</p>
+<div class="toolbar" role="group" aria-label="Coloring mode"><button id="free" aria-pressed="true">🎨 Free Color</button><button id="numbers" aria-pressed="false">🔢 Color by Number</button><button id="undo">↶ Undo</button><button id="reset">Start Over</button><button id="save" class="primary">Save Picture ↓</button></div>
+<div class="layout"><section class="paper" aria-label="Coloring picture">
+<svg id="art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 640" role="img" aria-label="Friendly lion on a grassy hill with sunshine and flowers">
+<rect width="560" height="640" fill="white"/>
+<g id="shapes">
+<path class="paintable" data-color="1" d="M52 552 Q280 465 508 552 L540 625 H20Z" fill="white"/>
+<circle class="paintable" data-color="2" cx="465" cy="90" r="47" fill="white"/>
+<path class="paintable" data-color="2" d="M465 16V4 M465 164v18 M391 90h-18 M539 90h17 M413 38l-15-15 M517 142l15 15 M517 38l15-15 M413 142l-15 15" fill="none" stroke="#1c2635" stroke-width="9"/>
+<path class="paintable" data-color="3" d="M185 365 Q124 302 151 244 Q107 193 165 159 Q157 103 221 107 Q259 66 301 111 Q368 88 381 153 Q437 177 399 229 Q443 285 394 325 Q399 383 343 395Z" fill="white"/>
+<ellipse class="paintable" data-color="4" cx="286" cy="438" rx="103" ry="112" fill="white"/>
+<path class="paintable" data-color="4" d="M362 453 Q447 415 444 492 Q440 533 408 510" fill="white"/>
+<ellipse class="paintable" data-color="4" cx="221" cy="526" rx="40" ry="26" fill="white"/>
+<ellipse class="paintable" data-color="4" cx="349" cy="526" rx="40" ry="26" fill="white"/>
+<path class="paintable" data-color="5" d="M209 186 Q187 141 222 154 L246 179Z" fill="white"/>
+<path class="paintable" data-color="5" d="M327 179 Q363 141 371 188 L347 208Z" fill="white"/>
+<ellipse class="paintable" data-color="5" cx="285" cy="251" rx="92" ry="103" fill="white"/>
+<ellipse cx="249" cy="234" rx="7" ry="11" fill="#1c2635"/><ellipse cx="325" cy="234" rx="7" ry="11" fill="#1c2635"/>
+<path class="paintable" data-color="6" d="M263 276 Q286 258 309 276 L287 297Z" fill="white"/>
+<path d="M287 297v18 M287 315q-22 23-42 0 M287 315q22 23 42 0" fill="none" stroke="#1c2635" stroke-width="5" stroke-linecap="round"/>
+<path class="paintable" data-color="2" d="M85 538l-8-27 18 15 16-17-3 31Z" fill="white"/>
+<path class="paintable" data-color="2" d="M457 551l-9-28 19 14 14-17-1 32Z" fill="white"/>
+<g transform="translate(107 480)"><path class="paintable" data-color="7" d="M0 0v57" fill="none"/><circle class="paintable" data-color="8" cx="0" cy="-10" r="16" fill="white"/><circle class="paintable" data-color="8" cx="-19" cy="0" r="15" fill="white"/><circle class="paintable" data-color="8" cx="19" cy="0" r="15" fill="white"/><circle class="paintable" data-color="8" cx="0" cy="15" r="15" fill="white"/><circle class="paintable" data-color="2" cx="0" cy="0" r="11" fill="white"/></g>
+<g transform="translate(470 479)"><path class="paintable" data-color="7" d="M0 0v63" fill="none"/><circle class="paintable" data-color="8" cx="0" cy="-10" r="16" fill="white"/><circle class="paintable" data-color="8" cx="-19" cy="0" r="15" fill="white"/><circle class="paintable" data-color="8" cx="19" cy="0" r="15" fill="white"/><circle class="paintable" data-color="8" cx="0" cy="15" r="15" fill="white"/><circle class="paintable" data-color="2" cx="0" cy="0" r="11" fill="white"/></g>
+</g><g id="labels"></g></svg>
+<p class="status" id="status" role="status" aria-live="polite">Pick a color to get started!</p></section>
+<aside class="side"><h2>Choose a color</h2><div class="palette" id="palette" role="group" aria-label="Paint colors"></div><p class="tip" id="tip">In Free Color mode, tap any section to fill it with your selected color.</p><p class="tip">Your picture stays on this device until you leave or refresh. Save it when you're done!</p></aside></div></main>
+<footer>Made for little artists with big imaginations 💛 · Reid Kids</footer>
+<script>
+(()=>{
+const colors=['#70bd65','#ffcf4a','#d58b42','#eebf84','#f6d6a7','#b97752','#4aa987','#f39abc','#7bbaf2','#9d84d9','#f18459','#ffffff'];
+const suggested={1:0,2:1,3:2,4:3,5:4,6:5,7:6,8:7};
+const shapes=[...document.querySelectorAll('.paintable')].filter(e=>e.getAttribute('fill')!=='none');
+const palette=document.getElementById('palette'),status=document.getElementById('status'),labels=document.getElementById('labels');
+let selected=0,mode='free',history=[];
+colors.forEach((color,i)=>{const b=document.createElement('button');b.className='swatch';b.style.background=color;b.setAttribute('aria-label','Color '+(i+1));b.setAttribute('aria-pressed',String(i===selected));b.innerHTML='<span>'+(i+1)+'</span>';b.addEventListener('click',()=>{selected=i;updatePalette()});palette.append(b)});
+function updatePalette(){[...palette.children].forEach((b,i)=>b.setAttribute('aria-pressed',String(i===selected)))}
+function numbers(){labels.replaceChildren();if(mode!=='numbers')return;shapes.forEach(s=>{if(s.dataset.done==='1')return;let bb;try{bb=s.getBBox()}catch{return}if(bb.width<16||bb.height<16)return;const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('class','number');t.setAttribute('x',bb.x+bb.width/2);t.setAttribute('y',bb.y+bb.height/2+6);t.textContent=(suggested[s.dataset.color]??0)+1;labels.append(t)})}
+function paint(s){const target=suggested[s.dataset.color]??0;if(mode==='numbers'&&selected!==target){status.textContent='Try color '+(target+1)+' for this part!';return}const before=s.getAttribute('fill');if(before===colors[selected])return;history.push({s,before,done:s.dataset.done});s.setAttribute('fill',colors[selected]);s.dataset.done='1';status.textContent='Great coloring! 🌟';numbers();if(mode==='numbers'&&shapes.every(x=>x.dataset.done==='1'))status.textContent='You finished your masterpiece! 🎉'}
+shapes.forEach(s=>{s.setAttribute('tabindex','0');s.setAttribute('role','button');s.setAttribute('aria-label','Color section '+s.dataset.color);s.addEventListener('click',()=>paint(s));s.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();paint(s)}})});
+function setMode(m){mode=m;document.getElementById('free').setAttribute('aria-pressed',String(m==='free'));document.getElementById('numbers').setAttribute('aria-pressed',String(m==='numbers'));document.getElementById('tip').textContent=m==='free'?'In Free Color mode, tap any section to fill it with your selected color.':'Match the number in each section with the number on a color button.';status.textContent=m==='free'?'Color any way you like!':'Match the numbers to fill the picture!';numbers()}
+document.getElementById('free').onclick=()=>setMode('free');document.getElementById('numbers').onclick=()=>setMode('numbers');
+document.getElementById('undo').onclick=()=>{const h=history.pop();if(!h){status.textContent='Nothing to undo yet.';return}h.s.setAttribute('fill',h.before);if(h.done===undefined)delete h.s.dataset.done;else h.s.dataset.done=h.done;numbers();status.textContent='Last color undone.'};
+document.getElementById('reset').onclick=()=>{if(!confirm('Start over with a blank picture?'))return;shapes.forEach(s=>{s.setAttribute('fill','white');delete s.dataset.done});history=[];numbers();status.textContent='A fresh picture is ready!'};
+document.getElementById('save').onclick=()=>{const svg=document.getElementById('art').cloneNode(true);svg.querySelector('#labels').replaceChildren();svg.querySelectorAll('[tabindex],[role],[aria-label]').forEach(n=>{n.removeAttribute('tabindex');n.removeAttribute('role');n.removeAttribute('aria-label')});const xml=new XMLSerializer().serializeToString(svg);const blob=new Blob([xml],{type:'image/svg+xml;charset=utf-8'});const url=URL.createObjectURL(blob);const img=new Image();img.onload=()=>{const c=document.createElement('canvas');c.width=1120;c.height=1280;const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);ctx.drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(url);c.toBlob(b=>{if(!b){status.textContent='Could not save the picture.';return}const a=document.createElement('a');const u=URL.createObjectURL(b);a.href=u;a.download='reidkids-lion-coloring.png';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);status.textContent='Picture saved!'},'image/png')};img.onerror=()=>{URL.revokeObjectURL(url);status.textContent='Could not save the picture.'};img.src=url};
+})();
+</script></body></html>
