@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bible Match — a free memory matching game for kids from Reid Kids. Flip the cards and find the pairs across Noah's Ark animals, Bible heroes, and God's creation." />
+  <meta name="theme-color" content="#003594" />
+  <title>Bible Match Game — Reid Kids</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Bible Match Game — Reid Kids" />
+  <meta property="og:description" content="Flip the cards and find the pairs! A free memory game for kids." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.reidkids.com/bible-match.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Game styles — all scoped under .bm- so they can't clash with the site CSS -->
+  <style>
+    .bm-game { max-width: 620px; margin: 0 auto; background: var(--white);
+      border: 1px solid var(--line); border-radius: var(--radius-lg);
+      box-shadow: var(--shadow); padding: clamp(1.4rem, 4vw, 2.2rem); position: relative; }
+    .bm-themes { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; }
+    .bm-theme { font-size: .95rem; padding: .7rem 1.2rem; }
+    .bm-stats { display: flex; flex-wrap: wrap; gap: .6rem 1.4rem; align-items: center;
+      justify-content: center; margin: 1.4rem 0 .2rem; color: var(--ink); font-weight: 700; }
+    .bm-stat { font-size: 1rem; }
+    .bm-stat strong { color: var(--royal); }
+    .bm-restart { font-size: .9rem; padding: .55rem 1.1rem; }
+    .bm-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: .7rem;
+      max-width: 520px; margin: 1.3rem auto 0; }
+    .bm-card { aspect-ratio: 3 / 4; perspective: 700px; background: none; border: 0;
+      padding: 0; cursor: pointer; border-radius: 14px; }
+    .bm-card:focus-visible { outline: 3px solid var(--sol); outline-offset: 3px; }
+    .bm-card__inner { position: relative; width: 100%; height: 100%; }
+    /* Faces cross-fade by opacity (GPU-independent, works everywhere); a small
+       scale pop on flip gives it a playful "flip" feel. */
+    .bm-card__face { position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: .2rem; border-radius: 14px;
+      transition: opacity .18s ease; }
+    .bm-card__front { opacity: 0; }
+    .bm-card.is-flipped .bm-card__front,
+    .bm-card.is-matched .bm-card__front { opacity: 1; }
+    .bm-card.is-flipped .bm-card__back,
+    .bm-card.is-matched .bm-card__back { opacity: 0; }
+    .bm-card.is-flipped .bm-card__inner,
+    .bm-card.is-matched .bm-card__inner { animation: bm-pop .26s ease; }
+    @keyframes bm-pop { 0% { transform: scale(.72); } 100% { transform: scale(1); } }
+    .bm-card__back { background: linear-gradient(155deg, var(--royal), var(--royal-dark));
+      box-shadow: var(--shadow-sm); }
+    .bm-card__back span { color: var(--sol); font-size: clamp(1.4rem, 6vw, 2rem); font-weight: 800; }
+    .bm-card__front { background: var(--panel); border: 2px solid var(--royal-line); }
+    .bm-card__emoji { font-size: clamp(1.7rem, 7vw, 2.6rem); line-height: 1; }
+    .bm-card__label { font-family: var(--font-body); font-weight: 800;
+      font-size: clamp(.72rem, 2.6vw, .9rem); color: var(--royal); text-align: center; padding: 0 .2rem; }
+    .bm-card.is-matched .bm-card__front { border-color: var(--sol); background: #FFF9D6; }
+    .bm-win { margin-top: 1.6rem; }
+    .bm-win__card { background: var(--royal-soft); border: 1px solid var(--royal-line);
+      border-radius: 16px; padding: 1.6rem; text-align: center; }
+    .bm-win__title { font-family: var(--font-head); font-weight: 600; color: var(--royal);
+      font-size: 1.5rem; margin: 0 0 .5rem; }
+    .bm-win__text { color: var(--ink); margin: 0 0 1.2rem; }
+    .bm-win__text strong { color: var(--royal); }
+    @media (max-width: 560px) {
+      .bm-board { grid-template-columns: repeat(3, 1fr); gap: .55rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header: white · sticky (same as other pages, no Games in top nav) -->
+  <header class="site-header" id="top">
+    <div class="container">
+      <a class="site-wordmark" href="index.html" aria-label="Reid Kids — home">Reid Kids</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html#about">About</a>
+        <a href="index.html#books">Books</a>
+        <a href="coloring.html">Coloring Books</a>
+        <a href="worship.html">Worship</a>
+        <a href="verses.html">Verses</a>
+        <a href="games.html" aria-current="page">Games</a>
+        <a href="index.html#contact" class="nav-cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="game">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow eyebrow--center">Play &amp; Learn</span>
+          <h2>Bible <span class="hl">Match</span></h2>
+          <p class="section__sub">Flip the cards and find the matching pairs. Pick a theme to start!</p>
+        </div>
+
+        <div class="bm-game reveal">
+          <div class="bm-themes" role="group" aria-label="Choose a theme">
+            <button class="btn btn--primary bm-theme" type="button" data-theme="ark" aria-pressed="true">Noah's Ark Animals</button>
+            <button class="btn btn--outline bm-theme" type="button" data-theme="heroes" aria-pressed="false">Bible Heroes</button>
+            <button class="btn btn--outline bm-theme" type="button" data-theme="creation" aria-pressed="false">God's Creation</button>
+          </div>
+
+          <div class="bm-stats">
+            <span class="bm-stat">Moves: <strong id="bm-moves">0</strong></span>
+            <span class="bm-stat">Matches: <strong id="bm-matches">0</strong> / <strong id="bm-total">6</strong></span>
+            <button class="btn btn--outline bm-restart" id="bm-restart" type="button">Restart</button>
+          </div>
+
+          <div class="bm-board" id="bm-board" aria-label="Game board"></div>
+
+          <div class="bm-win" id="bm-win" hidden>
+            <div class="bm-win__card">
+              <p class="bm-win__title">You matched them all! 🎉</p>
+              <p class="bm-win__text">Great job! You found every pair in <strong id="bm-win-moves">0</strong> moves.</p>
+              <button class="btn btn--primary" id="bm-play-again" type="button">Play again</button>
+            </div>
+          </div>
+        </div>
+
+        <p class="play-cta" style="margin-top:2.4rem">
+          <a href="games.html">← Back to all games</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer: royal · with Games link -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a class="footer__logo" href="index.html" aria-label="Reid Kids — home">
+        <img src="images/assets/ReidKids_Eagle_Logo.svg" alt="Reid Kids eagle logo" width="72" height="72" />
+      </a>
+      <nav class="footer__nav" aria-label="Footer">
+        <a href="index.html#about">About</a>
+        <a href="index.html#books">Books</a>
+        <a href="coloring.html">Coloring Books</a>
+        <a href="worship.html">Worship</a>
+        <a href="verses.html">Verses</a>
+        <a href="games.html">Games</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <p class="footer__verse">“She is more precious than jewels.” — Proverbs 3:15 (CSB)</p>
+      <p class="footer__copy">© 2026 Reid Kids</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    /* ---- Bible Match — a memory matching game ---- */
+    (function () {
+      "use strict";
+      var THEMES = {
+        ark:      [["🦁","Lion"],["🐘","Elephant"],["🦓","Zebra"],["🐒","Monkey"],["🦜","Parrot"],["🐢","Turtle"]],
+        heroes:   [["🚢","Noah"],["📜","Moses"],["👑","David"],["🐳","Jonah"],["🌾","Ruth"],["🧥","Joseph"]],
+        creation: [["☀️","Sun"],["🌙","Moon"],["⭐","Stars"],["🌳","Trees"],["🌊","Ocean"],["🐦","Birds"]]
+      };
+
+      var board = document.getElementById("bm-board");
+      var movesEl = document.getElementById("bm-moves");
+      var matchesEl = document.getElementById("bm-matches");
+      var totalEl = document.getElementById("bm-total");
+      var winEl = document.getElementById("bm-win");
+      var winMovesEl = document.getElementById("bm-win-moves");
+      if (!board) return;
+
+      var theme = "ark";
+      var first = null, lock = false, moves = 0, matched = 0, pairs = 0;
+
+      function shuffle(a) {
+        for (var i = a.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var t = a[i]; a[i] = a[j]; a[j] = t;
+        }
+        return a;
+      }
+
+      function build() {
+        var set = THEMES[theme] || THEMES.ark;
+        pairs = set.length;
+        moves = 0; matched = 0; first = null; lock = false;
+        movesEl.textContent = "0";
+        matchesEl.textContent = "0";
+        totalEl.textContent = String(pairs);
+        winEl.hidden = true;
+        board.innerHTML = "";
+
+        var deck = shuffle(set.concat(set).map(function (p, i) {
+          return { emoji: p[0], label: p[1], uid: i };
+        }));
+
+        deck.forEach(function (c) {
+          var card = document.createElement("button");
+          card.type = "button";
+          card.className = "bm-card";
+          card.setAttribute("data-key", c.label);
+          card.setAttribute("aria-label", "Hidden card");
+
+          var inner = document.createElement("span");
+          inner.className = "bm-card__inner";
+
+          var back = document.createElement("span");
+          back.className = "bm-card__face bm-card__back";
+          var q = document.createElement("span");
+          q.textContent = "?";
+          q.setAttribute("aria-hidden", "true");
+          back.appendChild(q);
+
+          var front = document.createElement("span");
+          front.className = "bm-card__face bm-card__front";
+          var em = document.createElement("span");
+          em.className = "bm-card__emoji";
+          em.textContent = c.emoji;
+          em.setAttribute("aria-hidden", "true");
+          var lab = document.createElement("span");
+          lab.className = "bm-card__label";
+          lab.textContent = c.label;
+          front.appendChild(em);
+          front.appendChild(lab);
+
+          inner.appendChild(back);
+          inner.appendChild(front);
+          card.appendChild(inner);
+          card.addEventListener("click", function () { flip(card); });
+          board.appendChild(card);
+        });
+      }
+
+      function flip(card) {
+        if (lock) return;
+        if (card.classList.contains("is-flipped") || card.classList.contains("is-matched")) return;
+        card.classList.add("is-flipped");
+        card.setAttribute("aria-label", card.getAttribute("data-key"));
+
+        if (!first) { first = card; return; }
+
+        moves++; movesEl.textContent = String(moves);
+
+        if (first.getAttribute("data-key") === card.getAttribute("data-key")) {
+          first.classList.add("is-matched");
+          card.classList.add("is-matched");
+          first = null;
+          matched++; matchesEl.textContent = String(matched);
+          if (matched === pairs) {
+            winMovesEl.textContent = String(moves);
+            winEl.hidden = false;
+          }
+        } else {
+          lock = true;
+          var a = first, b = card; first = null;
+          setTimeout(function () {
+            a.classList.remove("is-flipped"); a.setAttribute("aria-label", "Hidden card");
+            b.classList.remove("is-flipped"); b.setAttribute("aria-label", "Hidden card");
+            lock = false;
+          }, 850);
+        }
+      }
+
+      // Theme buttons
+      Array.prototype.forEach.call(document.querySelectorAll(".bm-theme"), function (btn) {
+        btn.addEventListener("click", function () {
+          theme = btn.getAttribute("data-theme");
+          Array.prototype.forEach.call(document.querySelectorAll(".bm-theme"), function (b) {
+            var active = b === btn;
+            b.classList.toggle("btn--primary", active);
+            b.classList.toggle("btn--outline", !active);
+            b.setAttribute("aria-pressed", active ? "true" : "false");
+          });
+          build();
+        });
+      });
+
+      document.getElementById("bm-restart").addEventListener("click", build);
+      document.getElementById("bm-play-again").addEventListener("click", build);
+
+      build();
+    })();
+  </script>
+</body>
+</html>
