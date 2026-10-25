@@ -1,62 +1,79 @@
-/* Seasonal porch-inspired installation. Decorative only; no stored data. */
+/* A removable, purely decorative October layer. No tracking or stored data. */
 (() => {
   'use strict';
   const header = document.querySelector('.site-header');
   if (!header || document.getElementById('halloween-decor')) return;
-  const host = document.createElement('div');
-  host.id='halloween-decor'; host.setAttribute('aria-hidden','true'); host.inert=true;
-  header.after(host);
-  const NS='http://www.w3.org/2000/svg';
-  const svg=document.createElementNS(NS,'svg');
-  svg.setAttribute('viewBox','0 0 1200 500'); svg.setAttribute('focusable','false');
-  host.append(svg);
+  const NS = 'http://www.w3.org/2000/svg';
+  const layer = document.createElement('div');
+  layer.id = 'halloween-decor';
+  layer.setAttribute('aria-hidden', 'true');
+  layer.inert = true;
+  document.body.append(layer);
+  const defs = `<defs>
+    <filter id="hw-glow" x="-150%" y="-150%" width="400%" height="400%"><feGaussianBlur stdDeviation="2"/></filter>
+  </defs>`;
+  const svg = document.createElementNS(NS, 'svg');
+  svg.classList.add('hw-ropes');
+  svg.setAttribute('focusable', 'false');
+  layer.append(svg);
+  const wordmark = header.querySelector('.site-wordmark');
+  const hero = document.querySelector('.hero');
   document.documentElement.classList.add('halloween-season');
-  // Each skeleton is individually articulated, rather than mirrored icon art.
-  function skeleton(x,y,scale,angle,pose,anchor) {
-    const poses={
-      seated:{arms:[[-28,53],[-37,86],[35,57],[49,83]],legs:[[-45,108],[-18,155],[48,112],[76,146]]},
-      hanging:{arms:[[-15,-30],[20,-70],[55,-25],[110,-20]],legs:[[5,160],[65,165],[50,145],[75,195]]},
-      climbing:{arms:[[-34,9],[-35,-29],[29,16],[35,-18]],legs:[[-31,132],[-17,166],[31,111],[39,140]]},
-      pulling:{arms:[[-44,48],[-76,16],[7,-4],[-45,22]],legs:[[-18,141],[-42,187],[33,135],[50,179]]}
-    };
-    const p=poses[pose];
-    let ax=0,ay=0;
-    if(anchor){const a=angle*Math.PI/180;ax=(anchor[0]*Math.cos(a)-anchor[1]*Math.sin(a))*scale;ay=(anchor[0]*Math.sin(a)+anchor[1]*Math.cos(a))*scale;}
-    const bone=(a,b,width=4)=>`<path d="M${a[0]} ${a[1]} L${b[0]} ${b[1]}" class="hw-bone-outline" stroke-width="${width+1.5}"/><path d="M${a[0]} ${a[1]} L${b[0]} ${b[1]}" class="hw-bone" stroke-width="${width}"/>`;
-    const joint=(a,r=2.6)=>`<circle cx="${a[0]}" cy="${a[1]}" r="${r}" fill="#ddd3b7" stroke="#9e9582" stroke-width=".8"/>`;
-    const hand=(a,flip)=>`<g transform="translate(${a[0]} ${a[1]}) rotate(${flip?18:-22})"><path d="M0 4 l-3 -7 m3 7 l0 -11 m0 11 l3 -11 m-3 11 l6 -8 m-6 8 l8 -4" class="hw-fingers"/></g>`;
-    let out=`<g transform="translate(${x-ax} ${y-ay}) rotate(${angle}) scale(${scale})" class="hw-skeleton">`;
-    // Small skull, long neck and torso: restrained proportions like the reference props.
-    out+=`<path d="M-12 1 C-15 -8 -10 -18 0 -19 C10 -19 15 -12 13 -2 L10 8 L7 13 L-7 13 L-10 7 Z" fill="url(#hw-ivory)" stroke="#9e9582" stroke-width="1"/>
-    <path d="M-8 7 L-7 17 Q0 21 7 17 L8 7" fill="#ddd3b7" stroke="#9e9582" stroke-width=".8"/><path d="M-7 11 H7 M-4 9 V16 M0 9 V17 M4 9 V16" stroke="#918a7c" stroke-width=".8"/>
-    <ellipse cx="-6" cy="0" rx="3.8" ry="4.7" fill="#474940"/><ellipse cx="6" cy="0" rx="3.8" ry="4.7" fill="#474940"/><path d="M0 3 L-2.7 8 H2.7 Z" fill="#636155"/>`;
-    out+=bone([0,20],[0,91],3.2);
-    out+=`<path d="M-21 35 Q-10 28 0 34 Q10 28 21 35" class="hw-bone" stroke-width="3.5"/>`;
-    for(let i=0;i<6;i++){const yy=39+i*6,spread=21-i*1.3;out+=`<path d="M-2 ${yy} C-${spread} ${yy-9} -${spread+5} ${yy+5} -3 ${yy+7} M2 ${yy} C${spread} ${yy-9} ${spread+5} ${yy+5} 3 ${yy+7}" fill="none" stroke="#dcd2b8" stroke-width="2.6"/>`;}
-    out+=`<path d="M-15 88 Q-6 96 0 89 Q6 96 15 88 L19 101 L9 112 L0 104 L-9 112 L-19 101 Z" fill="url(#hw-ivory)" stroke="#9e9582" stroke-width="1"/><ellipse cx="-10" cy="100" rx="4" ry="5" fill="#6a6a57"/><ellipse cx="10" cy="100" rx="4" ry="5" fill="#6a6a57"/>`;
-    [[[-21,35],p.arms[0],p.arms[1]],[[21,35],p.arms[2],p.arms[3]]].forEach((v,i)=>{out+=bone(v[0],v[1],3.8)+joint(v[1])+bone(v[1],v[2],2.8)+bone([v[1][0]+2,v[1][1]],[v[2][0]+2,v[2][1]],1.2)+hand(v[2],i);});
-    [[[-10,108],p.legs[0],p.legs[1]],[[10,108],p.legs[2],p.legs[3]]].forEach(v=>{out+=bone(v[0],v[1],4.6)+joint(v[1],3)+bone(v[1],v[2],3.2)+bone([v[1][0]+3,v[1][1]],[v[2][0]+2,v[2][1]],1.5)+`<path d="M${v[2][0]-3} ${v[2][1]} q4 -3 7 1 l8 5 q-8 4 -15 0 Z" fill="#e0d7bd" stroke="#9e9582" stroke-width=".8"/>`;});
-    return out+'</g>';
-  }
+  let frame = 0;
   function draw() {
-  const mark=header.querySelector('.site-wordmark');
-  const anchorX=mark ? (mark.getBoundingClientRect().left+18)*1200/document.documentElement.clientWidth : 79;
-  const rope=`M ${anchorX} 0 C ${anchorX+12} 42 236 88 349 119 S 669 184 811 209 S 1030 254 1184 278`;
-  let content=`<defs><linearGradient id="hw-ivory"><stop stop-color="#f1e9d6"/><stop offset=".55" stop-color="#d8ceb3"/><stop offset="1" stop-color="#b5aa90"/></linearGradient></defs>
-  <path d="${rope}" fill="none" stroke="#725e3e" stroke-width="3.4"/>
-  <path d="${rope}" fill="none" stroke="#c4ae7c" stroke-width="2.1"/>
-  <path d="${rope}" fill="none" stroke="#e0cc9d" stroke-width=".65" stroke-dasharray="2 5"/>`;
-  // Delicate warm bulbs and small gauze scraps, never a rectangular light border.
-  const lamps=[[127,32],[182,62],[246,86],[309,109],[382,127],[458,145],[538,161],[619,177],[703,191],[785,205],[868,220],[949,237],[1030,253],[1110,267],[1170,276]];
-  lamps.forEach(([x,y],i)=>{content+=`<path d="M${x-7} ${y-3} q7 9 14 3" fill="none" stroke="#b39863" stroke-width=".7"/><path d="M${x} ${y} v7" stroke="#887148" stroke-width="1"/><ellipse cx="${x}" cy="${y+10}" rx="2.3" ry="3.6" fill="#e4a75d"/><ellipse cx="${x-.5}" cy="${y+9}" rx=".65" ry="1.5" fill="#ffe1a5"/>`;});
-  [[281,103,1],[561,168,.65],[765,203,.8]].forEach(([x,y,s])=>{content+=`<g transform="translate(${x} ${y}) scale(${s})" fill="none" stroke="#e5dfcc" stroke-width=".7" opacity=".42"><path d="M-14 -5 L-5 22 L1 8 L10 34 L16 11 L25 29 L32 4 M-10 4 L29 9 M-5 12 L24 18 M2 18 L17 23 M-14 -5 L32 4"/></g>`;});
-  content+=skeleton(anchorX+80,16,.6,45,'seated');
-  content+=skeleton(238,83,.88,-64,'hanging',[20,-70]);
-  content+=skeleton(697,190,.31,-23,'climbing',[-35,-29]);
-  content+=skeleton(1000,247,1.18,7,'pulling',[-76,16]);
-  svg.innerHTML=content;
+    frame = 0;
+    svg.setAttribute('height', '0');
+    const w = document.documentElement.clientWidth;
+    const h = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    const small = w < 760;
+    const headerBottom = header.offsetHeight;
+    const gap = small ? 9 : Math.max(28, (w - 1140) / 2);
+    const left = gap, right = w - gap;
+    const start = headerBottom + 12, end = h - 20;
+    const wave = small ? 3 : 14;
+    const rope = (x, phase) => {
+      let d = `M ${x} ${start}`;
+      for (let y = start; y < end; y += 160) d += ` Q ${x + phase * wave} ${Math.min(y + 80,end)} ${x} ${Math.min(y + 160,end)}`;
+      return d;
+    };
+    const paths = [rope(left,1),rope(right,-1)];
+    let html = defs;
+    paths.forEach(d => { html += `<path d="${d}" class="hw-rope-shadow"/><path d="${d}" class="hw-rope"/><path d="${d}" class="hw-rope-twist"/>`; });
+    const brandX = wordmark ? wordmark.getBoundingClientRect().left + 13 : left;
+    const tether = `M ${brandX} ${start-16} C ${brandX+18} ${start+8} ${left+20} ${start+35} ${left} ${start+82}`;
+    html += `<path d="${tether}" class="hw-rope-shadow"/><path d="${tether}" class="hw-rope"/><path d="${tether}" class="hw-rope-twist"/><ellipse cx="${brandX}" cy="${start-13}" rx="7" ry="4" fill="none" stroke="#ead0a0" stroke-width="2"/>`;
+    [left,right].forEach((x,i)=>{
+      let wire=`M ${x} ${start}`;
+      for(let y=start;y<end;y+=24) wire+=` Q ${x+8} ${y+6} ${x} ${y+12} Q ${x-8} ${y+18} ${x} ${Math.min(y+24,end)}`;
+      html+=`<path d="${wire}" fill="none" stroke="#9f7044" stroke-width="1" opacity=".9"/>`;
+    });
+    // A porch-like garland beneath the navigation, leaving all links unobstructed.
+    const garland = `M ${left} ${start} Q ${w*.25} ${start+31} ${w*.5} ${start+8} Q ${w*.75} ${start+31} ${right} ${start}`;
+    html += `<path d="${garland}" class="hw-rope"/><path d="${garland}" class="hw-rope-twist"/>`;
+    for (let x = left+20; x < right-10; x += small ? 33 : 45) {
+      const y = start + 9 + Math.sin(x/w*Math.PI)*9;
+      html += bulb(x,y,Math.round(x));
+    }
+    for (let y = start + 55; y < end - 35; y += small ? 112 : 88) {
+      [left,right].forEach((x,i)=>{ html += bulb(x + Math.sin((y-start)/160*Math.PI)*wave*(i?-1:1)/2,y,Math.round(y+i*11)); });
+    }
+    const heroSize = small ? 100 : Math.min(430, Math.max(240, w*.36));
+    if(hero) {
+      const top=start+18;
+      html+=`<image href="assets/halloween-skeleton.webp?v=20261025-4" x="${left-heroSize*.47}" y="${top}" width="${heroSize}" height="${heroSize*1.5}" preserveAspectRatio="xMidYMid meet"/><g transform="translate(${right+heroSize*.47} ${top}) scale(-1 1)"><image href="assets/halloween-skeleton.webp?v=20261025-4" width="${heroSize}" height="${heroSize*1.5}" preserveAspectRatio="xMidYMid meet"/></g>`;
+    }
+    svg.setAttribute('width', String(w)); svg.setAttribute('height', String(h));
+    svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
+    svg.innerHTML = html;
   }
+  function bulb(x,y,seed) {
+    return `<g class="hw-light" style="--hw-delay:-${seed%7}s"><path d="M${x} ${y-6} v6" stroke="#947353" stroke-width="2"/><ellipse cx="${x}" cy="${y+5}" rx="7" ry="9" fill="#ff8e28" opacity=".45" filter="url(#hw-glow)"/><ellipse cx="${x}" cy="${y+5}" rx="3.1" ry="5.2" fill="#ffb25b"/><ellipse cx="${x-1}" cy="${y+3}" rx=".9" ry="2" fill="#fff3c9"/></g>`;
+  }
+  const schedule = () => { if(!frame) frame = requestAnimationFrame(draw); };
+  window.addEventListener('resize',schedule,{passive:true});
+  window.addEventListener('load',schedule,{once:true});
+  // Layout changes (e.g. book data) must not leave the tethers hanging mid-page.
+  const observer = new ResizeObserver(schedule);
+  observer.observe(document.body);
   draw();
-  window.addEventListener('resize',draw,{passive:true});
-  window.addEventListener('load',draw,{once:true});
 })();
