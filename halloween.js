@@ -27,7 +27,7 @@
     const h = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
     const small = w < 760;
     const headerBottom = header.offsetHeight;
-    const gap = small ? 9 : Math.max(28, (w - 1140) / 2);
+    const gap = small ? 14 : Math.max(70, (w - 1140) / 2);
     const left = gap, right = w - gap;
     const start = headerBottom + 12, end = h - 20;
     const wave = small ? 3 : 14;
