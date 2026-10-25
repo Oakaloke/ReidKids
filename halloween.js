@@ -15,9 +15,9 @@
   function skeleton(x,y,scale,angle,pose,anchor) {
     const poses={
       seated:{arms:[[-28,53],[-37,86],[35,57],[49,83]],legs:[[-45,108],[-18,155],[48,112],[76,146]]},
-      hanging:{arms:[[-31,3],[-27,-43],[42,14],[58,-10]],legs:[[2,146],[60,104],[51,132],[94,91]]},
+      hanging:{arms:[[-15,-30],[20,-70],[55,-25],[110,-20]],legs:[[5,160],[65,165],[50,145],[75,195]]},
       climbing:{arms:[[-34,9],[-35,-29],[29,16],[35,-18]],legs:[[-31,132],[-17,166],[31,111],[39,140]]},
-      pulling:{arms:[[-44,48],[-76,16],[-7,64],[-54,28]],legs:[[-18,141],[-42,187],[33,135],[50,179]]}
+      pulling:{arms:[[-44,48],[-76,16],[7,-4],[-45,22]],legs:[[-18,141],[-42,187],[33,135],[50,179]]}
     };
     const p=poses[pose];
     let ax=0,ay=0;
@@ -50,8 +50,8 @@
   const lamps=[[127,32],[182,62],[246,86],[309,109],[382,127],[458,145],[538,161],[619,177],[703,191],[785,205],[868,220],[949,237],[1030,253],[1110,267],[1170,276]];
   lamps.forEach(([x,y],i)=>{content+=`<path d="M${x-7} ${y-3} q7 9 14 3" fill="none" stroke="#b39863" stroke-width=".7"/><path d="M${x} ${y} v7" stroke="#887148" stroke-width="1"/><ellipse cx="${x}" cy="${y+10}" rx="2.3" ry="3.6" fill="#e4a75d"/><ellipse cx="${x-.5}" cy="${y+9}" rx=".65" ry="1.5" fill="#ffe1a5"/>`;});
   [[281,103,1],[561,168,.65],[765,203,.8]].forEach(([x,y,s])=>{content+=`<g transform="translate(${x} ${y}) scale(${s})" fill="none" stroke="#e5dfcc" stroke-width=".7" opacity=".42"><path d="M-14 -5 L-5 22 L1 8 L10 34 L16 11 L25 29 L32 4 M-10 4 L29 9 M-5 12 L24 18 M2 18 L17 23 M-14 -5 L32 4"/></g>`;});
-  content+=skeleton(anchorX,22,.6,28,'seated');
-  content+=skeleton(238,83,.88,-64,'hanging',[-27,-43]);
+  content+=skeleton(anchorX+80,16,.6,45,'seated');
+  content+=skeleton(238,83,.88,-64,'hanging',[20,-70]);
   content+=skeleton(697,190,.31,-23,'climbing',[-35,-29]);
   content+=skeleton(1000,247,1.18,7,'pulling',[-76,16]);
   svg.innerHTML=content;
