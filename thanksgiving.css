@@ -4,9 +4,9 @@
 .thanksgiving-season body { background: #fffdf6; }
 .thanksgiving-frame { position: fixed; inset: 0; z-index: 60; pointer-events: none; overflow: hidden; }
 .thanksgiving-frame::before, .thanksgiving-frame::after {
-  content: ''; position: absolute; top: 0; bottom: 0; width: 38%;
+  content: ''; position: absolute; top: 0; bottom: 0; width: 24%;
   background-image: url('assets/thanksgiving-frame-20261101.png');
-  background-repeat: no-repeat; background-size: min(100vw, 1050px) 100%;
+  background-repeat: no-repeat; background-size: min(100vw, 60vh) 100%;
 }
 .thanksgiving-frame::before { left: 0; background-position: left center; }
 .thanksgiving-frame::after { right: 0; background-position: right center; }
@@ -16,7 +16,7 @@
 .thanksgiving-season .site-nav { justify-content: center; gap: 4px 18px; }
 .thanksgiving-season .site-nav a { min-height: 44px; display: inline-flex; align-items: center; }
 .thanksgiving-season .hero { background: #fffdf6; color: #003594; padding: 24px 0 50px; }
-.thanksgiving-season .hero__logo { max-width: 100%; margin-bottom: 22px; padding: 16px; box-shadow: 0 15px 35px -22px #62523b; }
+.thanksgiving-season .hero__logo { width: min(100%, 334px); max-width: 100%; margin-bottom: 22px; padding: 16px; box-shadow: 0 15px 35px -22px #62523b; }
 .thanksgiving-season .hero__logo img { width: min(100%, 300px); height: auto; }
 .thanksgiving-season .hero__title { color: #003594; font-size: clamp(28px, 5vw, 48px); }
 .thanksgiving-season .hero__lead { color: #6a6863; font-size: 17px; margin-bottom: 20px; }
