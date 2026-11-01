@@ -1,16 +1,16 @@
 /* Illustrated frame extracted from the approved Thanksgiving mockup.
    Artwork is decorative; content and navigation remain real, accessible HTML. */
-.thanksgiving-season { --frame-gutter: clamp(46px, 15vw, 150px); background: #fffdf6; }
-.thanksgiving-season body { background: var(--royal); }
+.thanksgiving-season { --frame-gutter: clamp(44px, 18vw, 110px); background: #fffdf6; }
+.thanksgiving-season body { background: var(--royal); padding-inline: var(--frame-gutter); }
 .thanksgiving-frame { position: fixed; inset: 0; z-index: 60; pointer-events: none; overflow: hidden; }
 .thanksgiving-frame::before, .thanksgiving-frame::after {
-  content: ''; position: absolute; top: 0; bottom: 0; width: 24%;
+  content: ''; position: absolute; top: 0; bottom: 0; width: var(--frame-gutter); background-color: #fffdf6;
   background-image: url('assets/thanksgiving-frame-20261101.png');
-  background-repeat: no-repeat; background-size: min(100vw, 60vh) 100%;
+  background-repeat: no-repeat; background-size: min(72vw, 60vh) 100%;
 }
 .thanksgiving-frame::before { left: 0; background-position: left center; }
 .thanksgiving-frame::after { right: 0; background-position: right center; }
-.thanksgiving-season .container { padding-inline: calc(var(--frame-gutter) + 10px); }
+.thanksgiving-season .container { padding-inline: 12px; min-width: 0; overflow-wrap: break-word; }
 .thanksgiving-season .site-header { position: relative; background: #fffdf6; border: 0; }
 .thanksgiving-season .site-header .container { flex-direction: column; padding-top: 20px; gap: 12px; }
 .thanksgiving-season .site-nav { justify-content: center; gap: 4px 18px; }
@@ -40,4 +40,9 @@
   .thanksgiving-season .section { padding-block: 40px; }
   .thanksgiving-season .site-footer { padding-bottom: 100px; }
 }
-@media print { .thanksgiving-frame { display: none; } .thanksgiving-season .container { padding-inline: 24px; } }
+@media print { .thanksgiving-season body { padding-inline: 0; } .thanksgiving-frame { display: none; } .thanksgiving-season .container { padding-inline: 24px; } }
+
+/* Art occupies reserved rails only; no text or hit target may enter them. */
+.thanksgiving-season main, .thanksgiving-season header, .thanksgiving-season footer { min-width: 0; max-width: 100%; }
+.thanksgiving-season .container > *, .thanksgiving-season .hero__inner { min-width: 0; max-width: 100%; }
+@media(max-width:400px) { .thanksgiving-season .hero__title { font-size: 25px; } .thanksgiving-season .site-nav { gap: 0 8px; } }
