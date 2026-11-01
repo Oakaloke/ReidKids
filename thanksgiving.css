@@ -46,3 +46,8 @@
 .thanksgiving-season main, .thanksgiving-season header, .thanksgiving-season footer { min-width: 0; max-width: 100%; }
 .thanksgiving-season .container > *, .thanksgiving-season .hero__inner { min-width: 0; max-width: 100%; }
 @media(max-width:400px) { .thanksgiving-season .hero__title { font-size: 25px; } .thanksgiving-season .site-nav { gap: 0 8px; } }
+@media(max-width:700px) {
+ .thanksgiving-season .cbooks, .thanksgiving-season .verse-grid, .thanksgiving-season .gh-grid { grid-template-columns: minmax(0, 1fr); }
+ .thanksgiving-season .cbook, .thanksgiving-season .verse-card, .thanksgiving-season .gh-card { min-width: 0; }
+ .thanksgiving-season .cq-touch { flex-wrap: wrap; }
+}
