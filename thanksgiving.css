@@ -1,17 +1,43 @@
-/* Quiet Thanksgiving framing, never a banner. */
-.thanksgiving-frame{position:fixed;inset:0;z-index:30;pointer-events:none;overflow:hidden;contain:layout paint}
-.thanksgiving-frame__rail{position:absolute;top:0;bottom:0;width:clamp(24px,4.5vw,54px);display:flex;flex-direction:column;align-items:center;justify-content:space-around;background:linear-gradient(to right,rgba(255,240,211,.72),rgba(255,240,211,0));border-left:2px solid rgba(185,119,55,.28)}
-.thanksgiving-frame__rail--left{left:0}
-.thanksgiving-frame__rail--right{right:0;transform:scaleX(-1)}
-.thanksgiving-frame__rail span{font-size:clamp(16px,2.5vw,27px);opacity:.82;transform:rotate(-12deg);filter:drop-shadow(0 1px 1px #fff)}
-.thanksgiving-frame__rail span:nth-child(even){transform:rotate(13deg) scale(.9)}
-.thanksgiving-frame__rail--right span{transform:scaleX(-1) rotate(-12deg)}
-.thanksgiving-frame__corner{position:absolute;top:6px;font-size:clamp(19px,3vw,34px);opacity:.8}
-.thanksgiving-frame__corner--tl{left:6px}.thanksgiving-frame__corner--tr{right:6px}
-@media(max-width:700px){
-  .thanksgiving-frame__rail{width:19px;background:linear-gradient(to right,rgba(255,240,211,.45),transparent);border-left-width:1px}
-  .thanksgiving-frame__rail span{font-size:16px;opacity:.72}
-  .thanksgiving-frame__corner{font-size:17px;top:4px}
-  .thanksgiving-frame__corner--tl{left:2px}.thanksgiving-frame__corner--tr{right:2px}
+/* Illustrated frame extracted from the approved Thanksgiving mockup.
+   Artwork is decorative; content and navigation remain real, accessible HTML. */
+.thanksgiving-season { --frame-gutter: clamp(46px, 15vw, 150px); background: #fffdf6; }
+.thanksgiving-season body { background: #fffdf6; }
+.thanksgiving-frame { position: fixed; inset: 0; z-index: 60; pointer-events: none; overflow: hidden; }
+.thanksgiving-frame::before, .thanksgiving-frame::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 38%;
+  background-image: url('assets/thanksgiving-frame-20261101.png');
+  background-repeat: no-repeat; background-size: min(100vw, 1050px) 100%;
 }
-@media print{.thanksgiving-frame{display:none}}
+.thanksgiving-frame::before { left: 0; background-position: left center; }
+.thanksgiving-frame::after { right: 0; background-position: right center; }
+.thanksgiving-season .container { padding-inline: calc(var(--frame-gutter) + 10px); }
+.thanksgiving-season .site-header { position: relative; background: #fffdf6; border: 0; }
+.thanksgiving-season .site-header .container { flex-direction: column; padding-top: 20px; gap: 12px; }
+.thanksgiving-season .site-nav { justify-content: center; gap: 4px 18px; }
+.thanksgiving-season .site-nav a { min-height: 44px; display: inline-flex; align-items: center; }
+.thanksgiving-season .hero { background: #fffdf6; color: #003594; padding: 24px 0 50px; }
+.thanksgiving-season .hero__logo { max-width: 100%; margin-bottom: 22px; padding: 16px; box-shadow: 0 15px 35px -22px #62523b; }
+.thanksgiving-season .hero__logo img { width: min(100%, 300px); height: auto; }
+.thanksgiving-season .hero__title { color: #003594; font-size: clamp(28px, 5vw, 48px); }
+.thanksgiving-season .hero__lead { color: #6a6863; font-size: 17px; margin-bottom: 20px; }
+.thanksgiving-season .hero__verse, .thanksgiving-season .hero__verse strong { color: #655b46; }
+.thanksgiving-shortcuts { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; margin: 22px auto; max-width: 560px; }
+.thanksgiving-shortcuts a { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 86px; padding: 12px 6px; border-radius: 18px; color: #003594; font-weight: 800; text-decoration: none; background: #fff0aa; }
+.thanksgiving-shortcuts a:nth-child(2) { background: #dcefff; }
+.thanksgiving-shortcuts a:nth-child(3) { background: #cdf0d5; }
+.thanksgiving-shortcuts a:nth-child(4) { background: #ffdbdc; }
+.thanksgiving-shortcuts span { font-size: 28px; }
+.thanksgiving-shortcuts a:hover { outline: 2px solid #003594; outline-offset: 2px; }
+@media(max-width:700px) {
+  .thanksgiving-season .site-wordmark { font-size: 27px; }
+  .thanksgiving-season .site-nav { gap: 0 10px; }
+  .thanksgiving-season .site-nav a { font-size: 12px; padding: 6px 0; }
+  .thanksgiving-season .site-nav .nav-studio, .thanksgiving-season .site-nav .nav-cta { padding: 7px 10px; }
+  .thanksgiving-season .hero__logo { width: 210px; padding: 12px; border-radius: 20px; }
+  .thanksgiving-season .hero__lead { font-size: 15px; }
+  .thanksgiving-shortcuts a { font-size: 14px; }
+  .thanksgiving-season .shop { grid-template-columns: 1fr; }
+  .thanksgiving-season .section { padding-block: 40px; }
+  .thanksgiving-season .site-footer { padding-bottom: 100px; }
+}
+@media print { .thanksgiving-frame { display: none; } .thanksgiving-season .container { padding-inline: 24px; } }
