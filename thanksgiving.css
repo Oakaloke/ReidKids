@@ -1,7 +1,7 @@
 /* Illustrated frame extracted from the approved Thanksgiving mockup.
    Artwork is decorative; content and navigation remain real, accessible HTML. */
 .thanksgiving-season { --frame-gutter: clamp(46px, 15vw, 150px); background: #fffdf6; }
-.thanksgiving-season body { background: #fffdf6; }
+.thanksgiving-season body { background: var(--royal); }
 .thanksgiving-frame { position: fixed; inset: 0; z-index: 60; pointer-events: none; overflow: hidden; }
 .thanksgiving-frame::before, .thanksgiving-frame::after {
   content: ''; position: absolute; top: 0; bottom: 0; width: 24%;
