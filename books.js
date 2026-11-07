@@ -26,17 +26,4 @@
      featured    – true to show it in the homepage preview, false to hide it there
    ========================================================= */
 
-window.REIDKIDS_BOOKS = [
-  {
-    title: "The Lion of Judah",
-    subtitle: "A Christian Coloring Book for Little Hearts",
-    cover: "images/books/lion-of-judah.svg",
-    alt: "Cover of The Lion of Judah coloring book",
-    ageRange: "Ages 3–7",
-    description:
-      "A gentle coloring book for little ones that celebrates Jesus, the Lion of Judah, one page at a time.",
-    amazon: "#",
-    stores: [],
-    featured: true
-  }
-];
+window.REIDKIDS_BOOKS = [];

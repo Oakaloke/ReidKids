@@ -18,7 +18,7 @@ Defined once as CSS variables in `styles.css` and used everywhere:
 The logo has a **white eagle**, so it always sits on a Rams Royal header/footer band.
 
 ## Pages & sections
-- **Home** (`index.html`) — hero, About, Children's Books, Coloring Books preview, Family Resources, Coming Soon, Contact
+- **Home** (`index.html`) — hero, shop links, About, newsletter, Contact
 - **Coloring Books** (`coloring.html`) — grid of coloring books (data-driven, see below)
 - **Worship** (`worship.html`) — "Worship for Little Ones" hymn list
 - **Song** (`song.html`) — a single hymn page ("Jesus Loves Me", "O Store Gud")
