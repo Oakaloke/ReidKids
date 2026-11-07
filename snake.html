@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#123d37">
+<meta name="description" content="Play Wormie's Garden, a free Snake game from Reid Kids. Pick your snake's color, collect fruit, and grow! Keyboard and touch controls for family fun.">
+<meta property="og:title" content="Wormie's Garden · Snake | Reid Kids">
+<meta property="og:description" content="A tiny snake. A big adventure. Choose your color, collect fruit, and see how far you can grow.">
+<meta property="og:url" content="https://www.reidkids.com/snake.html">
+<meta property="og:type" content="website">
+<title>Wormie's Garden · Snake | Reid Kids</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="snake.css?v=1">
+<script src="snake-engine.js?v=1" defer></script>
+<script src="snake.js?v=1" defer></script>
+</head>
+<body>
+<header class="site-top"><a href="index.html" class="brand">Reid Kids<span>.</span></a><a href="games.html" class="back">← All games</a></header>
+<main>
+<section class="intro" aria-labelledby="game-title"><p class="eyebrow"><span aria-hidden="true">✦</span> A little play. A little growth.</p><h1 id="game-title">Wormie’s <em>Garden</em><span class="title-leaf" aria-hidden="true"></span></h1><p>A tiny snake. A big adventure. How far can you grow?</p></section>
+<div class="game-layout">
+<section class="arena" aria-label="Snake game">
+<div class="scorebar"><div class="scoregroup"><div class="score"><span>FRUIT</span><strong id="score">0</strong></div><div class="score best"><span>BEST <span aria-hidden="true">✦</span></span><strong id="best">0</strong></div></div><div class="trail-level"><span class="live-dot" aria-hidden="true"></span><span id="level">Level 1</span></div><button type="button" id="sound" class="icon-button" aria-pressed="false" aria-label="Turn sound on" title="Sound off">♪<span class="sound-slash" aria-hidden="true"></span></button></div>
+<div class="board-frame" id="board-frame">
+<canvas id="board" width="600" height="600" tabindex="0" role="img" aria-label="Snake playfield. Use arrow keys or W A S D to steer; Space or P pauses." aria-describedby="game-help">This game needs a browser with canvas support. Use arrow keys or the direction buttons to steer the snake.</canvas>
+<div class="overlay" id="overlay"><div class="overlay-card"><div class="overlay-symbol" id="overlay-symbol" aria-hidden="true">✦</div><p class="eyebrow" id="overlay-kicker">Fresh adventure ahead</p><h2 id="overlay-title">Ready to grow?</h2><p id="overlay-copy">Collect the fruit. Watch your tail.<br>Make a little room to grow.</p><button class="button primary" id="play" type="button">Let’s play <span aria-hidden="true">→</span></button><p class="overlay-tip" id="overlay-tip">Arrow keys · WASD · Swipe</p></div></div>
+</div>
+<div class="game-toolbar"><button class="button secondary" id="pause" type="button" disabled>Pause</button><p id="game-help">Collect fruit. Avoid the edges &amp; your tail.</p><button class="button secondary" id="restart" type="button">↻ Restart</button></div>
+<div class="touch-area"><div class="touch-copy"><strong>Your next move.</strong><span>Tap the arrows or swipe<br>anywhere on the board.</span></div><div class="dpad" role="group" aria-label="Snake direction controls"><button data-direction="up" class="up" type="button" aria-label="Move up">↑</button><button data-direction="left" class="left" type="button" aria-label="Move left">←</button><span class="pad-center" aria-hidden="true">✦</span><button data-direction="right" class="right" type="button" aria-label="Move right">→</button><button data-direction="down" class="down" type="button" aria-label="Move down">↓</button></div></div>
+<p class="sr-only" id="announcement" role="status" aria-live="polite" aria-atomic="true">Choose a color and press Let’s play to begin.</p>
+</section>
+<aside class="sidebar" aria-label="Game settings and tips">
+<section class="settings panel"><p class="eyebrow">Make it yours</p><h2>Your trail, your style.</h2><div class="setting-label"><span id="color-label">Snake color</span><span id="color-name">Leaf</span></div><div class="swatches" role="group" aria-labelledby="color-label"><button type="button" class="swatch" data-color="leaf" aria-label="Leaf green snake" aria-pressed="true" style="--swatch:#b4ed77">✓</button><button type="button" class="swatch" data-color="sky" aria-label="Sky blue snake" aria-pressed="false" style="--swatch:#78cfff"></button><button type="button" class="swatch" data-color="berry" aria-label="Berry pink snake" aria-pressed="false" style="--swatch:#ff99ba"></button><button type="button" class="swatch" data-color="sunshine" aria-label="Sunshine yellow snake" aria-pressed="false" style="--swatch:#ffda68"></button><button type="button" class="swatch" data-color="lavender" aria-label="Lavender purple snake" aria-pressed="false" style="--swatch:#c4a7ff"></button><button type="button" class="swatch" data-color="peach" aria-label="Peach orange snake" aria-pressed="false" style="--swatch:#ffa778"></button></div><label class="setting-label pace-label" for="pace">Pick your pace</label><select id="pace"><option value="gentle">Gentle · take your time</option><option value="classic" selected>Classic · find your rhythm</option><option value="zippy">Zippy · quick little turns</option></select><p class="setting-note" id="pace-note">A little faster every 5 fruits.</p></section>
+<section class="goodness panel"><div class="goodness-top"><span class="seed-icon" aria-hidden="true">❧</span><span class="eyebrow">Grow in goodness</span></div><h2 id="virtue">Kindness</h2><p id="virtue-copy">A kind word can brighten someone’s whole day.</p><div class="verse-line"></div><p class="verse">“But the fruit of the Spirit is love, joy, peace…”</p><a href="verses.html" class="verse-ref">Galatians 5:22–23 <span>· KJV</span> →</a><p class="goodness-foot">Little reminders for life beyond the game.</p></section>
+<details class="howto panel"><summary>How to play <span aria-hidden="true">+</span></summary><ol><li>Pick a color and pace, then press <strong>Let’s play.</strong></li><li>Use <strong>arrow keys</strong> or <strong>WASD</strong>. On a phone, swipe the board or tap the arrows.</li><li>Each fruit makes you one segment longer. Avoid the edges and your own tail. You can’t turn straight backward.</li><li>Press <strong>Space</strong>, <strong>P</strong>, or Pause for a break. Your game also pauses when you leave this tab.</li></ol><p>Your best for each pace stays on this device when browser storage is available.</p></details>
+</aside>
+</div>
+</main>
+<footer><span class="footer-sprout" aria-hidden="true">❧</span> Small steps. Good fruit. Lots of fun.<br><span>No ads, accounts, or downloads. Just play.</span></footer>
+<dialog id="restart-dialog" aria-labelledby="restart-title"><h2 id="restart-title">A fresh little adventure?</h2><p>Your current round will be cleared. Your best score will stay.</p><div class="dialog-actions"><button class="button secondary" id="cancel-restart" type="button">Keep playing</button><button class="button primary" id="confirm-restart" type="button">Start fresh</button></div></dialog>
+<noscript><p class="noscript">Please enable JavaScript to play Wormie's Garden. <a href="games.html">Back to all games</a>.</p></noscript>
+</body>
+</html>
