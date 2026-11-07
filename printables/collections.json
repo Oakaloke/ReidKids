@@ -1,0 +1,231 @@
+{
+  "designs": [
+    {
+      "id": "rainbows",
+      "title": "Rainbows",
+      "description": "A little color for every day.",
+      "suffix": "Rainbows_Cards.pdf"
+    },
+    {
+      "id": "moon-stars",
+      "title": "Moon and Stars",
+      "description": "A sky full of wonder.",
+      "suffix": "Moon_and_Stars_Cards.pdf"
+    },
+    {
+      "id": "dolphins",
+      "title": "Dolphins",
+      "description": "A splash of ocean joy.",
+      "suffix": "Dolphins_Cards.pdf"
+    },
+    {
+      "id": "unicorns",
+      "title": "Unicorns",
+      "description": "A touch of make-believe.",
+      "suffix": "Unicorns_Cards.pdf"
+    },
+    {
+      "id": "camouflage",
+      "title": "Camouflage",
+      "description": "Ready for an everyday adventure.",
+      "suffix": "Camouflage_Cards.pdf"
+    },
+    {
+      "id": "ink-saving",
+      "title": "Ink-saving",
+      "description": "Simple black and white.",
+      "suffix": "Ink_Saving_Cards.pdf"
+    }
+  ],
+  "collections": [
+    {
+      "id": "genesis",
+      "title": "Genesis",
+      "group": "Books",
+      "heading": "Start at the beginning.",
+      "description": "Creation, trust, and God’s promises. The same eight verses in every design, with a reference on the front and the full verse on the back.",
+      "firstReference": "Genesis 1:1",
+      "firstVerse": "In the beginning, God created the heavens and the earth.",
+      "prefix": "ReidKids_Genesis",
+      "verses": [
+        {
+          "reference": "Genesis 1:1",
+          "topic": "God creates"
+        },
+        {
+          "reference": "Genesis 1:3",
+          "topic": "God gives light"
+        },
+        {
+          "reference": "Genesis 1:27",
+          "topic": "Made in God’s image"
+        },
+        {
+          "reference": "Genesis 2:3",
+          "topic": "A day made holy"
+        },
+        {
+          "reference": "Genesis 6:8",
+          "topic": "Noah finds favor"
+        },
+        {
+          "reference": "Genesis 9:13",
+          "topic": "A sign of God’s promise"
+        },
+        {
+          "reference": "Genesis 15:6",
+          "topic": "Abram trusts God"
+        },
+        {
+          "reference": "Genesis 50:20",
+          "topic": "God works for good"
+        }
+      ],
+      "context": "Genesis 50:20 describes God bringing good from Joseph’s suffering. It does not excuse harm or ask a child to remain unsafe. Encourage children to tell a trusted adult if someone hurts them."
+    },
+    {
+      "id": "spiritual-armor",
+      "title": "Spiritual Armor",
+      "group": "Themes",
+      "heading": "Stand strong in God’s love.",
+      "description": "Eight complete verses from Ephesians 6 help children remember God's strength, truth, peace, faith, salvation, word, and prayer.",
+      "firstReference": "Ephesians 6:10",
+      "firstVerse": "Finally, be strong in the Lord and in the strength of his might.",
+      "prefix": "ReidKids_Spiritual_Armor",
+      "verses": [
+        {
+          "reference": "Ephesians 6:10",
+          "topic": "Strength in the Lord"
+        },
+        {
+          "reference": "Ephesians 6:11",
+          "topic": "The whole armor"
+        },
+        {
+          "reference": "Ephesians 6:13",
+          "topic": "Stand firm"
+        },
+        {
+          "reference": "Ephesians 6:14",
+          "topic": "Truth and righteousness"
+        },
+        {
+          "reference": "Ephesians 6:15",
+          "topic": "Ready for peace"
+        },
+        {
+          "reference": "Ephesians 6:16",
+          "topic": "The shield of faith"
+        },
+        {
+          "reference": "Ephesians 6:17",
+          "topic": "Salvation and God's word"
+        },
+        {
+          "reference": "Ephesians 6:18",
+          "topic": "Keep praying"
+        }
+      ],
+      "context": "Read Ephesians 6:10–18 together. God’s armor is a picture of spiritual faithfulness, never a reason to fight people.",
+      "parentPages": 3,
+      "guidePages": 8,
+      "guideDescription": "Includes three parent-guide pages, the holder, two deliberate blank pages, and the two-page alignment test."
+    },
+    {
+      "id": "fruit-of-the-spirit",
+      "title": "Fruit of the Spirit",
+      "group": "Themes",
+      "heading": "Grow in love, day by day.",
+      "description": "Eight complete verses help families learn all nine qualities of the fruit of the Spirit and practice love in daily life.",
+      "firstReference": "Galatians 5:22",
+      "firstVerse": "But the fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faith,",
+      "prefix": "ReidKids_Fruit_of_the_Spirit",
+      "verses": [
+        {
+          "reference": "Galatians 5:22",
+          "topic": "The Spirit's fruit"
+        },
+        {
+          "reference": "Galatians 5:23",
+          "topic": "Gentleness and self-control"
+        },
+        {
+          "reference": "Galatians 5:25",
+          "topic": "Walk by the Spirit"
+        },
+        {
+          "reference": "John 15:5",
+          "topic": "Stay close to Jesus"
+        },
+        {
+          "reference": "John 15:9",
+          "topic": "Remain in Jesus' love"
+        },
+        {
+          "reference": "Romans 15:13",
+          "topic": "Joy, peace, and hope"
+        },
+        {
+          "reference": "Ephesians 4:32",
+          "topic": "Kind and tender hearted"
+        },
+        {
+          "reference": "2 Timothy 1:7",
+          "topic": "Power, love, self-control"
+        }
+      ],
+      "context": "Read cards 1 and 2 together: Galatians 5:22–23 includes all nine qualities. WEB Classic uses “faith,” with the footnote “or, faithfulness.”",
+      "parentPages": 3,
+      "guidePages": 8,
+      "guideDescription": "Includes three parent-guide pages, the holder, two deliberate blank pages, and the two-page alignment test."
+    },
+    {
+      "id": "exodus",
+      "title": "Exodus",
+      "group": "Books",
+      "heading": "A journey of faith.",
+      "description": "Eight selected Exodus verses introduce God's call to Moses, Israel's rescue, worship, covenant, and daily faithfulness.",
+      "firstReference": "Exodus 3:14",
+      "firstVerse": "God said to Moses, “I AM WHO I AM,” and he said, “You shall tell the children of Israel this: ‘I AM has sent me to you.’ ”",
+      "prefix": "ReidKids_Exodus",
+      "verses": [
+        {
+          "reference": "Exodus 3:14",
+          "topic": "God reveals his name"
+        },
+        {
+          "reference": "Exodus 14:14",
+          "topic": "God rescues Israel"
+        },
+        {
+          "reference": "Exodus 15:2",
+          "topic": "Strength and song"
+        },
+        {
+          "reference": "Exodus 19:5",
+          "topic": "God's covenant with Israel"
+        },
+        {
+          "reference": "Exodus 20:3",
+          "topic": "Worship God alone"
+        },
+        {
+          "reference": "Exodus 20:12",
+          "topic": "Honor father and mother"
+        },
+        {
+          "reference": "Exodus 20:15",
+          "topic": "Respect what belongs to others"
+        },
+        {
+          "reference": "Exodus 20:16",
+          "topic": "Speak truth about others"
+        }
+      ],
+      "context": "Eight selected memory verses from Exodus, not a complete Ten Commandments set.",
+      "parentPages": 3,
+      "guidePages": 8,
+      "guideDescription": "Includes three parent-guide pages, the holder, two deliberate blank pages, and the two-page alignment test."
+    }
+  ]
+}
