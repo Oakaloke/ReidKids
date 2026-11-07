@@ -74,7 +74,9 @@ Preview with `python3 -m http.server 8000` and open `/studio/`. Check all pages,
 
 `printables.html` is a progressively enhanced collection library. `printables/collections.json` lists only completed, reviewed collections. Each has eight complete WEB Classic verses in five color designs plus ink-saving black and white. Real PDFs and previews live under `printables/<collection>/`. Keep existing published asset URLs stable.
 
-The collection chooser uses ordinary fragment links, grouped into Books and Themes. JavaScript shows the selected collection and remembers each collection's selected design while the page is open. Without JavaScript all collection sections, PDF links, and guides remain available. Bare `/printables.html` defaults to Genesis; `#genesis`, `#spiritual-armor`, `#fruit-of-the-spirit`, and `#exodus` link to individual collections when present.
+The collection chooser uses ordinary fragment links, grouped into Books and Themes. JavaScript shows the selected collection and remembers each collection's selected design while the page is open. Without JavaScript all collection sections, PDF links, and guides remain available. Bare `/printables.html` defaults to Genesis; `#genesis`, `#exodus`, `#leviticus`, `#numbers`, `#deuteronomy`, `#spiritual-armor`, and `#fruit-of-the-spirit` link to individual collections when present.
+
+The five available Bible books are shown in canonical order, followed by the two themes. This is a growing selection, not a complete Bible set.
 
 To add a collection, first finish and review its assets and exact verse text, then add its public metadata to `printables/collections.json` and run `python3 tools/build_printables.py`. This generator checks for all required real PDFs and front/back images before writing the checked-in HTML. It is an authoring helper, not a new deployment build step. Never add placeholder collections or internal production paths to the public catalog. Preserve the first two Fruit of the Spirit cards together as all nine qualities; Exodus is a selection, not the entire Ten Commandments.
 

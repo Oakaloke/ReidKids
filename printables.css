@@ -101,11 +101,11 @@
 .collection-chooser { padding-top: 62px; scroll-margin-top: 150px; }
 .collection-chooser h2 { font-size: clamp(30px,4vw,43px); font-weight: 500; }
 .collection-chooser > p:not(.step-label) { color: #526079; max-width: 700px; }
-.collection-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 24px; }
+.collection-groups { display: grid; grid-template-columns: 3fr 2fr; gap: 30px; margin-top: 24px; }
 .collection-group h3 { font: 800 .8rem var(--font-body); color: #526079; margin-bottom: 12px; text-transform: uppercase; letter-spacing: .1em; }
-.collection-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.collection-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .printables-page main a.collection-option:not(.btn) { text-decoration: none; display: flex; flex-direction: column; min-height: 120px; padding: 16px; border: 2px solid #d8deea; border-radius: 12px; color: var(--royal); background: #fff; }
-.collection-option > span:first-child { font-weight: 800; font-size: .93rem; }
+.collection-option > span:first-child { overflow-wrap: anywhere; font-weight: 800; font-size: .93rem; }
 .collection-option small { font-size: .7rem; color: #526079; margin-block: 6px; }
 .collection-selected { font-size: .67rem; margin-top: auto; visibility: hidden; font-weight: 800; }
 .collection-option[aria-current] { border-color: var(--royal); background: #edf4ff !important; }
@@ -124,6 +124,7 @@
 .resource-filename { display: block; margin-top: 5px; }
 .design-options { display: none; }
 .printables-enhanced .design-options { display: grid; }
+@media (min-width: 901px) { .collection-group:first-child .collection-options { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 900px) { .collection-groups { gap: 20px; } .printables-page main a.collection-option:not(.btn) { padding: 13px; } }
 @media (max-width: 700px) { .collection-chooser { padding-top: 40px; scroll-margin-top: 20px; } .collection-groups { grid-template-columns: 1fr; gap: 20px; } .collection-section { padding-block: 35px 40px; scroll-margin-top: 20px; } .collection-chooser > p:not(.step-label) { font-size: .9rem; } .collection-resources .help-downloads a { padding: 18px 18px 18px 55px; } .collection-resources .resource-icon { left: 18px; } .collection-option > span:first-child { font-size: .88rem; } }
 @media print { .collection-chooser,.collection-section { display: none; } }

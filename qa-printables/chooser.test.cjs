@@ -17,7 +17,7 @@ const sections = data.collections.map(c => {
 });
 const links = data.collections.map(c=>element({dataset:{selectCollection:c.id},querySelector(){return {textContent:c.title};}}));
 const status=element(); const listeners={};
-const document={documentElement:{classList:{add(){}}},querySelectorAll(s){return s==='[data-collection]'?sections:links;},getElementById(id){return id==='collection-status'?status:sections.find(s=>s.id===id);}};
+const document={documentElement:{classList:{add(){}}},querySelectorAll(s){return s==='[data-collection]'?sections:links;},getElementById(id){return id==='collection-status'?status:sections.find(s=>s.id===id) || sections.find(s=>s.id+'-downloads'===id);}};
 const window={location:{hash:''},addEventListener(k,fn){listeners[k]=fn;}};
 vm.runInNewContext(fs.readFileSync('printables.js','utf8'),{document,window});
 const assertSelected=(id)=>{ assert.equal(sections.filter(s=>!s.hidden).length,1); assert.equal(sections.find(s=>!s.hidden).id,id); assert.equal(links.filter(l=>l.attrs['aria-current']).length,1); assert.equal(links.find(l=>l.attrs['aria-current']).dataset.selectCollection,id); };
@@ -41,3 +41,16 @@ for (const section of [...sections,...sections.slice().reverse(),sections[0]]) {
 }
 window.location.hash=''; listeners.hashchange(); assertSelected('genesis');
 console.log(`PASS: ${sections.length} collections, six designs each, repeated and reverse choices, preview/alt/download/filename updates, unknown hashes, default Genesis and Back hash handling`);
+
+// Each collection retains its selected design when families switch books.
+for (const section of sections) {
+  window.location.hash = '#' + section.id; listeners.hashchange();
+  section.buttons[1].handlers.click();
+}
+for (const section of sections.slice().reverse()) {
+  window.location.hash = '#' + section.id + '-downloads'; listeners.hashchange();
+  assertSelected(section.id);
+  assert.equal(section.nodes['selected-title'].textContent, 'Moon and Stars');
+  assert.equal(section.nodes['selected-download'].href, section.buttons[1].dataset.pdf);
+}
+console.log('PASS: collection-specific design memory and direct download fragments');

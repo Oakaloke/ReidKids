@@ -59,4 +59,15 @@ if new_manifest.exists():
  for file in ['printables/collections.json','printables.html','printables.js']:
   content=(root/file).read_text()
   assert not any(x in content for x in ['/workspace/','/tmp/','source_file','brief_file','transcript_evidence']),file
- print('PASS all 44 PDFs: real direct links, correct page counts and US Letter dimensions; 48 preview images; 69 frozen new-asset hashes; sanitized catalog')
+ print(f"PASS all {len(data['collections']) * 11} PDFs: real direct links, correct page counts and US Letter dimensions; {len(data['collections']) * 12} preview images; {len(json.loads(new_manifest.read_text()))} frozen asset hashes; sanitized catalog")
+
+# Every already published PDF and preview remains byte-identical.
+published = subprocess.check_output(['git', 'ls-tree', '-r', '--name-only', 'HEAD', 'printables']).decode().splitlines()
+for relative in published:
+ if Path(relative).suffix not in ['.pdf', '.png']: continue
+ assert (root/relative).read_bytes() == subprocess.check_output(['git', 'show', 'HEAD:'+relative]), relative
+book_order = ['genesis', 'exodus', 'leviticus', 'numbers', 'deuteronomy']
+assert [c['id'] for c in data['collections'] if c['group']=='Books'] == book_order
+assert [c['id'] for c in data['collections'] if c['group']=='Themes'] == ['spiritual-armor', 'fruit-of-the-spirit']
+assert all(c['parentPages']==3 and c['guidePages']==8 for c in data['collections'] if c['id'] in book_order[2:])
+print('PASS canonical book order, two completed themes, new guide page counts, and byte preservation of all published printable assets')

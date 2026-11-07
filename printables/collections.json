@@ -84,6 +84,198 @@
       "context": "Genesis 50:20 describes God bringing good from Joseph’s suffering. It does not excuse harm or ask a child to remain unsafe. Encourage children to tell a trusted adult if someone hurts them."
     },
     {
+      "id": "exodus",
+      "title": "Exodus",
+      "group": "Books",
+      "heading": "A journey of faith.",
+      "description": "Eight selected Exodus verses introduce God's call to Moses, Israel's rescue, worship, covenant, and daily faithfulness.",
+      "firstReference": "Exodus 3:14",
+      "firstVerse": "God said to Moses, “I AM WHO I AM,” and he said, “You shall tell the children of Israel this: ‘I AM has sent me to you.’ ”",
+      "prefix": "ReidKids_Exodus",
+      "verses": [
+        {
+          "reference": "Exodus 3:14",
+          "topic": "God reveals his name"
+        },
+        {
+          "reference": "Exodus 14:14",
+          "topic": "God rescues Israel"
+        },
+        {
+          "reference": "Exodus 15:2",
+          "topic": "Strength and song"
+        },
+        {
+          "reference": "Exodus 19:5",
+          "topic": "God's covenant with Israel"
+        },
+        {
+          "reference": "Exodus 20:3",
+          "topic": "Worship God alone"
+        },
+        {
+          "reference": "Exodus 20:12",
+          "topic": "Honor father and mother"
+        },
+        {
+          "reference": "Exodus 20:15",
+          "topic": "Respect what belongs to others"
+        },
+        {
+          "reference": "Exodus 20:16",
+          "topic": "Speak truth about others"
+        }
+      ],
+      "context": "Eight selected memory verses from Exodus, not a complete Ten Commandments set.",
+      "parentPages": 3,
+      "guidePages": 8,
+      "guideDescription": "Includes three parent-guide pages, the holder, two deliberate blank pages, and the two-page alignment test."
+    },
+    {
+      "id": "leviticus",
+      "title": "Leviticus",
+      "group": "Books",
+      "heading": "Love God. Care for others.",
+      "description": "Eight complete Leviticus verses help families explore holiness, sharing, care for neighbors and respect for God's land.",
+      "firstReference": "Leviticus 19:2",
+      "firstVerse": "“Speak to all the congregation of the children of Israel, and tell them, ‘You shall be holy; for I, Yahweh your God, am holy.",
+      "prefix": "ReidKids_Leviticus",
+      "verses": [
+        {
+          "reference": "Leviticus 19:2",
+          "topic": "God calls Israel to holiness"
+        },
+        {
+          "reference": "Leviticus 19:9",
+          "topic": "Leave food for others"
+        },
+        {
+          "reference": "Leviticus 19:14",
+          "topic": "Protect your neighbor"
+        },
+        {
+          "reference": "Leviticus 19:18",
+          "topic": "Love your neighbor"
+        },
+        {
+          "reference": "Leviticus 19:32",
+          "topic": "Honor older people"
+        },
+        {
+          "reference": "Leviticus 19:33",
+          "topic": "Welcome people from other lands"
+        },
+        {
+          "reference": "Leviticus 22:31",
+          "topic": "Listen and live God's words"
+        },
+        {
+          "reference": "Leviticus 25:23",
+          "topic": "The land belongs to God"
+        }
+      ],
+      "context": "Read these instructions in their setting as God's words to Israel through Moses. Family prompts and word explanations help make the context clear.",
+      "parentPages": 3,
+      "guidePages": 8,
+      "guideDescription": "Includes three parent-guide pages, the holder, two deliberate blank pages, and the two-page alignment test."
+    },
+    {
+      "id": "numbers",
+      "title": "Numbers",
+      "group": "Books",
+      "heading": "Blessings for the journey.",
+      "description": "Eight complete Numbers verses introduce Aaron's blessing and stories of guidance, careful listening and shared leadership.",
+      "firstReference": "Numbers 6:24",
+      "firstVerse": "‘Yahweh bless you, and keep you.",
+      "prefix": "ReidKids_Numbers",
+      "verses": [
+        {
+          "reference": "Numbers 6:24",
+          "topic": "A blessing for Israel"
+        },
+        {
+          "reference": "Numbers 6:25",
+          "topic": "A blessing of grace"
+        },
+        {
+          "reference": "Numbers 6:26",
+          "topic": "A blessing of peace"
+        },
+        {
+          "reference": "Numbers 9:8",
+          "topic": "Moses listens before answering"
+        },
+        {
+          "reference": "Numbers 9:16",
+          "topic": "The cloud and fire"
+        },
+        {
+          "reference": "Numbers 11:29",
+          "topic": "Moses welcomes others' gifts"
+        },
+        {
+          "reference": "Numbers 27:5",
+          "topic": "Listening to the daughters"
+        },
+        {
+          "reference": "Numbers 27:18",
+          "topic": "Joshua is chosen"
+        }
+      ],
+      "context": "Read the first three cards together as Aaron's blessing. The guide identifies the people and setting behind each short story verse.",
+      "parentPages": 3,
+      "guidePages": 8,
+      "guideDescription": "Includes three parent-guide pages, the holder, two deliberate blank pages, and the two-page alignment test."
+    },
+    {
+      "id": "deuteronomy",
+      "title": "Deuteronomy",
+      "group": "Books",
+      "heading": "Remember, love, and live.",
+      "description": "Eight complete Deuteronomy verses encourage love for God, gratitude, welcoming others, fairness and praise.",
+      "firstReference": "Deuteronomy 6:4",
+      "firstVerse": "Hear, Israel: Yahweh is our God. Yahweh is one.",
+      "prefix": "ReidKids_Deuteronomy",
+      "verses": [
+        {
+          "reference": "Deuteronomy 6:4",
+          "topic": "Hear, Israel"
+        },
+        {
+          "reference": "Deuteronomy 6:5",
+          "topic": "Love God fully"
+        },
+        {
+          "reference": "Deuteronomy 6:6",
+          "topic": "Keep God's words close"
+        },
+        {
+          "reference": "Deuteronomy 8:10",
+          "topic": "Give thanks for good gifts"
+        },
+        {
+          "reference": "Deuteronomy 10:14",
+          "topic": "The earth belongs to God"
+        },
+        {
+          "reference": "Deuteronomy 10:19",
+          "topic": "Love people from other lands"
+        },
+        {
+          "reference": "Deuteronomy 16:19",
+          "topic": "Be fair to everyone"
+        },
+        {
+          "reference": "Deuteronomy 32:3",
+          "topic": "Praise God's greatness"
+        }
+      ],
+      "context": "Read Moses' teaching in its setting. The guide connects daily practice with each passage's original context.",
+      "parentPages": 3,
+      "guidePages": 8,
+      "guideDescription": "Includes three parent-guide pages, the holder, two deliberate blank pages, and the two-page alignment test."
+    },
+    {
       "id": "spiritual-armor",
       "title": "Spiritual Armor",
       "group": "Themes",
@@ -175,54 +367,6 @@
         }
       ],
       "context": "Read cards 1 and 2 together: Galatians 5:22–23 includes all nine qualities. WEB Classic uses “faith,” with the footnote “or, faithfulness.”",
-      "parentPages": 3,
-      "guidePages": 8,
-      "guideDescription": "Includes three parent-guide pages, the holder, two deliberate blank pages, and the two-page alignment test."
-    },
-    {
-      "id": "exodus",
-      "title": "Exodus",
-      "group": "Books",
-      "heading": "A journey of faith.",
-      "description": "Eight selected Exodus verses introduce God's call to Moses, Israel's rescue, worship, covenant, and daily faithfulness.",
-      "firstReference": "Exodus 3:14",
-      "firstVerse": "God said to Moses, “I AM WHO I AM,” and he said, “You shall tell the children of Israel this: ‘I AM has sent me to you.’ ”",
-      "prefix": "ReidKids_Exodus",
-      "verses": [
-        {
-          "reference": "Exodus 3:14",
-          "topic": "God reveals his name"
-        },
-        {
-          "reference": "Exodus 14:14",
-          "topic": "God rescues Israel"
-        },
-        {
-          "reference": "Exodus 15:2",
-          "topic": "Strength and song"
-        },
-        {
-          "reference": "Exodus 19:5",
-          "topic": "God's covenant with Israel"
-        },
-        {
-          "reference": "Exodus 20:3",
-          "topic": "Worship God alone"
-        },
-        {
-          "reference": "Exodus 20:12",
-          "topic": "Honor father and mother"
-        },
-        {
-          "reference": "Exodus 20:15",
-          "topic": "Respect what belongs to others"
-        },
-        {
-          "reference": "Exodus 20:16",
-          "topic": "Speak truth about others"
-        }
-      ],
-      "context": "Eight selected memory verses from Exodus, not a complete Ten Commandments set.",
       "parentPages": 3,
       "guidePages": 8,
       "guideDescription": "Includes three parent-guide pages, the holder, two deliberate blank pages, and the two-page alignment test."
