@@ -1,0 +1,99 @@
+/* Bible printables: the established royal-and-sunshine brand, with a warm paper workspace. */
+.printables-page { background: #fffdf7; overflow-x: visible; }
+.printables-page .container { max-width: 1180px; }
+.printables-page .site-header .container { flex-wrap: wrap; justify-content: center; gap: 12px 30px; padding-block: 20px; }
+.printables-page .site-nav { justify-content: center; gap: 4px 18px; }
+.printables-page .site-nav a { min-height: 44px; display: inline-flex; align-items: center; }
+.printables-page :is(a,button,summary):focus-visible { outline: 3px solid #b84a00; outline-offset: 4px; }
+.skip-link { position: fixed; top: 8px; left: 12px; z-index: 100; background: #fff; color: var(--royal); padding: 12px 20px; border-radius: 8px; transform: translateY(-150%); }
+.skip-link:focus { transform: translateY(0); }
+.print-hero { background: var(--royal); color: #fff; overflow: hidden; }
+.print-hero__inner { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 48px; min-height: 540px; padding-block: 70px; }
+.print-eyebrow { font-size: .76rem; font-weight: 800; letter-spacing: .17em; color: var(--royal); margin: 0 0 18px; }
+.print-hero .print-eyebrow { color: var(--sol); }
+.print-hero h1 { font-size: clamp(44px,5.1vw,70px); color: #fff; font-weight: 500; line-height: 1.05; }
+.print-hero h1 em { color: var(--sol); font-style: normal; }
+.print-hero__lead { max-width: 440px; font-size: 1.05rem; line-height: 1.8; margin: 24px 0 28px; color: #eef3ff; }
+.hero-note { color: #e0eaff; font-size: .8rem; margin-top: 16px; }
+.hero-cards { position: relative; height: 350px; }
+.hero-card { height: auto; width: 80%; position: absolute; border-radius: 14px; box-shadow: 0 18px 40px #00194366; }
+.hero-card--back { top: 0; right: 0; transform: rotate(9deg); }
+.hero-card--front { top: 126px; left: 0; transform: rotate(-9deg); }
+.hero-spark { position: absolute; color: var(--sol); font-size: 44px; }
+.hero-spark--one { left: 0; top: -35px; }
+.hero-spark--two { right: -8px; top: 200px; }
+.hero-sticker { position: absolute; bottom: -3px; right: 2px; background: var(--sol); color: var(--royal); width: 126px; height: 126px; border-radius: 50%; display: grid; place-content: center; text-align: center; font-size: .85rem; font-weight: 800; transform: rotate(9deg); border: 6px solid var(--royal); }
+.print-specs { background: #ffed9c; color: #15366b; }
+.print-specs .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px 22px; padding-block: 19px; font-size: .85rem; }
+.print-specs strong { margin-right: 5px; }
+.genesis-section { padding-block: 72px; scroll-margin-top: 150px; }
+.set-heading { display: flex; justify-content: space-between; gap: 20px; align-items: center; margin-bottom: 32px; }
+.set-heading h2,.help-heading h2 { font-size: clamp(30px,4vw,43px); font-weight: 500; }
+.set-heading p:not(.print-eyebrow) { max-width: 670px; color: #525d6d; margin-bottom: 0; }
+.set-number { font: 100px var(--font-head); color: #e8dfc6; }
+.design-workspace { border: 1px solid #dddfe5; border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: 1.1fr 1fr; background: #fff; }
+.design-preview { padding: 34px 44px 25px; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #eaf0f8; background-image: radial-gradient(#c9d6e4 1px, transparent 1px); background-size: 14px 14px; }
+.preview-labels { display: none; }
+.preview-cards { width: 100%; max-width: 390px; }
+.preview-cards figure { margin: 0 0 14px; }
+.preview-cards img { width: 100%; height: auto; border-radius: 13px; box-shadow: 0 9px 20px #243a5c18; }
+.preview-cards figcaption { text-align: center; font-weight: 800; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: #4d607c; margin-top: 9px; }
+.preview-caption { font-size: .77rem; color: #4d607c; margin: 0; text-align: center; max-width: 300px; }
+.design-controls { padding: 36px; }
+.step-label { color: #657086; font-size: .7rem; font-weight: 800; letter-spacing: .15em; margin: 0 0 8px; }
+.design-controls h3 { font-size: 30px; margin-bottom: 6px; }
+#selected-description { color: #526079; margin: 0 0 24px; min-height: 27px; }
+.design-options { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
+.design-option { appearance: none; font: inherit; padding: 6px; border: 2px solid #e0e4eb; border-radius: 10px; background: #fff; position: relative; cursor: pointer; color: #35425b; min-width: 0; }
+.design-option img { width: 100%; height: auto; border-radius: 5px; }
+.design-option > span:not(.selected-mark) { display: block; padding: 8px 0 2px; font-weight: 800; font-size: .72rem; line-height: 1.3; }
+.design-option[aria-pressed="true"] { border-color: var(--royal); background: #edf4ff; color: var(--royal); }
+.design-option:hover { border-color: #6b88b8; }
+.selected-mark { display: none; position: absolute; right: -6px; top: -6px; width: 23px; height: 23px; background: var(--royal); border-radius: 50%; color: #fff; font-size: 13px; font-weight: 800; border: 2px solid #fff; }
+.design-option[aria-pressed="true"] .selected-mark { display: block; }
+.design-note { color: #526079; font-size: .77rem; margin: 16px 0 25px; }
+.download-main { display: block; width: 100%; border-radius: 12px; padding-inline: 12px; font-size: .93rem; }
+.download-meta { text-align: center; font-size: .73rem; color: #5d687c; margin: 11px 0; }
+.print-first { text-align: center; font-size: .8rem; margin-bottom: 0; color: #526079; }
+.printables-page main a:not(.btn):not(.help-downloads a) { text-decoration: underline; text-underline-offset: 3px; }
+.all-downloads,.verse-details { border-bottom: 1px solid #dedfdc; }
+.printables-page summary { cursor: pointer; padding: 20px 4px; font-weight: 800; color: var(--royal); }
+.all-downloads { margin-top: 18px; }
+.download-list-wrap,.verse-details > div { padding: 0 4px 20px; }
+.download-list { display: grid; grid-template-columns: 1fr 1fr; list-style: none; padding: 0; gap: 10px 28px; }
+.download-list a { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 5px 12px; padding: 12px 0; color: var(--royal); font-weight: 800; border-bottom: 1px solid #e6e5e0; font-size: .9rem; }
+.download-list a span { font-size: .75rem; color: #5a6679; font-weight: 600; }
+.download-list-wrap p,.verse-details p { color: #526079; font-size: .86rem; }
+.verse-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; padding-left: 20px; }
+.verse-list li { font-size: .85rem; }
+.verse-list strong { color: var(--royal); margin-right: 8px; }
+.print-help { background: #f0f3f8; padding-block: 65px; scroll-margin-top: 150px; }
+.help-heading { text-align: center; margin-bottom: 40px; }
+.help-heading > p:last-child { color: #526079; }
+.print-steps { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 35px; }
+.step-number { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; background: var(--sol); color: var(--royal); border-radius: 50%; font-size: .8rem; font-weight: 800; margin-bottom: 20px; }
+.print-steps h3 { font-size: 22px; }
+.print-steps p { color: #525e72; font-size: .9rem; }
+.help-downloads { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; margin-top: 35px; }
+.help-downloads a { display: flex; flex-direction: column; background: #fff; border-radius: 14px; border: 1px solid #d9e0eb; padding: 22px; color: var(--royal); }
+.help-downloads a:hover { border-color: var(--royal); }
+.resource-icon { font-size: 30px; line-height: 1; margin-bottom: 15px; }
+.help-downloads strong { font-size: 1rem; }
+.help-downloads a > span:not(.resource-icon) { font-size: .8rem; color: #526079; margin-top: 5px; flex: 1; }
+.help-downloads small { font-weight: 800; margin-top: 18px; }
+.combined-guide { text-align: center; margin: 26px 0 40px; color: var(--royal); font-weight: 800; font-size: .85rem; }
+.combined-guide span { display: block; color: #526079; font-weight: 400; font-size: .75rem; margin-top: 5px; }
+.print-faq { max-width: 830px; margin: 0 auto; border-top: 1px solid #d7dfeb; }
+.print-faq details { border-bottom: 1px solid #d7dfeb; }
+.print-faq p { font-size: .88rem; color: #526079; margin: 0 4px 20px; }
+.print-closing { padding-block: 65px; text-align: center; }
+.print-closing > span { color: #e5b200; font-size: 40px; }
+.print-closing h2 { font-size: 38px; font-weight: 500; }
+.print-closing p { font-size: .95rem; color: #526079; }
+.print-closing a { color: var(--royal); font-weight: 800; font-size: .85rem; }
+.printables-page .footer { margin: 0; }
+@media (max-width: 900px) { .print-hero__inner { gap: 30px; } .hero-cards { height: 300px; } .hero-card { width: 88%; } .hero-card--front { top: 110px; } .hero-sticker { width: 105px; height: 105px; font-size: .75rem; } .hero-spark--two { top: 165px; } .design-preview { padding: 25px; } .design-controls { padding: 28px 22px; } .design-options { gap: 10px; } }
+@media (max-width: 700px) { .printables-page .container { padding-inline: 20px; } .printables-page .site-header { position: relative; } .printables-page .site-header .container { padding-block: 16px; } .printables-page .site-nav { gap: 2px 13px; } .printables-page .site-nav a { font-size: .79rem; } .printables-page .site-nav .nav-cta { padding-inline: 12px; } .print-hero__inner { grid-template-columns: 1fr; padding-block: 42px; gap: 38px; } .print-hero h1 { font-size: 48px; } .print-hero__lead { max-width: none; font-size: .96rem; margin-block: 20px 24px; } .print-hero .btn { font-size: .91rem; padding-inline: 18px; } .hero-cards { width: min(88%,400px); margin-inline: auto; height: 300px; } .hero-card { height: auto; width: 80%; } .hero-card--front { top: 110px; } .hero-sticker { bottom: 5px; } .print-specs .container { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 14px; font-size: .75rem; } .print-specs strong { display: block; } .genesis-section { padding-block: 45px; scroll-margin-top: 20px; } .set-number { display: none; } .set-heading p:not(.print-eyebrow) { font-size: .9rem; } .design-workspace { display: flex; flex-direction: column; } .design-preview { padding: 25px 20px; } .preview-cards { max-width: 520px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; } .preview-cards img { border-radius: 7px; } .preview-cards figure { margin-bottom: 5px; } .preview-caption { font-size: .68rem; max-width: none; margin-top: 8px; } .design-controls { padding: 25px 22px; } .design-option > span:not(.selected-mark) { font-size: .7rem; } .print-steps { grid-template-columns: 1fr; gap: 18px; } .print-steps li { position: relative; padding-left: 60px; } .step-number { position: absolute; top: 0; left: 0; } .print-steps p { margin-bottom: 0; } .help-downloads { grid-template-columns: 1fr; gap: 12px; } .help-downloads a { position: relative; padding: 20px 20px 20px 65px; } .resource-icon { position: absolute; left: 22px; top: 25px; } .help-downloads small { margin-top: 8px; } .print-help { padding-block: 45px; scroll-margin-top: 20px; } .download-list,.verse-list { grid-template-columns: 1fr; } .printables-page summary { font-size: .9rem; } .print-closing { padding-block: 45px; } .print-closing h2 { font-size: 32px; } }
+@media (max-width: 360px) { .hero-cards { height: 240px; } .hero-card--front { top: 90px; } .hero-sticker { width: 90px; height: 90px; font-size: .65rem; bottom: 0; } .print-hero h1 { font-size: 42px; } .design-controls { padding-inline: 16px; } .design-options { gap: 8px; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .printables-page * { transition: none; } }
+@media print { .printables-page .site-header,.printables-page .footer,.print-hero,.print-specs,.print-closing,.design-workspace,.all-downloads,.verse-details { display: none; } .print-help { background: #fff; padding-block: 0; } .help-downloads { display: none; } .print-steps { grid-template-columns: 1fr; } .print-faq details { break-inside: avoid; } }

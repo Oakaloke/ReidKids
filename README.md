@@ -69,3 +69,9 @@ Then visit <http://localhost:8000>.
 Color layers are stored per page in IndexedDB on the visitor's device only. There are no accounts, uploads, analytics or external services in the studio. Download PNG is the backup if browser storage is blocked or cleared.
 
 Preview with `python3 -m http.server 8000` and open `/studio/`. Check all pages, number mode, wrong-color feedback, undo, reset cancel/accept, gallery navigation, rapid page changes, per-page persistence, PNG export and narrow touch layouts before publishing.
+
+## Bible printables
+
+`printables.html` provides the Genesis collection: eight complete WEB Classic verses in five color designs and an ink-saving version. `printables/genesis/` holds the US Letter PDFs and previews. The chooser in `printables.js` is progressive enhancement; all files remain linked in the HTML. The page includes the parent guide, duplex alignment test, and single-sided holder template. Physical printer alignment and holder assembly have not been tested; families are prompted to test plain paper first.
+
+Keep all design choices available to every child. Add future sets only when their real PDFs are complete. Check `node --check printables.js`, `node qa-printables/chooser.test.cjs`, `python3 qa-printables/validate.py` (requires lxml and PyMuPDF), and the printable files/links before publication. Verify desktop, narrow-screen, keyboard, repeated selection, and download behavior. GitHub Pages serves these files from the repository root with no new build step.
