@@ -1,0 +1,44 @@
+body { background: #eaf6ff; }
+.site-header { position: relative; }
+.site-header .container { flex-wrap: wrap; justify-content: center; }
+.site-nav { justify-content: center; }
+.site-nav a { min-height: 44px; display: inline-flex; align-items: center; }
+.site-nav [aria-current="page"] { color: var(--royal); text-decoration: underline; text-decoration-color: var(--sol); text-decoration-thickness: 4px; text-underline-offset: 6px; }
+.jokes-main { padding: 0 24px 64px; background: radial-gradient(circle at 8% 4%, #fff1a8, transparent 22%), radial-gradient(circle at 94% 13%, #cbe6ff, transparent 24%), #eaf6ff; }
+.jokes-welcome { text-align: center; padding: 44px 0 38px; max-width: 800px; margin: auto; }
+.jokes-badge { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 24px; font-family: var(--font-body); font-size: 2rem; line-height: 1; font-weight: 800; color: var(--royal); }
+.jokes-badge span { background: var(--sol); padding: 18px 22px; border-radius: 24px 24px 4px 24px; transform: rotate(-8deg); box-shadow: 0 5px 0 #00359414; }
+.jokes-badge span:last-child { background: white; border: 2px solid #b4d8f5; transform: rotate(8deg); border-radius: 24px 24px 24px 4px; }
+.jokes-kicker { font-weight: 800; text-transform: uppercase; letter-spacing: .12em; font-size: .8rem; color: var(--royal); }
+.jokes-welcome h1 { font-family: var(--font-body); font-weight: 800; font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.05; margin: 14px 0 20px; }
+.jokes-intro { font-size: 1.15rem; line-height: 1.7; margin: 0 auto 24px; }
+.jokes-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.jokes-actions button,.jokes-actions a { font: 800 1rem var(--font-body); padding: 14px 24px; border-radius: 40px; border: 2px solid var(--royal); cursor: pointer; }
+.jokes-actions button { background: var(--royal); color: white; }
+.jokes-actions button:hover { background: var(--royal-dark); }
+.jokes-actions a { background: var(--sol); color: var(--royal); border-color: var(--sol); }
+.jokes-actions [hidden] { display: none; }
+.jokes-family { font-size: .9rem; margin-top: 18px; }
+#joke-list { max-width: 1080px; margin: 0 auto; scroll-margin-top: 20px; }
+.jokes-section-head { text-align: center; margin-bottom: 24px; }
+.jokes-section-head h2 { font-size: 1.9rem; }
+.jokes-section-head p { margin: 0; }
+.joke-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; align-items: start; }
+.joke-card { border: 2px solid #c2dff5; border-radius: 24px; background: white; box-shadow: 0 6px 0 #00359409; scroll-margin-top: 24px; overflow: hidden; }
+.joke-card summary { list-style: none; padding: 24px; cursor: pointer; }
+.joke-card summary::-webkit-details-marker { display: none; }
+.joke-card summary:focus-visible { outline: 3px solid var(--royal); outline-offset: -5px; border-radius: 24px; }
+.joke-number { display: block; font-size: .75rem; text-transform: uppercase; font-weight: 800; letter-spacing: .09em; color: #315c8c; margin-bottom: 14px; }
+.joke-question { display: block; color: var(--royal); font-size: 1.2rem; font-weight: 800; line-height: 1.45; }
+.joke-hint { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 22px; color: #315c8c; font-size: .82rem; font-weight: 800; }
+.joke-hint > span:last-child { display: grid; place-items: center; background: #fff1a8; color: var(--royal); border-radius: 50%; width: 30px; height: 30px; font-size: 1.3rem; flex-shrink: 0; }
+.open-hint { display: none; }
+.joke-card[open] { border-color: #e6bd00; }
+.joke-card[open] .open-hint { display: inline; }
+.joke-card[open] .closed-hint { display: none; }
+.joke-card[open] .joke-hint > span:last-child { transform: rotate(45deg); }
+.joke-answer { margin: 0; padding: 22px 24px; background: #fff6ca; border-top: 1px solid #f1dc83; color: var(--royal); font-size: 1.3rem; font-weight: 800; line-height: 1.5; }
+.jokes-goodbye { max-width: 720px; margin: 42px auto 0; text-align: center; padding: 30px 20px; border-radius: 24px; border: 2px dashed #97c0e1; }
+.jokes-goodbye h2 { font-size: 1.8rem; }.jokes-goodbye a { color: var(--royal); text-decoration: underline; font-weight: 800; }
+@media(max-width: 850px) { .joke-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media(max-width: 540px) { .jokes-main { padding-inline: 16px; }.joke-grid { grid-template-columns: minmax(0,1fr); gap: 16px; }.jokes-welcome { padding-top: 30px; }.site-nav { gap: .15rem .8rem; }.site-nav a { font-size: .85rem; }.jokes-intro { font-size: 1.05rem; }.joke-card summary { padding: 22px; } }
