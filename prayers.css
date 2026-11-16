@@ -42,3 +42,28 @@ body { background: #e9f5ff; }
 .peace-prayer { border-top: 2px solid #ffed91; padding-top: 28px; }
 .peace-prayer h3 { font-family: var(--font-body); color: var(--royal); font-size: 1.45rem; margin-bottom: 24px; }
 @media print { .prayer-choices { display: none; } .peace-paper { break-before: page; } }
+
+/* A growing prayer library, not one long reading page. */
+.prayer-welcome { padding: 30px 0 24px; }
+.prayer-emblem { width: 76px; height: 76px; margin-bottom: 16px; }
+.prayer-emblem img { width: 62px; height: 62px; }
+.prayer-welcome h1 { font-size: clamp(2rem, 5vw, 3.3rem); }
+.prayer-intro { margin-bottom: 12px; }
+.prayer-library-hint { color: #425675; font-size: .95rem; margin: 0; }
+.prayer-library { max-width: 840px; margin: auto; scroll-margin-top: 90px; }
+.prayer-entry { border: 1px solid #bfd5eb; background: #fff; border-radius: 20px; margin-bottom: 14px; box-shadow: 0 6px 20px #00359408; scroll-margin-top: 90px; overflow: hidden; }
+.prayer-entry > summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; list-style: none; cursor: pointer; padding: 23px 26px; color: var(--royal); }
+.prayer-entry > summary::-webkit-details-marker { display: none; }
+.prayer-entry > summary strong { display: block; font-size: 1.25rem; line-height: 1.35; }
+.prayer-entry > summary small { display: block; font-size: .9rem; font-weight: 600; color: #425675; margin-top: 5px; }
+.prayer-open-label { flex-shrink: 0; font-weight: 800; font-size: .9rem; background: #fff1a8; padding: 9px 12px; border-radius: 999px; }
+.prayer-entry[open] > summary { background: #fff9df; border-bottom: 1px solid #e1d8a9; }
+.prayer-entry[open] .prayer-open-label { font-size: 0; }
+.prayer-entry[open] .prayer-open-label::after { content: 'Close −'; font-size: .9rem; }
+.prayer-reader { padding: 22px; }
+.prayer-reader .prayer-paper { border: 0; padding: 8px 12px 24px; border-radius: 0; box-shadow: none; margin: 0 auto; }
+.prayer-reader .prayer-story { margin-top: 20px; }
+.prayer-back { display: block; margin: 24px auto 0; min-height: 48px; background: var(--sol); color: var(--royal); border: 0; border-radius: 999px; font: 800 1rem var(--font-body); padding: 12px 24px; cursor: pointer; }
+.prayer-back[hidden] { display: none; }
+@media(max-width:480px) { .prayer-entry > summary { padding: 19px 16px; gap: 10px; } .prayer-entry > summary strong { font-size: 1.1rem; } .prayer-reader { padding: 16px 8px; } .prayer-reader .prayer-story { padding: 20px; } .prayer-open-label { padding: 8px 10px; } }
+@media print { .prayer-entry > summary,.prayer-back { display: none; } .prayer-entry { border: 0; box-shadow: none; } .prayer-reader { padding: 0; } }

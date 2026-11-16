@@ -20,6 +20,8 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="prayers.css">
+  <link rel="stylesheet" href="navigation.css">
+  <script src="navigation.js" defer></script>
 </head>
 <body>
   <!-- Header: white · sticky -->
@@ -46,8 +48,12 @@
       <p class="prayer-kicker">Little hearts. Big love.</p>
       <h1 id="prayer-title">Prayers for Little Hearts</h1>
       <p class="prayer-intro">Come close, take a quiet breath, and pray together.</p>
-      <nav class="prayer-choices" aria-label="Choose a prayer"><a class="prayer-jump" href="#lords-prayer">The Lord’s Prayer</a><a class="prayer-jump" href="#philippians">Joy &amp; Peace</a></nav>
+      <p class="prayer-library-hint">Choose a prayer to open. A quiet moment is just a tap away.</p>
     </section>
+    <div class="prayer-library" id="prayer-library">
+    <details class="prayer-entry" id="lords-prayer-entry">
+      <summary><span><strong>The Lord’s Prayer</strong><small>The prayer Jesus taught us · Our Father</small></span><span class="prayer-open-label" aria-hidden="true">Open +</span></summary>
+      <div class="prayer-reader">
     <article id="lords-prayer" class="prayer-paper" aria-labelledby="lords-prayer-title">
       <div class="prayer-cross" aria-hidden="true">✝</div>
       <p class="read-together">A prayer for our family</p>
@@ -71,6 +77,12 @@
     </section>
     <p class="prayer-source">Source: <cite>The Book of Common Prayer</cite>, 1979, Church Publishing Incorporated, Rite One.<br><a href="https://justus.anglican.org/resources/bcp/">Free to read online</a></p>
 
+      <button class="prayer-back" type="button" hidden>↑ All prayers</button>
+      </div>
+    </details>
+    <details class="prayer-entry" id="philippians-entry">
+      <summary><span><strong>A Prayer for Joy &amp; Peace</strong><small>Philippians 4:4–7 · Bring every worry to God</small></span><span class="prayer-open-label" aria-hidden="true">Open +</span></summary>
+      <div class="prayer-reader">
     <article id="philippians" class="prayer-paper peace-paper" aria-labelledby="peace-title">
       <div class="prayer-cross" aria-hidden="true">✝</div>
       <p class="read-together">Bring every worry to God</p>
@@ -104,7 +116,12 @@
       <p>God’s peace is not a promise that every problem disappears right away. This passage reminds us that we can bring our needs to Him and trust His care. Read the verses slowly, then use the prayer above or speak to Him in your own words.</p>
     </section>
     <p class="prayer-source">Scripture quotations marked ESV are from the ESV® Bible (The Holy Bible, English Standard Version®), © 2001 by Crossway, a publishing ministry of Good News Publishers. Used by permission. All rights reserved.</p>
+      <button class="prayer-back" type="button" hidden>↑ All prayers</button>
+      </div>
+    </details>
+    </div>
   </main>
+  <script src="prayers.js" defer></script>
   <footer class="footer"><div class="container footer__inner"><a href="index.html" class="footer__logo" aria-label="Reid Kids home"><img src="images/assets/ReidKids_Eagle_Logo.svg" alt="Reid Kids eagle logo" width="72" height="72"></a><p class="footer__verse">Helping little hearts grow in God’s love.</p><a href="index.html">Back to Reid Kids</a><p class="footer__copy">© 2026 Reid Kids</p></div></footer>
 </body>
 </html>
