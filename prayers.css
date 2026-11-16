@@ -29,3 +29,16 @@ body { background: #e9f5ff; }
 .prayer-sources a,.prayer-source a { text-decoration: underline; text-underline-offset: 3px; }
 @media(max-width: 480px) { .prayers-main { padding-inline: 14px; } .prayer-welcome { padding-top: 30px; } .prayer-paper { padding-inline: 12px; border-radius: 24px; } .prayer-story { padding: 24px; } .site-nav { gap: .2rem .8rem; } .site-nav a { min-height: 44px; display: inline-flex; align-items: center; font-size: .85rem; } }
 @media print { .site-header,.footer,.prayer-welcome,.prayer-story,.prayer-jump { display: none; } body,.prayers-main { background: white; } .prayer-paper { border: 0; box-shadow: none; } .prayer-words { font-size: 16pt; line-height: 1.6; } }
+
+/* One Prayers tab, with simple on-page choices as the collection grows. */
+.prayer-choices { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.prayer-paper { scroll-margin-top: 24px; }
+.prayer-paper h2 { font-family: var(--font-body); font-weight: 800; font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.2; margin: 0 0 24px; }
+.peace-paper { margin-top: 64px; }
+.passage-label { color: var(--royal); font-weight: 800; font-size: .95rem; }
+.scripture-words { margin: 24px 0 32px; padding: 0; color: var(--royal); text-align: left; font-size: clamp(1.15rem, 3vw, 1.5rem); line-height: 1.8; }
+.scripture-words p { margin: 0 0 1em; }
+.scripture-words sup { font-size: .65em; font-weight: 800; }
+.peace-prayer { border-top: 2px solid #ffed91; padding-top: 28px; }
+.peace-prayer h3 { font-family: var(--font-body); color: var(--royal); font-size: 1.45rem; margin-bottom: 24px; }
+@media print { .prayer-choices { display: none; } .peace-paper { break-before: page; } }
