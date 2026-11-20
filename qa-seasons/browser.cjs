@@ -11,8 +11,8 @@ const pages = ['index.html','coloring.html','worship.html','song.html','verses.h
   const page = await context.newPage();
   await page.clock.install({time:new Date('2026-11-20T16:59:59Z')});
   await page.clock.pauseAt(new Date('2026-11-20T17:00:00Z'));
-  await page.route('https://fonts.googleapis.com/**', r=>r.abort());
-  await page.route('https://fonts.gstatic.com/**', r=>r.abort());
+  await context.route('https://fonts.googleapis.com/**', r=>r.abort());
+  await context.route('https://fonts.gstatic.com/**', r=>r.abort());
   const errors=[];
   const preexisting=[];
   page.on('pageerror',e=>errors.push(e.message));
