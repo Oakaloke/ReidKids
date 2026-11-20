@@ -14,6 +14,7 @@ const pages = ['index.html','coloring.html','worship.html','song.html','verses.h
   await page.route('https://fonts.googleapis.com/**', r=>r.abort());
   await page.route('https://fonts.gstatic.com/**', r=>r.abort());
   const errors=[];
+  const preexisting=[];
   page.on('pageerror',e=>errors.push(e.message));
   for(const season of ['thanksgiving','christmas','new-year','st-patricks','default']) {
     for(const width of [320,375,768,1440]) {
@@ -23,13 +24,39 @@ const pages = ['index.html','coloring.html','worship.html','song.html','verses.h
         await page.evaluate(()=>document.fonts.ready);
         const result = await page.evaluate(()=>({
           overflow:document.documentElement.scrollWidth>innerWidth,
+          scrollWidth:document.documentElement.scrollWidth,
           frameCount:document.querySelectorAll('.thanksgiving-frame,.holiday-frame').length,
           pointer:document.querySelector('.holiday-frame') && getComputedStyle(document.querySelector('.holiday-frame')).pointerEvents,
           root:document.documentElement.className
         }));
-        assert.equal(result.overflow,false,`${season} ${width} ${path}: overflow`);
+        if(result.overflow && season==='default') {
+          // Compare to the repository's existing unthemed styles, with its old
+          // unconditional Thanksgiving activator disabled. Do not hide regressions.
+          const baseline=await context.newPage();
+          await baseline.setViewportSize({width,height:900});
+          await baseline.route('**/thanksgiving.js?*',r=>r.fulfill({contentType:'application/javascript',body:''}));
+          await baseline.route('**/thanksgiving.css?*',r=>r.fulfill({contentType:'text/css',body:cp.execFileSync('git',['show','5fc7321:thanksgiving.css'],{encoding:'utf8'})}));
+          await baseline.goto(`${BASE}/${path}`,{waitUntil:'networkidle'});
+          const originalWidth=await baseline.evaluate(()=>document.documentElement.scrollWidth);
+          assert.equal(result.scrollWidth,originalWidth,`${path}: new default layout regression`);
+          preexisting.push(`${path} viewport ${width}: unchanged default width ${originalWidth}`);
+          await baseline.close();
+        } else assert.equal(result.overflow,false,`${season} ${width} ${path}: overflow`);
         assert.equal(result.frameCount,season==='default'?0:1);
         if(!['thanksgiving','default'].includes(season)) assert.equal(result.pointer,'none');
+        if(path==='index.html') {
+          const joke=page.locator('#daily-joke-reveal');
+          await joke.locator('summary').focus();
+          await page.keyboard.press('Enter');
+          assert.equal(await joke.getAttribute('open'),'');
+          await page.keyboard.press('Enter');
+          if(width<1201) {
+            await page.locator('.menu-toggle').click();
+            assert.equal(await page.locator('.site-nav').isVisible(),true);
+            assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+            await page.locator('.menu-toggle').click();
+          }
+        }
         if(path==='index.html' && [375,1440].includes(width))
           await page.screenshot({path:`/tmp/reid-seasons-qa/${season}-${width}.png`});
       }
@@ -73,6 +100,7 @@ const pages = ['index.html','coloring.html','worship.html','song.html','verses.h
   await page.goto('https://reidkids.com/index.html?season-preview=christmas',{waitUntil:'networkidle'});
   assert.ok(await page.locator('html').evaluate(e=>e.classList.contains('thanksgiving-season')));
   assert.deepEqual(errors,[]);
+  console.log('Existing default layout findings:',JSON.stringify(preexisting));
   await browser.close();
   console.log('PASS: 160 page/theme/viewport combinations; November identical at 375/1440; five open-tab midnight transitions; public preview disabled; no page errors.');
 })().catch(e=>{console.error(e);process.exit(1)});
