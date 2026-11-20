@@ -22,6 +22,8 @@
   <link rel="stylesheet" href="thanksgiving.css?v=20261101-art-5">
   <link rel="stylesheet" href="navigation.css">
   <script src="navigation.js" defer></script>
+  <link rel="stylesheet" href="daily-joke.css">
+  <script src="daily-joke.js" defer></script>
 </head>
 <body>
   <!-- Header: white · sticky -->
@@ -61,6 +63,15 @@
             <a href="jokes.html"><span aria-hidden="true">☺</span>Jokes</a>
           </nav>
           <p class="hero__verse">“Let the little children come to me.” <strong>— Mark 10:14 (CSB)</strong></p>
+          <aside class="daily-joke" aria-labelledby="daily-joke-title">
+            <h2 id="daily-joke-title"><span aria-hidden="true">😄</span> Joke of the Day</h2>
+            <p id="daily-joke-question" class="daily-joke__question" hidden></p>
+            <details id="daily-joke-reveal" class="daily-joke__reveal" hidden>
+              <summary><span class="daily-joke__show">Show the punchline</span><span class="daily-joke__hide">Hide the punchline</span></summary>
+              <p id="daily-joke-answer" class="daily-joke__answer"></p>
+            </details>
+            <a href="jokes.html">More jokes in the Giggle Corner <span aria-hidden="true">→</span></a>
+          </aside>
         </div>
       </div>
     </section>

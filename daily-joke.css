@@ -1,0 +1,66 @@
+.daily-joke {
+  max-width: 30rem;
+  margin: clamp(1rem, 4vw, 1.75rem) auto 0;
+  padding: .85rem clamp(.65rem, 3vw, 1.25rem);
+  border: 1px solid #e9cf7e;
+  border-radius: 1rem;
+  background: #fff8df;
+  color: #243454;
+  overflow-wrap: anywhere;
+}
+
+.daily-joke h2 {
+  margin: 0 0 .35rem;
+  font-size: 1.17rem;
+  line-height: 1.25;
+  color: #003594;
+}
+
+.daily-joke__question {
+  margin: .25rem 0;
+  font-size: clamp(1rem, 3vw, 1.13rem);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.daily-joke__reveal summary,
+.daily-joke a {
+  display: inline-grid;
+  place-content: center;
+  min-height: 44px;
+  color: #003594;
+  text-decoration: underline;
+  text-underline-offset: .15em;
+}
+
+.daily-joke__reveal summary {
+  padding: 0 .85rem;
+  border-radius: .75rem;
+  background: #fff;
+  border: 1px solid #d4be79;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.daily-joke__reveal summary::-webkit-details-marker { display: none; }
+.daily-joke__reveal:not([open]) .daily-joke__hide,
+.daily-joke__reveal[open] .daily-joke__show { display: none; }
+
+.daily-joke__answer {
+  margin: .45rem 0 .15rem;
+  font-weight: 700;
+}
+
+.daily-joke a {
+  display: inline-block;
+  padding: .65rem 0;
+  font-size: .88rem;
+  font-weight: 650;
+}
+
+.daily-joke :is(summary, a):focus-visible {
+  outline: 3px solid #003594;
+  outline-offset: 2px;
+}
+
+.daily-joke [hidden] { display: none; }
