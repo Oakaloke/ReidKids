@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="640" viewBox="0 0 80 640"><path d="M40 0q-30 60 0 120t0 120t0 120t0 120t0 120v40" fill="none" stroke="#b5d2a3" stroke-width="2"/>
+<defs><g id="clover"><path d="M0 10C-35 7-29-19-11-12c-8-30 30-30 22 0C29-19 35 7 0 10Z" fill="#398152" stroke="#25653d" stroke-width="1.5"/><path d="M0 4q2 18-10 25M0 4l-11-7M0 4v-13M0 4l11-7" fill="none" stroke="#23633a" stroke-width="2"/></g></defs>
+<use href="#clover" transform="translate(40 54)"/><use href="#clover" transform="translate(40 374)"/>
+<g fill="none" stroke-width="5"><path d="M14 175a26 26 0 0 1 52 0M14 495a26 26 0 0 1 52 0" stroke="#d5ae61"/><path d="M20 175a20 20 0 0 1 40 0M20 495a20 20 0 0 1 40 0" stroke="#9cbd8b"/><path d="M26 175a14 14 0 0 1 28 0M26 495a14 14 0 0 1 28 0" stroke="#7cacc0"/></g>
+<g fill="#d8b65b" stroke="#bc943b" stroke-width="1.5"><circle cx="40" cy="260" r="13"/><circle cx="40" cy="580" r="13"/></g><g fill="none" stroke="#fff3ba" stroke-width="1.5"><circle cx="40" cy="260" r="8"/><circle cx="40" cy="580" r="8"/></g>
+<g fill="#6da77b"><circle cx="17" cy="116" r="3"/><circle cx="62" cy="210" r="3"/><circle cx="19" cy="306" r="3"/><circle cx="17" cy="436" r="3"/><circle cx="62" cy="530" r="3"/><circle cx="19" cy="626" r="3"/></g></svg>
